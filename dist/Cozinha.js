@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cozinhaozinha = void 0;
+exports.Cozinha = void 0;
 const Comodos_1 = require("./Comodos");
-class Cozinhaozinha extends Comodos_1.Comodo {
+class Cozinha extends Comodos_1.Comodo {
     constructor(nome, luzes, altura, largura, comprimento, temperatura, fogão, geladeira) {
         super(nome, luzes, altura, largura, comprimento, temperatura);
         this._fogão = fogão;
@@ -24,4 +24,4 @@ class Cozinhaozinha extends Comodos_1.Comodo {
         }
     }
 }
-exports.Cozinhaozinha = Cozinhaozinha;
+exports.Cozinha = Cozinha;

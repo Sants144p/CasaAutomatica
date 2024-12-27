@@ -1,7 +1,7 @@
 import { Comodo } from "./Comodos";
 
 
-export class Cozinhaozinha extends Comodo{
+export class Cozinha extends Comodo{
 
     protected _fogão : boolean
     protected _geladeira : boolean

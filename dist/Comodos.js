@@ -28,11 +28,13 @@ class Comodo {
     get temperatura() {
         return this._temperatura;
     }
-    alterarLuzes(status) {
-        this._luzes = status;
+    Trocarluzes() {
+        this._luzes = !this._luzes;
+        console.log(`${this._nome}: as luzes estão agora ${this._luzes ? "ligadas" : "desligadas"}.`);
     }
     alterarTemperatura(novaTemperatura) {
         this._temperatura = novaTemperatura;
+        console.log(`A temperatura atual é igual a ${this._temperatura}`);
     }
 }
 exports.Comodo = Comodo;

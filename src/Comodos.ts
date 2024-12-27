@@ -35,13 +35,15 @@ export class Comodo{
         return this._temperatura
     }
     
-    alterarLuzes(status : boolean){
-        this._luzes = status
+    Trocarluzes(): void {
+        this._luzes = !this._luzes;
+        console.log(`${this._nome}: as luzes estão agora ${this._luzes ? "ligadas" : "desligadas"}.`);
     }
 
 
     alterarTemperatura(novaTemperatura: number) {
         this._temperatura = novaTemperatura;
+        console.log(`A temperatura atual é igual a ${this._temperatura}`);
     }
 
     /* Com set seria assim:

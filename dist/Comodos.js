@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Comodo = void 0;
-class Comodo {
+export class Comodo {
     constructor(nome, luzes, altura, largura, comprimento, temperatura) {
         this._nome = nome;
         this._luzes = luzes;
@@ -37,4 +34,3 @@ class Comodo {
         console.log(`A temperatura atual é igual a ${this._temperatura}`);
     }
 }
-exports.Comodo = Comodo;

@@ -1,4 +1,4 @@
-import { Comodo } from "./Comodos";
+import { Comodo } from "./Comodos.js";
 
 
 export class Cozinha extends Comodo{

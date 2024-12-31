@@ -10,7 +10,7 @@ https://uiverse.io/KSAplay/angry-wasp-95
 /*
 Para facilitar na hora de criar novos comodos, pra copiar e colar
 
-import { Comodo } from "./Comodos";
+import { Comodo } from "./Comodos.js";
 
 export class XXX extends Comodo{
 

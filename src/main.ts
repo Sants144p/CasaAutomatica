@@ -1,9 +1,9 @@
-import { Comodo } from "./Comodos";
-import { Banheiro } from "./Banheiro";
-import { Garagem } from "./Garagem";
-import { Cozinha } from "./Cozinha";
-import { Quarto } from "./Quarto";
-import { Sala } from "./Sala";
+import { Comodo } from "./Comodos.js";
+import { Banheiro } from "./Banheiro.js";
+import { Garagem } from "./Garagem.js";
+import { Cozinha } from "./Cozinha.js";
+import { Quarto } from "./Quarto.js";
+import { Sala } from "./Sala.js";
 
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
@@ -35,9 +35,31 @@ function alterarLuzes() : void{
 
 }
 
-cameraExibeComodo(0)
-alterarLuzes()
-cameraExibeComodo(1)
-alterarLuzes()
-cameraExibeComodo(3)
-alterarLuzes()
+const selectCamera = document.getElementById('camera-select')! as HTMLSelectElement;
+const btnAlternarLuzes = document.getElementById('alternar-luzes')! as HTMLSelectElement;
+const output = document.getElementById('output')! as HTMLSelectElement;
+
+function atualizarOutput() {
+    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
+        const comodoAtual = ListaComodos[cameraIndice];
+        output.innerHTML = `Câmera no ${comodoAtual.nome} <br>Luzes: ${comodoAtual.luzes ? 'Ligadas' : 'Desligadas'}`;
+    } else {
+        output.innerHTML = 'Câmera não posicionada.';
+    }
+}
+
+selectCamera.addEventListener('change', () => {
+    const indice = parseInt(selectCamera.value, 10);
+    cameraExibeComodo(indice);
+    atualizarOutput();
+});
+
+btnAlternarLuzes.addEventListener('click', () => {
+    alterarLuzes();
+    atualizarOutput();
+});
+
+// Inicializa a interface
+atualizarOutput();
+
+

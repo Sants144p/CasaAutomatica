@@ -1,16 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const Banheiro_1 = require("./Banheiro");
-const Garagem_1 = require("./Garagem");
-const Cozinha_1 = require("./Cozinha");
-const Quarto_1 = require("./Quarto");
-const Sala_1 = require("./Sala");
+import { Banheiro } from "./Banheiro.js";
+import { Garagem } from "./Garagem.js";
+import { Cozinha } from "./Cozinha.js";
+import { Quarto } from "./Quarto.js";
+import { Sala } from "./Sala.js";
 const ListaComodos = [
-    new Quarto_1.Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
-    new Sala_1.Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1
-    new Banheiro_1.Banheiro("Banheiro1", true, 2.5, 6, 6, 20), //2
-    new Garagem_1.Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
-    new Cozinha_1.Cozinha("Garagem", true, 3.5, 12, 14, 20, false, false) //4
+    new Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
+    new Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1
+    new Banheiro("Banheiro1", true, 2.5, 6, 6, 20), //2
+    new Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
+    new Cozinha("Garagem", true, 3.5, 12, 14, 20, false, false) //4
 ];
 // Variável para rastrear a posição atual da câmera
 let cameraIndice = -1;
@@ -31,9 +29,26 @@ function alterarLuzes() {
         console.log("A câmera não está posicionada em um cômodo válido.");
     }
 }
-cameraExibeComodo(0);
-alterarLuzes();
-cameraExibeComodo(1);
-alterarLuzes();
-cameraExibeComodo(3);
-alterarLuzes();
+const selectCamera = document.getElementById('camera-select');
+const btnAlternarLuzes = document.getElementById('alternar-luzes');
+const output = document.getElementById('output');
+function atualizarOutput() {
+    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
+        const comodoAtual = ListaComodos[cameraIndice];
+        output.innerHTML = `Câmera no ${comodoAtual.nome} <br>Luzes: ${comodoAtual.luzes ? 'Ligadas' : 'Desligadas'}`;
+    }
+    else {
+        output.innerHTML = 'Câmera não posicionada.';
+    }
+}
+selectCamera.addEventListener('change', () => {
+    const indice = parseInt(selectCamera.value, 10);
+    cameraExibeComodo(indice);
+    atualizarOutput();
+});
+btnAlternarLuzes.addEventListener('click', () => {
+    alterarLuzes();
+    atualizarOutput();
+});
+// Inicializa a interface
+atualizarOutput();

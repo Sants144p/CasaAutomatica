@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cozinha = void 0;
-const Comodos_1 = require("./Comodos");
-class Cozinha extends Comodos_1.Comodo {
+import { Comodo } from "./Comodos.js";
+export class Cozinha extends Comodo {
     constructor(nome, luzes, altura, largura, comprimento, temperatura, fogão, geladeira) {
         super(nome, luzes, altura, largura, comprimento, temperatura);
         this._fogão = fogão;
@@ -24,4 +21,3 @@ class Cozinha extends Comodos_1.Comodo {
         }
     }
 }
-exports.Cozinha = Cozinha;

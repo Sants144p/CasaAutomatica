@@ -51,7 +51,7 @@ const ListaComodos : Comodo[] = [
     new Sala("Sala de Estar", true, 3.5, 12,14, 20, false), //1
     new Banheiro("Banheiro1", true, 2.5, 6, 6, 20), //2
     new Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
-    new Cozinha("Garagem", true, 3.5, 12,14, 20, false, false) //4
+    new Cozinha("Cozinha", true, 3.5, 12,14, 20, false, false) //4
 ]
 
 // Variável para rastrear a posição atual da câmera

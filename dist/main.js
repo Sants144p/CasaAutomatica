@@ -3,6 +3,40 @@ import { Garagem } from "./Garagem.js";
 import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
+// Dados de login
+const validUser = "Gabiru";
+const validPassword = "RpgDosCrias2025";
+// Elementos do login
+const loginDiv = document.getElementById('login');
+const CasaDiv = document.getElementById('Casa-Automatica');
+const InputUsuario = document.getElementById('usuario');
+const InputSenha = document.getElementById('password');
+const MostrarSenha = document.getElementById('mostrar-senha');
+const eyeIcon = document.getElementById('eye-icon');
+const loginButton = document.getElementById('login-botão');
+const loginError = document.getElementById('login-error');
+loginButton.addEventListener('click', () => {
+    const usuario = InputUsuario.value;
+    const senha = InputSenha.value;
+    if (usuario === validUser && senha === validPassword) {
+        loginDiv.style.display = 'none';
+        CasaDiv.style.display = 'block';
+    }
+    else {
+        loginError.style.display = 'block';
+    }
+});
+// Mostrar/ocultar senha com botão de "olhinho"
+MostrarSenha.addEventListener('click', () => {
+    if (InputSenha.type === 'password') {
+        InputSenha.type = 'text';
+        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/invisible.png";
+    }
+    else {
+        InputSenha.type = 'password';
+        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/visible.png";
+    }
+});
 const ListaComodos = [
     new Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
     new Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1

@@ -7,3 +7,37 @@ body {
     margin-top: 20px;
     font-weight: bold;
 }
+
+#login {
+
+    display: block;
+}
+
+#Casa-Automatica{
+
+    display: none
+}
+
+#mostrador-senha{
+
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaçamento entre o campo de senha e o botão */
+
+} 
+
+.botao-olho{
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+
+}
+
+.botao-olho img{
+
+    width: 16px; /* Tamanho reduzido */
+    height: 16px;
+
+}

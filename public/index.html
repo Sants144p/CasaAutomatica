@@ -6,18 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casa Automática do Vinnicius 13</title>
   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-  <!DOCTYPE html>
-<html lang="br">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Biblioteca</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
+    <div id="login">
+
+      <h1>Login</h1>
+      <label for="username">Usuário:</label>
+      <input type="text" id="usuario">
+      <br><br>    
+      <div class="mostrador-senha">
+        <label for="password">Senha:</label>
+        <input type="password" id="password">
+        <button class="botao-olho" id="mostrar-senha">
+            <img src="https://img.icons8.com/ios-glyphs/30/000000/visible.png" alt="Mostrar senha" id="eye-icon">
+        </button>
+      </div>
+      <br><br>
+      <button id="login-botão">Entrar</button>
+      <p id="login-error" style="color: red; display: none;">Usuário ou senha inválidos!</p>
+
+    </div>
+
+    <div id="Casa-Automatica">
     <h1>Casa Automática do Vinnicus 13</h1>
 
     <label for="camera-select">Escolha o cômodo:</label>
@@ -34,5 +46,7 @@
     <div id="output">Câmera não posicionada.</div>
 
     <script type="module" src="/dist/main.js"></script>
+
+    </div>
 </body>
 </html>

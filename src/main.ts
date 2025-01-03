@@ -5,20 +5,30 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
- // Dados de login
- const validUser = "Gabiru";
- const validPassword = "RpgDosCrias2025";
+// Dados de login
+const validUser = "Gabiru";
+const validPassword = "RpgDosCrias2025";
 
- // Elementos do login
- const loginDiv = document.getElementById('login')! as HTMLDivElement;
- const CasaDiv = document.getElementById('Casa-Automatica')! as HTMLDivElement;
- const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
- const InputSenha = document.getElementById('password') as HTMLInputElement;
- const MostrarSenha = document.getElementById('mostrar-senha')! as HTMLButtonElement;
- const eyeIcon = document.getElementById('eye-icon')! as HTMLImageElement;
- const loginButton = document.getElementById('login-botão')! as HTMLButtonElement;
- const loginError = document.getElementById('login-error') as HTMLDivElement;
+//#region Elementos
+const loginDiv = document.getElementById('login')! as HTMLDivElement;
+const CasaDiv = document.getElementById('Casa-Automatica')! as HTMLDivElement;
+const CozinhaDiv = document.getElementById('controle-cozinha') as HTMLDivElement;
+const GaragemDiv = document.getElementById('controle-garagem') as HTMLDivElement;
+const SalaDiv = document.getElementById('controle-sala') as HTMLDivElement;
+const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
+const InputSenha = document.getElementById('password') as HTMLInputElement;
+const MostrarSenha = document.getElementById('mostrar-senha')! as HTMLButtonElement;
+const eyeIcon = document.getElementById('eye-icon')! as HTMLImageElement;
+const loginButton = document.getElementById('login-botão')! as HTMLButtonElement;
+const loginError = document.getElementById('login-error') as HTMLDivElement;
+const btnAlternarLuzes = document.getElementById('alternar-luzes')! as HTMLButtonElement;
+const btnAlternarFogao = document.getElementById('alternar-fogao')! as HTMLButtonElement;
+const btnAlternarGeladeira = document.getElementById('alternar-geladeira')! as HTMLButtonElement;
+const btnAlternarPortao = document.getElementById('alternar-portao')! as HTMLButtonElement;
+const btnAlternarTelevisao = document.getElementById('alternar-televisao')! as HTMLButtonElement;
+//#endregion
 
+//#region código do Login
  loginButton.addEventListener('click', () => {
      const usuario = InputUsuario.value;
      const senha = InputSenha.value;
@@ -45,6 +55,7 @@ import { Sala } from "./Sala.js";
             
     }
 });
+//#endregion
 
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
@@ -66,6 +77,8 @@ function cameraExibeComodo(indice: number): void {
     }
 }
 
+//#region Funções para alterar as booleanas
+
 function alterarLuzes() : void{
 
     if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
@@ -76,29 +89,115 @@ function alterarLuzes() : void{
 
 }
 
+function alterarFogao() {
+    if (cameraIndice === 4) {  // Cômodo Cozinha
+        const comodoAtual = ListaComodos[cameraIndice];
+        if (comodoAtual instanceof Cozinha) {
+            comodoAtual.alterarFogao();
+            atualizarOutput();
+        }
+    }
+}
+
+function alterarGeladeira() {
+    if (cameraIndice === 4) {  // Cômodo Cozinha
+        const comodoAtual = ListaComodos[cameraIndice];
+            if (comodoAtual instanceof Cozinha) {
+                comodoAtual.alterarGeladeira();
+                atualizarOutput();
+        }
+    }
+}
+
+function alterarPortao() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Garagem) {
+        comodoAtual.alterarPortao();
+        atualizarOutput();
+    }
+}
+
+function alterarTelevisao() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Sala) {
+        comodoAtual.alterarTV();
+        atualizarOutput();
+    }
+}
+
+//#endregion
+
+//#region Função para exibir e ocultar botões dependendo do cômodo selecionado
+function atualizarBotoes() {
+    // Ocultar todos os botões
+    CozinhaDiv.style.display = 'none';
+    GaragemDiv.style.display = 'none';
+    SalaDiv.style.display = 'none';
+
+    // Mostrar botões conforme o cômodo atual
+    if (cameraIndice === 4) { // Cozinha
+        CozinhaDiv.style.display = 'block';
+    } else if (cameraIndice === 3) { // Garagem
+        GaragemDiv.style.display = 'block';
+    } else if (cameraIndice === 1) { // Sala
+        SalaDiv.style.display = 'block';
+    }
+}
+//#endregion
+
+//#region Cameras
+
 const selectCamera = document.getElementById('camera-select')! as HTMLSelectElement;
-const btnAlternarLuzes = document.getElementById('alternar-luzes')! as HTMLButtonElement;
-const output = document.getElementById('output')! as HTMLDivElement;
+
 
 function atualizarOutput() {
-    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
-        const comodoAtual = ListaComodos[cameraIndice];
-        output.innerHTML = `Câmera no ${comodoAtual.nome} <br>Luzes: ${comodoAtual.luzes ? 'Ligadas' : 'Desligadas'}`;
-    } else {
-        output.innerHTML = 'Câmera não posicionada.';
+    const comodoAtual = ListaComodos[cameraIndice];
+    let status = `${comodoAtual.nome}: Luzes estão ${comodoAtual.luzes ? 'ligadas' : 'desligadas'}.`;
+    const output = document.getElementById('output')! as HTMLDivElement;
+
+    // Adicionar status das novas variáveis (garantir que acessamos corretamente os atributos específicos)
+    if (comodoAtual instanceof Cozinha) {
+        output.innerHTML = `${status} <br>
+        Fogão: ${comodoAtual.fogão ? 'Ligado' : 'Desligado'}.<br>
+        Geladeira: ${comodoAtual.geladeira ? 'Ligada' : 'Desligada'}.`
+    } else if (comodoAtual instanceof Garagem) {
+        output.innerHTML = `${status} <br> 
+        Portão: ${comodoAtual.portao ? 'Aberto' : 'Fechado'}.`;
+    } else if (comodoAtual instanceof Sala) {
+        output.innerHTML = `${status} <br>
+        Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.`;
     }
 }
 
 selectCamera.addEventListener('change', () => {
     const indice = parseInt(selectCamera.value, 10);
     cameraExibeComodo(indice);
+    atualizarBotoes();
     atualizarOutput();
+
 });
+
+//#endregion
+
+//#region Conectar os botões aos seus eventos
 
 btnAlternarLuzes.addEventListener('click', () => {
     alterarLuzes();
     atualizarOutput();
 });
+btnAlternarFogao.addEventListener('click', () => {
+    alterarFogao();
+});
+btnAlternarGeladeira.addEventListener('click', () => {
+    alterarGeladeira();
+});
+btnAlternarPortao.addEventListener('click', () => {
+    alterarPortao();
+});
+btnAlternarTelevisao.addEventListener('click', () => {
+    alterarTelevisao();
+});
+
 
 // Inicializa a interface
 atualizarOutput();

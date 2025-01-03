@@ -1,13 +1,14 @@
 import { Comodo } from "./Comodos.js";
 export class Sala extends Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura, televisao) {
+    constructor(nome, luzes, altura, largura, comprimento, temperatura, _televisao) {
         super(nome, luzes, altura, largura, comprimento, temperatura);
-        this._televisao = televisao;
+        this._televisao = false;
     }
     get televisao() {
         return this._televisao;
     }
-    alterarTV(status) {
-        this._televisao = status;
+    alterarTV() {
+        this._televisao = !this._televisao;
+        console.log(`Sala: Televisão está agora ${this._televisao ? "Ligada" : "Desligada"}`);
     }
 }

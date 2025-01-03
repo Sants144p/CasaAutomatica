@@ -7,33 +7,31 @@ export class Cozinha extends Comodo{
     protected _geladeira : boolean
 
     constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento: number, 
-        temperatura : number, fogão : boolean, geladeira : boolean) {
+        temperatura : number, _fogão : boolean, _geladeira : boolean) {
 
         super(nome, luzes, altura, largura, comprimento, temperatura)
 
-        this._fogão = fogão
-        this._geladeira = geladeira
+        this._fogão = false
+        this._geladeira = false
     }
 
     get fogão(){
         return this._fogão
     }
 
-    alterarFogão(status : boolean){
-
-        this._fogão = status
+    alterarFogao() : void{
+        this._fogão = !this._fogão;
+        console.log(`Cozinha: Fogão está agora ${this._fogão ? "Ligado" : "Desligado"}`);
     }
 
     get geladeira(){
         return this._geladeira
     }
 
-    alterarGeladeira(status : boolean){
+    alterarGeladeira() : void{
 
-        this._geladeira = status
+        this._geladeira = !this._geladeira;
+        console.log(`Cozinha: Geladeira está agora ${this._geladeira ? "Ligada" : "Desligada"}`);
         
-        if (status == true){
-            this._temperatura = this._temperatura + 5
-        }
     }
 }

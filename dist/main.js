@@ -4,8 +4,8 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 // Dados de login
-const validUser = "Gabiru";
-const validPassword = "RpgDosCrias2025";
+const validUser = "user";
+const validPassword = "1";
 //#region Elementos
 const loginDiv = document.getElementById('login');
 const CasaDiv = document.getElementById('Casa-Automatica');
@@ -34,6 +34,8 @@ loginButton.addEventListener('click', () => {
     if (usuario === validUser && senha === validPassword) {
         loginDiv.style.display = 'none';
         CasaDiv.style.display = 'block';
+        atualizarBotoes();
+        atualizarOutput();
     }
     else {
         loginError.style.display = 'block';

@@ -198,6 +198,10 @@ function atualizarOutput() {
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
         Ventilador: ${comodoAtual.ventilador ? 'Ligado' : 'Desligado'}`;
     }
+
+    const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
+    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${comodoAtual.temperatura}°C`; 
+
 }
 
 selectCamera.addEventListener('change', () => {

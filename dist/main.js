@@ -10,6 +10,7 @@ const validPassword = "RpgDosCrias2025";
 const loginDiv = document.getElementById('login');
 const CasaDiv = document.getElementById('Casa-Automatica');
 const CozinhaDiv = document.getElementById('controle-cozinha');
+const QuartoDiv = document.getElementById('controle-quarto');
 const GaragemDiv = document.getElementById('controle-garagem');
 const SalaDiv = document.getElementById('controle-sala');
 const InputUsuario = document.getElementById('usuario');
@@ -23,6 +24,8 @@ const btnAlternarFogao = document.getElementById('alternar-fogao');
 const btnAlternarGeladeira = document.getElementById('alternar-geladeira');
 const btnAlternarPortao = document.getElementById('alternar-portao');
 const btnAlternarTelevisao = document.getElementById('alternar-televisao');
+const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao');
+const btnAlternarVentilador = document.getElementById('alternar-ventilador-quarto');
 //#endregion
 //#region código do Login
 loginButton.addEventListener('click', () => {
@@ -49,14 +52,14 @@ MostrarSenha.addEventListener('click', () => {
 });
 //#endregion
 const ListaComodos = [
-    new Quarto("Quarto1", true, 2.5, 6, 8, 20), //0
+    new Quarto("Quarto", true, 2.5, 6, 8, 20, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1
-    new Banheiro("Banheiro1", true, 2.5, 6, 6, 20), //2
+    new Banheiro("Banheiro", true, 2.5, 6, 6, 20), //2
     new Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
     new Cozinha("Cozinha", true, 3.5, 12, 14, 20, false, false) //4
 ];
 // Variável para rastrear a posição atual da câmera
-let cameraIndice = -1;
+let cameraIndice = 0;
 function cameraExibeComodo(indice) {
     if (indice >= 0 && indice < ListaComodos.length) {
         cameraIndice = indice;
@@ -107,6 +110,20 @@ function alterarTelevisao() {
         atualizarOutput();
     }
 }
+function alterarTelevisaoQuarto() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto) {
+        comodoAtual.alterarTV();
+        atualizarOutput();
+    }
+}
+function alterarVentilador() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto) {
+        comodoAtual.alterarVentilador();
+        atualizarOutput();
+    }
+}
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
 function atualizarBotoes() {
@@ -114,6 +131,7 @@ function atualizarBotoes() {
     CozinhaDiv.style.display = 'none';
     GaragemDiv.style.display = 'none';
     SalaDiv.style.display = 'none';
+    QuartoDiv.style.display = 'none';
     // Mostrar botões conforme o cômodo atual
     if (cameraIndice === 4) { // Cozinha
         CozinhaDiv.style.display = 'block';
@@ -123,6 +141,9 @@ function atualizarBotoes() {
     }
     else if (cameraIndice === 1) { // Sala
         SalaDiv.style.display = 'block';
+    }
+    else if (cameraIndice === 0) { // Quarto
+        QuartoDiv.style.display = 'block';
     }
 }
 //#endregion
@@ -145,6 +166,11 @@ function atualizarOutput() {
     else if (comodoAtual instanceof Sala) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.`;
+    }
+    else if (comodoAtual instanceof Quarto) {
+        output.innerHTML = `${status} <br>
+        Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
+        Ventilador: ${comodoAtual.ventilador ? 'Ligado' : 'Desligado'}`;
     }
 }
 selectCamera.addEventListener('change', () => {
@@ -170,6 +196,12 @@ btnAlternarPortao.addEventListener('click', () => {
 });
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();
+});
+btnAlternarTelevisaoQuarto.addEventListener('click', () => {
+    alterarTelevisaoQuarto();
+});
+btnAlternarVentilador.addEventListener('click', () => {
+    alterarVentilador();
 });
 // Inicializa a interface
 atualizarOutput();

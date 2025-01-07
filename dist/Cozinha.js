@@ -1,7 +1,7 @@
 import { Comodo } from "./Comodos.js";
 export class Cozinha extends Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura, _fogão, _geladeira) {
-        super(nome, luzes, altura, largura, comprimento, temperatura);
+    constructor(nome, luzes, altura, largura, comprimento, _fogão, _geladeira) {
+        super(nome, luzes, altura, largura, comprimento);
         this._fogão = false;
         this._geladeira = false;
     }

@@ -7,9 +7,9 @@ export class Cozinha extends Comodo{
     protected _geladeira : boolean
 
     constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento: number, 
-        temperatura : number, _fogão : boolean, _geladeira : boolean) {
+        _fogão : boolean, _geladeira : boolean) {
 
-        super(nome, luzes, altura, largura, comprimento, temperatura)
+        super(nome, luzes, altura, largura, comprimento)
 
         this._fogão = false
         this._geladeira = false

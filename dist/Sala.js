@@ -1,7 +1,7 @@
 import { Comodo } from "./Comodos.js";
 export class Sala extends Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura, _televisao) {
-        super(nome, luzes, altura, largura, comprimento, temperatura);
+    constructor(nome, luzes, altura, largura, comprimento, _televisao) {
+        super(nome, luzes, altura, largura, comprimento);
         this._televisao = false;
     }
     get televisao() {

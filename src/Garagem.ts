@@ -5,9 +5,9 @@ export class Garagem extends Comodo{
     protected _portao : boolean
 
     constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento: number, 
-        temperatura : number, _portao : boolean) {
+        _portao : boolean) {
 
-        super(nome, luzes, altura, largura, comprimento, temperatura)
+        super(nome, luzes, altura, largura, comprimento)
         this._portao = false
 
     }

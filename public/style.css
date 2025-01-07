@@ -24,7 +24,12 @@ body {
     align-items: center;
     gap: 0px; /* Espaçamento entre o campo de senha e o botão */
 
-} 
+}
+
+#ajustar-temp-arcondicionado{
+
+    display: none
+}
 
 .botao-olho{
 

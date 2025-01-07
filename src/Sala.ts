@@ -5,9 +5,9 @@ export class Sala extends Comodo{
     protected _televisao : boolean
 
     constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento: number, 
-    temperatura : number, _televisao : boolean) {
+    _televisao : boolean) {
 
-        super(nome, luzes, altura, largura, comprimento, temperatura)
+        super(nome, luzes, altura, largura, comprimento)
 
         this._televisao = false
     }

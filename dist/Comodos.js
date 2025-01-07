@@ -1,11 +1,10 @@
 export class Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura) {
+    constructor(nome, luzes, altura, largura, comprimento) {
         this._nome = nome;
         this._luzes = luzes;
         this._altura = altura;
         this._largura = largura;
         this._comprimento = comprimento;
-        this._temperatura = temperatura;
     }
     get nome() {
         return this._nome;
@@ -22,15 +21,8 @@ export class Comodo {
     get comprimento() {
         return this._comprimento;
     }
-    get temperatura() {
-        return this._temperatura;
-    }
     Trocarluzes() {
         this._luzes = !this._luzes;
         console.log(`${this._nome}: as luzes estão agora ${this._luzes ? "ligadas" : "desligadas"}.`);
-    }
-    alterarTemperatura(novaTemperatura) {
-        this._temperatura = novaTemperatura;
-        console.log(`${this._nome}: a temperatura atual é igual a ${this._temperatura}`);
     }
 }

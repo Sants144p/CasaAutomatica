@@ -1,9 +1,10 @@
 import { Comodo } from "./Comodos.js";
 export class Quarto extends Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura, _televisao, _ventilador) {
-        super(nome, luzes, altura, largura, comprimento, temperatura);
+    constructor(nome, luzes, altura, largura, comprimento, _televisao, _ArCondicionado) {
+        super(nome, luzes, altura, largura, comprimento);
         this._televisao = false;
-        this._ventilador = false;
+        this._ArCondicionado = false;
+        this._temperaturaArCondicionado = 21;
     }
     get televisao() {
         return this._televisao;
@@ -12,11 +13,22 @@ export class Quarto extends Comodo {
         this._televisao = !this._televisao;
         console.log(`Quarto: Televisão está agora ${this._televisao ? "Ligada" : "Desligada"}`);
     }
-    get ventilador() {
-        return this._ventilador;
+    get ArCondionado() {
+        return this._ArCondicionado;
     }
-    alterarVentilador() {
-        this._ventilador = !this._ventilador;
-        console.log(`Quarto: O Ventilador está agora ${this._ventilador ? "Ligado" : "Desligado"}`);
+    alterarArCondicionado() {
+        this._ArCondicionado = !this._ArCondicionado;
+        console.log(`Quarto: O Ventilador está agora ${this._ArCondicionado ? "Ligado" : "Desligado"}`);
+    }
+    get temperaturaArCondicionado() {
+        return this._temperaturaArCondicionado;
+    }
+    ajustarTemperaturadoAr(temp) {
+        if (this.ArCondionado) {
+            this._temperaturaArCondicionado = temp;
+        }
+        else {
+            console.error("O Ar-Condicionado precisa estar ligado para funcionar");
+        }
     }
 }

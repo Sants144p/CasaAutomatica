@@ -6,6 +6,9 @@ import { Sala } from "./Sala.js";
 // Dados de login
 const validUser = "user";
 const validPassword = "1";
+//Temperatura
+let TemperaturaAncora = 21;
+let TemperaturaUniversal = TemperaturaAncora;
 //#region Elementos
 const loginDiv = document.getElementById('login');
 const CasaDiv = document.getElementById('Casa-Automatica');
@@ -13,6 +16,7 @@ const CozinhaDiv = document.getElementById('controle-cozinha');
 const QuartoDiv = document.getElementById('controle-quarto');
 const GaragemDiv = document.getElementById('controle-garagem');
 const SalaDiv = document.getElementById('controle-sala');
+const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -25,9 +29,10 @@ const btnAlternarGeladeira = document.getElementById('alternar-geladeira');
 const btnAlternarPortao = document.getElementById('alternar-portao');
 const btnAlternarTelevisao = document.getElementById('alternar-televisao');
 const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto');
-const btnAlternarVentilador = document.getElementById('alternar-ventilador-quarto');
+const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto');
+const btnAjustarTempAr = document.getElementById('ajustar-temp');
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
-const nova_temperatura = document.getElementById('nova-temperatura');
+const NovaTemperaturaHTML = document.getElementById('nova-temperatura');
 //#endregion
 //#region código do Login
 loginButton.addEventListener('click', () => {
@@ -56,11 +61,11 @@ MostrarSenha.addEventListener('click', () => {
 });
 //#endregion
 const ListaComodos = [
-    new Quarto("Quarto", true, 2.5, 6, 8, 20, false, false), //0
-    new Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1
+    new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
+    new Sala("Sala de Estar", true, 3.5, 12, 14, false), //1
     new Banheiro("Banheiro", true, 2.5, 6, 6, 19), //2
-    new Garagem("Garagem", true, 3.5, 20, 20, 21, false), //3
-    new Cozinha("Cozinha", true, 3.5, 12, 14, 22, false, false) //4
+    new Garagem("Garagem", true, 3.5, 20, 20, false), //3
+    new Cozinha("Cozinha", true, 3.5, 12, 14, false, false) //4
 ];
 // Variável para rastrear a posição atual da câmera
 let cameraIndice = 0;
@@ -83,12 +88,35 @@ function alterarLuzes() {
     }
 }
 function alterarTemperatura() {
-    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
-        ListaComodos[cameraIndice].alterarTemperatura(nova_temperatura.value);
+    var _a;
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+        let tempAr = (_a = comodoAtual.temperaturaArCondicionado) !== null && _a !== void 0 ? _a : 21;
+        TemperaturaUniversal = tempAr;
+        atualizarOutput();
+    }
+    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false) {
+        TemperaturaUniversal = TemperaturaAncora;
         atualizarOutput();
     }
     else {
-        console.log("A câmera não está posicionada em um cômodo válido.");
+        const NovaTemperatura = Number(NovaTemperaturaHTML.value);
+        TemperaturaAncora = NovaTemperatura;
+        TemperaturaUniversal = TemperaturaAncora;
+        atualizarOutput();
+    }
+}
+function alterarTemperatura2() {
+    var _a;
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+        let tempAr = (_a = comodoAtual.temperaturaArCondicionado) !== null && _a !== void 0 ? _a : 21;
+        TemperaturaUniversal = tempAr;
+        atualizarOutput();
+    }
+    else {
+        TemperaturaUniversal = TemperaturaAncora;
+        atualizarOutput();
     }
 }
 function alterarFogao() {
@@ -130,12 +158,24 @@ function alterarTelevisaoQuarto() {
         atualizarOutput();
     }
 }
-function alterarVentilador() {
+function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
-        comodoAtual.alterarVentilador();
+        comodoAtual.alterarArCondicionado();
+        atualizarBotoes();
         atualizarOutput();
     }
+    alterarTemperatura();
+}
+function RegularArCondicionado() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto) {
+        const tempHTML = document.getElementById('temp-ar');
+        const temp = parseInt(tempHTML.value, 10);
+        comodoAtual.ajustarTemperaturadoAr(temp);
+        atualizarOutput();
+    }
+    alterarTemperatura();
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -145,6 +185,7 @@ function atualizarBotoes() {
     GaragemDiv.style.display = 'none';
     SalaDiv.style.display = 'none';
     QuartoDiv.style.display = 'none';
+    AjustadorDiv.style.display = 'none';
     // Mostrar botões conforme o cômodo atual
     if (cameraIndice === 4) { // Cozinha
         CozinhaDiv.style.display = 'block';
@@ -157,6 +198,15 @@ function atualizarBotoes() {
     }
     else if (cameraIndice === 0) { // Quarto
         QuartoDiv.style.display = 'block';
+    }
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Quarto) {
+        if (comodoAtual.ArCondionado == true) {
+            AjustadorDiv.style.display = 'block';
+        }
+        else {
+            AjustadorDiv.style.display = 'none';
+        }
     }
 }
 //#endregion
@@ -183,16 +233,20 @@ function atualizarOutput() {
     else if (comodoAtual instanceof Quarto) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
-        Ventilador: ${comodoAtual.ventilador ? 'Ligado' : 'Desligado'}`;
+        Ar-Condicionado: ${comodoAtual.ArCondionado ? 'Ligado' : 'Desligado'}`;
     }
     const temperaturaDiv = document.getElementById('temperatura-atual');
-    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${comodoAtual._temperatura}°C`;
+    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${TemperaturaUniversal}°C`;
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}`;
+    }
 }
 selectCamera.addEventListener('change', () => {
     const indice = parseInt(selectCamera.value, 10);
     cameraExibeComodo(indice);
     atualizarBotoes();
     atualizarOutput();
+    alterarTemperatura2();
 });
 //#endregion
 //#region Conectar os botões aos seus eventos
@@ -215,8 +269,11 @@ btnAlternarTelevisao.addEventListener('click', () => {
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
     alterarTelevisaoQuarto();
 });
-btnAlternarVentilador.addEventListener('click', () => {
-    alterarVentilador();
+btnAlternarArCondicionado.addEventListener('click', () => {
+    alterarArCondicionado();
+});
+btnAjustarTempAr.addEventListener('click', () => {
+    RegularArCondicionado();
 });
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();

@@ -96,6 +96,8 @@ function alterarTemperatura() {
         atualizarOutput();
     }
     else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false) {
+        const NovaTemperatura = Number(NovaTemperaturaHTML.value);
+        TemperaturaAncora = NovaTemperatura;
         TemperaturaUniversal = TemperaturaAncora;
         atualizarOutput();
     }

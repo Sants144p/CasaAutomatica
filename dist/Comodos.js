@@ -31,6 +31,6 @@ export class Comodo {
     }
     alterarTemperatura(novaTemperatura) {
         this._temperatura = novaTemperatura;
-        console.log(`A temperatura atual é igual a ${this._temperatura}`);
+        console.log(`${this._nome}: a temperatura atual é igual a ${this._temperatura}`);
     }
 }

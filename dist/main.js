@@ -24,8 +24,10 @@ const btnAlternarFogao = document.getElementById('alternar-fogao');
 const btnAlternarGeladeira = document.getElementById('alternar-geladeira');
 const btnAlternarPortao = document.getElementById('alternar-portao');
 const btnAlternarTelevisao = document.getElementById('alternar-televisao');
-const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao');
+const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto');
 const btnAlternarVentilador = document.getElementById('alternar-ventilador-quarto');
+const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
+const nova_temperatura = document.getElementById('nova-temperatura');
 //#endregion
 //#region código do Login
 loginButton.addEventListener('click', () => {
@@ -56,9 +58,9 @@ MostrarSenha.addEventListener('click', () => {
 const ListaComodos = [
     new Quarto("Quarto", true, 2.5, 6, 8, 20, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12, 14, 20, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, 20), //2
-    new Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
-    new Cozinha("Cozinha", true, 3.5, 12, 14, 20, false, false) //4
+    new Banheiro("Banheiro", true, 2.5, 6, 6, 19), //2
+    new Garagem("Garagem", true, 3.5, 20, 20, 21, false), //3
+    new Cozinha("Cozinha", true, 3.5, 12, 14, 22, false, false) //4
 ];
 // Variável para rastrear a posição atual da câmera
 let cameraIndice = 0;
@@ -75,6 +77,15 @@ function cameraExibeComodo(indice) {
 function alterarLuzes() {
     if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
         ListaComodos[cameraIndice].Trocarluzes();
+    }
+    else {
+        console.log("A câmera não está posicionada em um cômodo válido.");
+    }
+}
+function alterarTemperatura() {
+    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
+        ListaComodos[cameraIndice].alterarTemperatura(nova_temperatura.value);
+        atualizarOutput();
     }
     else {
         console.log("A câmera não está posicionada em um cômodo válido.");
@@ -174,6 +185,8 @@ function atualizarOutput() {
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
         Ventilador: ${comodoAtual.ventilador ? 'Ligado' : 'Desligado'}`;
     }
+    const temperaturaDiv = document.getElementById('temperatura-atual');
+    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${comodoAtual._temperatura}°C`;
 }
 selectCamera.addEventListener('change', () => {
     const indice = parseInt(selectCamera.value, 10);
@@ -204,6 +217,9 @@ btnAlternarTelevisaoQuarto.addEventListener('click', () => {
 });
 btnAlternarVentilador.addEventListener('click', () => {
     alterarVentilador();
+});
+btnAlterarTemperatura.addEventListener('click', () => {
+    alterarTemperatura();
 });
 // Inicializa a interface
 atualizarOutput();

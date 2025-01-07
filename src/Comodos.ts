@@ -41,9 +41,9 @@ export class Comodo{
     }
 
 
-    alterarTemperatura(novaTemperatura: number) {
+    alterarTemperatura(novaTemperatura: any) {
         this._temperatura = novaTemperatura;
-        console.log(`A temperatura atual é igual a ${this._temperatura}`);
+        console.log(`${this._nome}: a temperatura atual é igual a ${this._temperatura}`);
     }
 
     /* Com set seria assim:

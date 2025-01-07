@@ -27,8 +27,10 @@ const btnAlternarFogao = document.getElementById('alternar-fogao')! as HTMLButto
 const btnAlternarGeladeira = document.getElementById('alternar-geladeira')! as HTMLButtonElement;
 const btnAlternarPortao = document.getElementById('alternar-portao')! as HTMLButtonElement;
 const btnAlternarTelevisao = document.getElementById('alternar-televisao')! as HTMLButtonElement;
-const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao')! as HTMLButtonElement;
+const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto')! as HTMLButtonElement;
 const btnAlternarVentilador = document.getElementById('alternar-ventilador-quarto')! as HTMLButtonElement;
+const btnAlterarTemperatura = document.getElementById('alterar-temperatura')! as HTMLButtonElement;
+const nova_temperatura = document.getElementById('nova-temperatura') as HTMLInputElement;
 //#endregion
 
 //#region código do Login
@@ -66,9 +68,9 @@ const btnAlternarVentilador = document.getElementById('alternar-ventilador-quart
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto", true, 2.5, 6, 8, 20, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12,14, 20, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, 20), //2
-    new Garagem("Garagem", true, 3.5, 20, 20, 20, false), //3
-    new Cozinha("Cozinha", true, 3.5, 12,14, 20, false, false) //4
+    new Banheiro("Banheiro", true, 2.5, 6, 6, 19), //2
+    new Garagem("Garagem", true, 3.5, 20, 20, 21, false), //3
+    new Cozinha("Cozinha", true, 3.5, 12,14, 22, false, false) //4
 ]
 
 // Variável para rastrear a posição atual da câmera
@@ -93,6 +95,15 @@ function alterarLuzes() : void{
         console.log("A câmera não está posicionada em um cômodo válido.");
     }
 
+}
+
+function alterarTemperatura() {
+    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
+        ListaComodos[cameraIndice].alterarTemperatura(nova_temperatura.value);
+        atualizarOutput();
+    } else {
+        console.log("A câmera não está posicionada em um cômodo válido.");
+    }
 }
 
 function alterarFogao() {
@@ -147,6 +158,7 @@ function alterarVentilador() {
     }
 }
 
+
 //#endregion
 
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -200,7 +212,7 @@ function atualizarOutput() {
     }
 
     const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
-    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${comodoAtual.temperatura}°C`; 
+    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${comodoAtual._temperatura}°C`; 
 
 }
 
@@ -238,6 +250,9 @@ btnAlternarTelevisaoQuarto.addEventListener('click', () => {
 btnAlternarVentilador.addEventListener('click', () => {
     alterarVentilador();
 });
+btnAlterarTemperatura.addEventListener('click', () => {
+    alterarTemperatura();
+})
 
 
 // Inicializa a interface

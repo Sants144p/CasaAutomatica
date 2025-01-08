@@ -18,6 +18,7 @@ const GaragemDiv = document.getElementById('controle-garagem');
 const SalaDiv = document.getElementById('controle-sala');
 const BanheiroDiv = document.getElementById('controle-banheiro');
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado');
+const HoraDiv = document.getElementById('Hora');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -237,6 +238,17 @@ function atualizarBotoes() {
         }
     }
 }
+//#endregion
+//#region Horário Atualizado
+function atualizarHora() {
+    const Agora = new Date();
+    const horas = ('0' + Agora.getHours()).slice(-2);
+    const minutos = ('0' + Agora.getMinutes()).slice(-2);
+    const segundos = ('0' + Agora.getSeconds()).slice(-2);
+    HoraDiv.textContent = `${horas}:${minutos}:${segundos}`;
+}
+setInterval(atualizarHora, 1000);
+atualizarHora();
 //#endregion
 //#region Cameras
 const selectCamera = document.getElementById('camera-select');

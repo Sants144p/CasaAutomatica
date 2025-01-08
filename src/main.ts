@@ -22,6 +22,7 @@ const GaragemDiv = document.getElementById('controle-garagem') as HTMLDivElement
 const SalaDiv = document.getElementById('controle-sala') as HTMLDivElement;
 const BanheiroDiv = document.getElementById('controle-banheiro') as HTMLDivElement;
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as HTMLDivElement
+const HoraDiv = document.getElementById('Hora') as HTMLDivElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -235,7 +236,6 @@ function RegularArCondicionado() {
     alterarTemperatura()
 }
 
-
 //#endregion
 
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -270,6 +270,22 @@ function atualizarBotoes() {
         }
     }
 }
+//#endregion
+
+//#region Horário Atualizado
+function atualizarHora(){
+    const Agora = new Date()
+
+    const horas = ('0' + Agora.getHours()).slice(-2);
+    const minutos = ('0' + Agora.getMinutes()).slice(-2);
+    const segundos = ('0' + Agora.getSeconds()).slice(-2);
+
+    HoraDiv.textContent = `${horas}:${minutos}:${segundos}`
+}
+
+setInterval(atualizarHora, 1000)
+
+atualizarHora()
 //#endregion
 
 //#region Cameras

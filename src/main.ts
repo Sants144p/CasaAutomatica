@@ -20,6 +20,7 @@ const CozinhaDiv = document.getElementById('controle-cozinha') as HTMLDivElement
 const QuartoDiv = document.getElementById('controle-quarto') as HTMLDivElement;
 const GaragemDiv = document.getElementById('controle-garagem') as HTMLDivElement;
 const SalaDiv = document.getElementById('controle-sala') as HTMLDivElement;
+const BanheiroDiv = document.getElementById('controle-banheiro') as HTMLDivElement;
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as HTMLDivElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
@@ -35,6 +36,7 @@ const btnAlternarGeladeira = document.getElementById('alternar-geladeira')! as H
 const btnAlternarPortao = document.getElementById('alternar-portao')! as HTMLButtonElement;
 const btnAlternarTelevisao = document.getElementById('alternar-televisao')! as HTMLButtonElement;
 const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto')! as HTMLButtonElement;
+const btnAlternarChuveiro = document.getElementById('alternar-chuveiro') as HTMLButtonElement;
 
 const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto')! as HTMLButtonElement;
 const btnAjustarTempAr = document.getElementById('ajustar-temp')! as HTMLButtonElement;
@@ -79,7 +81,7 @@ const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTML
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12,14, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, 19), //2
+    new Banheiro("Banheiro", true, 2.5, 6, 6, 19, false), //2
     new Garagem("Garagem", true, 3.5, 20, 20, false), //3
     new Cozinha("Cozinha", true, 3.5, 12,14, false, false) //4
 ]
@@ -187,6 +189,14 @@ function alterarTelevisaoQuarto() {
     }
 }
 
+function alterarChuveiro() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Banheiro) {
+        comodoAtual.alterarChuveiro();
+        atualizarOutput();
+    }
+}
+
 function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
@@ -217,15 +227,18 @@ function atualizarBotoes() {
     // Ocultar todos os botões
     CozinhaDiv.style.display = 'none';
     GaragemDiv.style.display = 'none';
+    BanheiroDiv.style.display = 'none';
     SalaDiv.style.display = 'none';
     QuartoDiv.style.display = 'none';
-    AjustadorDiv.style.display = 'none'
+    AjustadorDiv.style.display = 'none';
 
     // Mostrar botões conforme o cômodo atual
     if (cameraIndice === 4) { // Cozinha
         CozinhaDiv.style.display = 'block';
     } else if (cameraIndice === 3) { // Garagem
         GaragemDiv.style.display = 'block';
+    } else if (cameraIndice === 2) { // Banheiro
+        BanheiroDiv.style.display = 'block'
     } else if (cameraIndice === 1) { // Sala
         SalaDiv.style.display = 'block';
     } else if (cameraIndice === 0) { // Quarto
@@ -261,6 +274,9 @@ function atualizarOutput() {
     } else if (comodoAtual instanceof Garagem) {
         output.innerHTML = `${status} <br> 
         Portão: ${comodoAtual.portao ? 'Aberto' : 'Fechado'}.`;
+    } else if (comodoAtual instanceof Banheiro) {
+        output.innerHTML = `${status} <br>
+        Chuveiro: ${comodoAtual.chuveiro ? 'Ligado' : 'Desligado'}.`;
     } else if (comodoAtual instanceof Sala) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.`;
@@ -280,7 +296,7 @@ function atualizarOutput() {
 }
 
 selectCamera.addEventListener('change', () => {
-    const indice = parseInt(selectCamera.value, 10);
+    const indice = parseInt(selectCamera.value);
     cameraExibeComodo(indice);
     atualizarBotoes();
     atualizarOutput();
@@ -305,6 +321,9 @@ btnAlternarGeladeira.addEventListener('click', () => {
 btnAlternarPortao.addEventListener('click', () => {
     alterarPortao();
 });
+btnAlternarChuveiro.addEventListener('click', () => {
+    alterarChuveiro();
+})
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();
 });

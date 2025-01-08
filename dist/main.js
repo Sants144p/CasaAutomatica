@@ -16,6 +16,7 @@ const CozinhaDiv = document.getElementById('controle-cozinha');
 const QuartoDiv = document.getElementById('controle-quarto');
 const GaragemDiv = document.getElementById('controle-garagem');
 const SalaDiv = document.getElementById('controle-sala');
+const BanheiroDiv = document.getElementById('controle-banheiro');
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
@@ -29,6 +30,7 @@ const btnAlternarGeladeira = document.getElementById('alternar-geladeira');
 const btnAlternarPortao = document.getElementById('alternar-portao');
 const btnAlternarTelevisao = document.getElementById('alternar-televisao');
 const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto');
+const btnAlternarChuveiro = document.getElementById('alternar-chuveiro');
 const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto');
 const btnAjustarTempAr = document.getElementById('ajustar-temp');
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
@@ -63,7 +65,7 @@ MostrarSenha.addEventListener('click', () => {
 const ListaComodos = [
     new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12, 14, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, 19), //2
+    new Banheiro("Banheiro", true, 2.5, 6, 6, 19, false), //2
     new Garagem("Garagem", true, 3.5, 20, 20, false), //3
     new Cozinha("Cozinha", true, 3.5, 12, 14, false, false) //4
 ];
@@ -160,6 +162,13 @@ function alterarTelevisaoQuarto() {
         atualizarOutput();
     }
 }
+function alterarChuveiro() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Banheiro) {
+        comodoAtual.alterarChuveiro();
+        atualizarOutput();
+    }
+}
 function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
@@ -185,6 +194,7 @@ function atualizarBotoes() {
     // Ocultar todos os botões
     CozinhaDiv.style.display = 'none';
     GaragemDiv.style.display = 'none';
+    BanheiroDiv.style.display = 'none';
     SalaDiv.style.display = 'none';
     QuartoDiv.style.display = 'none';
     AjustadorDiv.style.display = 'none';
@@ -194,6 +204,9 @@ function atualizarBotoes() {
     }
     else if (cameraIndice === 3) { // Garagem
         GaragemDiv.style.display = 'block';
+    }
+    else if (cameraIndice === 2) { // Banheiro
+        BanheiroDiv.style.display = 'block';
     }
     else if (cameraIndice === 1) { // Sala
         SalaDiv.style.display = 'block';
@@ -228,6 +241,10 @@ function atualizarOutput() {
         output.innerHTML = `${status} <br> 
         Portão: ${comodoAtual.portao ? 'Aberto' : 'Fechado'}.`;
     }
+    else if (comodoAtual instanceof Banheiro) {
+        output.innerHTML = `${status} <br>
+        Chuveiro: ${comodoAtual.chuveiro ? 'Ligado' : 'Desligado'}.`;
+    }
     else if (comodoAtual instanceof Sala) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.`;
@@ -244,7 +261,7 @@ function atualizarOutput() {
     }
 }
 selectCamera.addEventListener('change', () => {
-    const indice = parseInt(selectCamera.value, 10);
+    const indice = parseInt(selectCamera.value);
     cameraExibeComodo(indice);
     atualizarBotoes();
     atualizarOutput();
@@ -264,6 +281,9 @@ btnAlternarGeladeira.addEventListener('click', () => {
 });
 btnAlternarPortao.addEventListener('click', () => {
     alterarPortao();
+});
+btnAlternarChuveiro.addEventListener('click', () => {
+    alterarChuveiro();
 });
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();

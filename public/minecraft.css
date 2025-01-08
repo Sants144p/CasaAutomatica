@@ -1,0 +1,266 @@
+:root {
+    --w-spacing: 4px;
+    --l-spacing: 20px;
+    --arrow: url(assets/arrow.png), default;
+    --pointer: url(assets/pointer.png), default;
+  }
+  
+  * {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  [cursor=pointer] {
+    cursor: var(--pointer);
+  }
+  
+  [cursor=arrow] {
+    cursor: var(--arrow);
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+  
+  .bg-dark {
+    background-color: #000;
+  }
+  
+  .bg-primary {
+    background-color: #009ac9;
+  }
+  
+  .bg-danger {
+    background-color: #f30000;
+  }
+  
+  .bg-warning {
+    background-color: #e5e900;
+  }
+  
+  .text-dark {
+    color: #000;
+  }
+  
+  .text-primary {
+    color: #009ac9;
+  }
+  
+  .text-danger {
+    color: #f30000;
+  }
+  
+  .text-warning {
+    color: #e5e900;
+  }
+  
+  .dialogue-box {
+    padding: 5px;
+    outline: 2px solid rgb(247, 247, 247);
+    border: 3px solid;
+    border-image: url("./assets/dialogue-image.png") 2;
+  }
+  
+  .inline {
+    display: inline-flex;
+  }
+  
+  input[type=text] {
+    padding: 2px;
+    border: 2px solid;
+    background-color: #616161;
+    color: #fff;
+    outline: 2px solid black;
+    border-image: url(./assets/text-input.png) 1;
+  }
+  
+  input[type=text]::placeholder {
+    color: #c4c4c4;
+  }
+  
+  input[type=text]:hover {
+    outline: 2px solid white;
+  }
+  
+  input[type=text]:focus {
+    outline: 2px solid white;
+  }
+  
+  .input-text-lg {
+    padding: 2px;
+    border: 2px solid;
+    background-color: #616161;
+    color: #fff;
+    height: 40px;
+    outline: 2px solid black;
+    border-image: url(./assets/text-input.png) 1;
+  }
+  
+  .input-text-lg::placeholder {
+    color: #c4c4c4;
+  }
+  
+  .input-text-lg:hover {
+    outline: 2px solid white;
+  }
+  
+  .input-text-lg:focus {
+    outline: 2px solid white;
+  }
+  
+  .is {
+    margin-right: 10px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .button-java, .button-java-w, .button-java-old, .button-java-w-old {
+    width: auto;
+    text-align: center;
+    display: block;
+    color: #fff;
+    padding: 10px;
+    border: 2px solid #000;
+    margin: 4px 0;
+    background: url("./assets/i01_button_normal.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .button-java:hover, 
+  .button-java-w:hover, 
+  .button-java-old:hover, 
+  .button-java-w-old:hover {
+    border: 2px solid #f1f1f1;
+  }
+  
+  .button-java-old:hover, 
+  .button-java-w-old:hover {
+    color: #f2ff7e;
+    background: url("./assets/utton_hover.png");
+  }
+  
+  .container {
+    padding: 17px;
+    margin: 10px;
+    background: #ececec;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .button {
+    height: 58px;
+    text-align: left;
+    display: block;
+    padding: 10px;
+    outline: 2px solid rgb(0, 0, 0);
+    border: 2px solid;
+    margin: 4px 0;
+    background-color: #c6c6c6;
+    border-image: url("./assets/button_normal.png") 1;
+  }
+  
+  .button:hover {
+    outline: 2px solid rgb(255, 255, 255);
+    border: 2px solid;
+    color: #fff;
+    background-color: #43a01c;
+    border-image: url("./assets/button_hover.png") 1;
+  }
+  
+  .button:active {
+    outline: 2px solid rgb(0, 0, 0);
+    border: 2px solid;
+    background-color: #8b8b8b;
+    border-image: url("./assets/button_pressed_hover.png") 1;
+  }
+  
+  a.link-white {
+    color: #fff;
+  }
+  
+  a.link-white:active {
+    color: #f0f0f0;
+  }
+  
+  a.link-black {
+    color: #000;
+  }
+  
+  a.link-black:active {
+    color: #4b4b4b;
+  }
+  
+  .button-dark {
+    color: #fff;
+    height: 58px;
+    text-align: left;
+    display: block;
+    padding: 10px;
+    outline: 2px solid rgb(0, 0, 0);
+    border: 2px solid;
+    margin: 4px 0;
+    background-color: #3a3a3a;
+    border-image: url("./assets/dark.png") 1;
+  }
+  
+  .button-dark:hover {
+    outline: 2px solid rgb(255, 255, 255);
+    color: #fff;
+    background-color: #5f6a74;
+    border-image: url("./assets/darkhover.png") 1;
+  }
+  
+  .header {
+    padding: 5px;
+    text-align: center;
+    width: 1300;
+    margin-left: 13px;
+    background-color: #c6c6c6;
+    border: 2px solid;
+    border-image: url("./assets/dark.png") 1;
+  }
+  
+  @media(max-width: 700px) {
+    .header {
+      width: auto;
+    }
+  }
+  
+  input.new[type=checkbox], 
+  input[type=checkbox] {
+    width: 60px;
+    height: 32px;
+    background-image: url(./assets/toggle_off.png);
+  }
+  
+  input.new[type=checkbox]:checked, 
+  input[type=checkbox]:checked {
+    background-image: url(./assets/toggle_on.png);
+  }
+  
+  select {
+    height: 55px;
+    text-align: left;
+    display: block;
+    padding: 10px;
+    outline: 2px solid rgb(0, 0, 0);
+    border: 2px solid;
+    background-color: #c6c6c6;
+    border-image: url("./assets/button_normal.png") 1;
+  }
+  
+  select:hover {
+    outline: 2px solid rgb(255, 255, 255);
+    color: #fff;
+    background-color: #43a01c;
+    border-image: url("./assets/button_pressed.png") 1;
+  }
+  
+  select option:hover {
+    background-color: #616161;
+    color: #fff;
+  }

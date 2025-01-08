@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casa Automática do Vinnicius 13</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="minecraft.css">
 
 </head>
 <body>
@@ -24,16 +25,17 @@
         </button>
       </div>
       <br>
-      <button id="login-botão">Entrar</button>
+      <button id="login-botão" class="button">Entrar</button>
       <p id="login-error" style="color: red; display: none;">Usuário ou senha inválidos!</p>
 
     </div>
 
     <div id="Casa-Automatica">
-    <h1>Casa Automática do Vinnicus 13</h1>
+    <h1>Casa Automatica do Vinnicus 13</h1>
 
     <label for="camera-select">Escolha o cômodo:</label>
-    <select id="camera-select">
+    <br><br>
+    <select id="camera-select" name="dropdown">
         <option value="0">Quarto</option>
         <option value="1">Sala</option>
         <option value="2">Banheiro</option>
@@ -41,41 +43,43 @@
         <option value="4">Cozinha</option>
     </select>
     <br><br>  
-    <button id="alternar-luzes">Alternar Luzes</button>
+    <button id="alternar-luzes" class="button">Alternar Luzes</button>
 
     <div id="controle-cozinha" style="display: none;">
       <br>
-      <button id="alternar-fogao">Alternar Fogão</button>
-      <button id="alternar-geladeira">Alternar Geladeira</button>
+      <button id="alternar-fogao" class="button">Alternar Fogão</button>
+      <br>
+      <button id="alternar-geladeira" class="button">Alternar Geladeira</button>
     </div>
 
     <div id="controle-quarto" style="display: none;">
       <br>
-      <button id="alternar-televisao-quarto">Alternar Televisão</button>
-      <button id="alternar-ar-quarto">Alternar Ar-Condicionado</button>
+      <button id="alternar-televisao-quarto" class="button">Alternar Televisão</button>
+      <br><br>
+      <button id="alternar-ar-quarto" class="button">Alternar Ar-Condicionado</button>
 
       <div id="ajustar-temp-arcondicionado">
         <br>
         <label for="temp-ar">Temperatura</label>
         <input type="number" id="temp-ar" min="16" max="30">
-        <button id="ajustar-temp">Ajustar a Temperatura do Ar-Condicionado</button>
+        <button id="ajustar-temp" class="button">Ajustar a Temperatura do Ar-Condicionado</button>
 
       </div>
     </div>
   
     <div id="controle-garagem" style="display: none;">
       <br>
-      <button id="alternar-portao">Alternar Portão</button>
+      <button id="alternar-portao" class="button">Alternar Portão</button>
     </div>
     
     <div id="controle-banheiro" style="display: none;">
       <br>
-      <button id="alternar-chuveiro">Alternar Chuveiro</button>
+      <button id="alternar-chuveiro" class="button">Alternar Chuveiro</button>
     </div>
 
     <div id="controle-sala" style="display: none;">
       <br>
-      <button id="alternar-televisao">Alternar Televisão</button>
+      <button id="alternar-televisao" class="button">Alternar Televisão</button>
     </div>
 
     <div id="output">Câmera não posicionada.</div>
@@ -85,10 +89,12 @@
   
   <label for="nova-temperatura"> <b>Nova Temperatura:</b></label>
     <input type="number" id="nova-temperatura" placeholder="Digite a nova temperatura">
-    <button id="alterar-temperatura">Alterar Temperatura</button>
+    <br><br>
+    <button id="alterar-temperatura" class="button">Alterar Temperatura</button>
     
   <script type="module" src="/dist/main.js"></script>
-
+  <script src="https://unpkg.com/minecraft-framework-css@1.1.9/css/assets/script.js"></script>
+   
 </div>
 </body>
 </html>

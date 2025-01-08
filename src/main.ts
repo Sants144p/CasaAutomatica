@@ -145,6 +145,22 @@ function alterarTemperatura2(){
     }
 }
 
+function alterarTemperatura3(){
+
+    const comodoAtual = ListaComodos[cameraIndice];
+
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+        let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
+        TemperaturaUniversal = tempAr
+        atualizarOutput()
+    }
+    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false){
+        TemperaturaUniversal = TemperaturaAncora
+        atualizarOutput()
+    }
+
+}
+
 function alterarFogao() {
     if (cameraIndice === 4) {  // Cômodo Cozinha
         const comodoAtual = ListaComodos[cameraIndice];
@@ -204,7 +220,7 @@ function alterarArCondicionado() {
         atualizarBotoes();
         atualizarOutput();
     }
-    alterarTemperatura()
+    alterarTemperatura3()
 }
 
 function RegularArCondicionado() {

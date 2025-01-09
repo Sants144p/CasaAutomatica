@@ -5,10 +5,6 @@
     --pointer: url(assets/pointer.png), default;
   }
   
-  * {
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  
   [cursor=pointer] {
     cursor: var(--pointer);
   }
@@ -149,18 +145,6 @@
   
   .text-center {
     text-align: center;
-  }
-  
-  .button {
-    height: 58px;
-    text-align: left;
-    display: block;
-    padding: 10px;
-    outline: 2px solid rgb(0, 0, 0);
-    border: 2px solid;
-    margin: 4px 0;
-    background-color: #c6c6c6;
-    border-image: url("./assets/button_normal.png") 1;
   }
   
   .button:hover {

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casa Automática do Vinnicius 13</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="minecraft-css2.css">
   <link rel="stylesheet" href="minecraft.css">
 
 </head>
@@ -25,7 +26,7 @@
         </button>
       </div>
       <br>
-      <button id="login-botão" class="button">Entrar</button>
+      <button id="login-botão" class="button button-primary">Entrar</button>
       <p id="login-error" style="color: red; display: none;">Usuário ou senha inválidos!</p>
 
     </div>
@@ -43,54 +44,54 @@
         <option value="4">Cozinha</option>
     </select>
     <br><br>  
-    <button id="alternar-luzes" class="button">Alternar Luzes</button>
+    <button id="alternar-luzes" class="button button-tertiary">Alternar Luzes</button>
 
     <div id="controle-cozinha" style="display: none;">
       <br>
-      <button id="alternar-fogao" class="button">Alternar Fogão</button>
+      <button id="alternar-fogao" class="button button-tertiary">Alternar Fogão</button>
       <br>
-      <button id="alternar-geladeira" class="button">Alternar Geladeira</button>
+      <button id="alternar-geladeira" class="button button-tertiary">Alternar Geladeira</button>
     </div>
 
     <div id="controle-quarto" style="display: none;">
       <br>
-      <button id="alternar-televisao-quarto" class="button">Alternar Televisão</button>
+      <button id="alternar-televisao-quarto" class="button button-tertiary">Alternar Televisão</button>
       <br><br>
-      <button id="alternar-ar-quarto" class="button">Alternar Ar-Condicionado</button>
+      <button id="alternar-ar-quarto" class="button button-tertiary">Alternar Ar-Condicionado</button>
 
       <div id="ajustar-temp-arcondicionado">
         <br>
         <label for="temp-ar">Temperatura</label>
         <input type="number" id="temp-ar" min="16" max="30">
-        <button id="ajustar-temp" class="button">Ajustar a Temperatura do Ar-Condicionado</button>
+        <button id="ajustar-temp" class="button button-tertiary">Ajustar a Temperatura do Ar-Condicionado</button>
 
       </div>
     </div>
   
     <div id="controle-garagem" style="display: none;">
       <br>
-      <button id="alternar-portao" class="button">Alternar Portão</button>
+      <button id="alternar-portao" class="button button-tertiary">Alternar Portão</button>
     </div>
     
     <div id="controle-banheiro" style="display: none;">
       <br>
-      <button id="alternar-chuveiro" class="button">Alternar Chuveiro</button>
+      <button id="alternar-chuveiro" class="button button-tertiary">Alternar Chuveiro</button>
     </div>
 
     <div id="controle-sala" style="display: none;">
       <br>
-      <button id="alternar-televisao" class="button">Alternar Televisão</button>
+      <button id="alternar-televisao" class="button button-tertiary">Alternar Televisão</button>
     </div>
 
     <div id="output">Câmera não posicionada.</div>
     
   <br><br>
-  <div id="temperatura-atual"><b>Temperatura Atual: </b></div>
+  <div id="temperatura-atual"><b>Temperatura Ambiente: </b></div>
   
   <label for="nova-temperatura"> <b>Nova Temperatura:</b></label>
     <input type="number" id="nova-temperatura" placeholder="Digite a nova temperatura">
     <br><br>
-    <button id="alterar-temperatura" class="button">Alterar Temperatura</button>
+    <button id="alterar-temperatura" class="button button-tertiary">Alterar Temperatura</button>
   
   <div id="Hora"></div>
 </div>

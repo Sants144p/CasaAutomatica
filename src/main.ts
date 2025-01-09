@@ -48,7 +48,7 @@ const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTML
 //#endregion
 
 //#region código do Login
- loginButton.addEventListener('click', () => {
+loginButton.addEventListener('click', () => {
      const usuario = InputUsuario.value;
      const senha = InputSenha.value;
 
@@ -63,7 +63,9 @@ const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTML
      }
  });
 
-// Mostrar/ocultar senha com botão de "olhinho"
+ //#endregion
+
+//#region Mostrar/ocultar senha com botão de "olhinho"
     MostrarSenha.addEventListener('click', () => {
     if (InputSenha.type === 'password') {
 
@@ -228,7 +230,7 @@ function RegularArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         const tempHTML = document.getElementById('temp-ar')! as HTMLInputElement
-        const temp = parseInt(tempHTML.value, 10)
+        const temp = parseInt(tempHTML.value)
         
         comodoAtual.ajustarTemperaturadoAr(temp);
         atualizarOutput();
@@ -323,7 +325,7 @@ function atualizarOutput() {
     temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${TemperaturaUniversal}°C`; 
 
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado){
-        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}`
+        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`
     }
 }
 
@@ -372,6 +374,7 @@ btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
 })
 
+//#endregion
 
 // Inicializa a interface
 atualizarOutput();

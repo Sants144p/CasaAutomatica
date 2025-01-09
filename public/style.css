@@ -55,6 +55,6 @@ body {
     color: white; /* Texto branco para contraste */
     padding: 5px 10px; /* Espaçamento interno */
     border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho do texto */
+    font-size: 24px; /* Tamanho do texto */
     z-index: 1000; /* Garante que a div fique acima de outros elementos */
 }

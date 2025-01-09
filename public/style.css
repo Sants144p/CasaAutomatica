@@ -1,6 +1,19 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.max-width{
+
+    background-image: url('/Images/Minecraft-Carregando.jpg'); /* Caminho para a imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    
+    width: 100vw;
+    height: 100vh;
+    background-position: top;    /* Centraliza a imagem */
+    z-index: -1;
 }
 
 #output {

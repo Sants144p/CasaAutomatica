@@ -7,6 +7,9 @@ https://legend077.github.io/framework-docs/docs/#texts
 Tocha
 https://uiverse.io/KSAplay/angry-wasp-95
 
+  <link rel="stylesheet" href="minecraft-css2.css">
+  <link rel="stylesheet" href="minecraft.css">
+
 /*
 Para facilitar na hora de criar novos comodos, pra copiar e colar
 

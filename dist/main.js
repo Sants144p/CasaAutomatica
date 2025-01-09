@@ -51,7 +51,8 @@ loginButton.addEventListener('click', () => {
         loginError.style.display = 'block';
     }
 });
-// Mostrar/ocultar senha com botão de "olhinho"
+//#endregion
+//#region Mostrar/ocultar senha com botão de "olhinho"
 MostrarSenha.addEventListener('click', () => {
     if (InputSenha.type === 'password') {
         InputSenha.type = 'text';
@@ -196,7 +197,7 @@ function RegularArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         const tempHTML = document.getElementById('temp-ar');
-        const temp = parseInt(tempHTML.value, 10);
+        const temp = parseInt(tempHTML.value);
         comodoAtual.ajustarTemperaturadoAr(temp);
         atualizarOutput();
     }
@@ -282,7 +283,7 @@ function atualizarOutput() {
     const temperaturaDiv = document.getElementById('temperatura-atual');
     temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${TemperaturaUniversal}°C`;
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
-        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}`;
+        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`;
     }
 }
 selectCamera.addEventListener('change', () => {
@@ -325,5 +326,6 @@ btnAjustarTempAr.addEventListener('click', () => {
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
 });
+//#endregion
 // Inicializa a interface
 atualizarOutput();

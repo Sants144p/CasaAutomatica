@@ -19,5 +19,8 @@
       "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
       "license": "ISC"
     }
+  },
+  "dependencies": {
+    "minecraft-framework-css": "^2.0.0"
   }
 }

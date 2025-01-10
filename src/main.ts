@@ -23,6 +23,8 @@ const SalaDiv = document.getElementById('controle-sala') as HTMLDivElement;
 const BanheiroDiv = document.getElementById('controle-banheiro') as HTMLDivElement;
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as HTMLDivElement
 const HoraDiv = document.getElementById('Hora') as HTMLDivElement
+const ValorTemp = document.getElementById('temperatura-range') as HTMLDivElement;
+const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivElement;
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -44,6 +46,7 @@ const btnAjustarTempAr = document.getElementById('ajustar-temp')! as HTMLButtonE
 
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura')! as HTMLButtonElement;
 const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTMLInputElement;
+const NovaTemperaturaAr = document.getElementById('temp-ar')! as HTMLInputElement;
 
 //#endregion
 
@@ -237,6 +240,17 @@ function RegularArCondicionado() {
     }
     alterarTemperatura()
 }
+function alterarValorTemp() {
+    const temp = parseInt(NovaTemperaturaHTML.value)
+    ValorTemp.innerHTML = `${temp}°`
+    atualizarOutput();
+}
+
+function alterarValorTempAr() {
+    const temp = parseInt(NovaTemperaturaAr.value)
+    ValorTempAr.innerHTML = `${temp}`
+    atualizarOutput();
+}
 
 //#endregion
 
@@ -373,7 +387,12 @@ btnAjustarTempAr.addEventListener('click', () => {
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
 })
-
+NovaTemperaturaHTML.addEventListener('change', () => {
+    alterarValorTemp();
+})
+NovaTemperaturaAr.addEventListener('change', () => {
+    alterarValorTempAr();
+})
 //#endregion
 
 // Inicializa a interface

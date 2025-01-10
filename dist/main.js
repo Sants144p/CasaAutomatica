@@ -19,6 +19,8 @@ const SalaDiv = document.getElementById('controle-sala');
 const BanheiroDiv = document.getElementById('controle-banheiro');
 const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado');
 const HoraDiv = document.getElementById('Hora');
+const ValorTemp = document.getElementById('temperatura-range');
+const ValorTempAr = document.getElementById('temperatura-range-ar');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -36,6 +38,7 @@ const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto');
 const btnAjustarTempAr = document.getElementById('ajustar-temp');
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
 const NovaTemperaturaHTML = document.getElementById('nova-temperatura');
+const NovaTemperaturaAr = document.getElementById('temp-ar');
 //#endregion
 //#region código do Login
 loginButton.addEventListener('click', () => {
@@ -203,6 +206,16 @@ function RegularArCondicionado() {
     }
     alterarTemperatura();
 }
+function alterarValorTemp() {
+    const temp = parseInt(NovaTemperaturaHTML.value);
+    ValorTemp.innerHTML = `${temp}°`;
+    atualizarOutput();
+}
+function alterarValorTempAr() {
+    const temp = parseInt(NovaTemperaturaAr.value);
+    ValorTempAr.innerHTML = `${temp}`;
+    atualizarOutput();
+}
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
 function atualizarBotoes() {
@@ -325,6 +338,12 @@ btnAjustarTempAr.addEventListener('click', () => {
 });
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
+});
+NovaTemperaturaHTML.addEventListener('change', () => {
+    alterarValorTemp();
+});
+NovaTemperaturaAr.addEventListener('change', () => {
+    alterarValorTempAr();
 });
 //#endregion
 // Inicializa a interface

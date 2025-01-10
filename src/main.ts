@@ -393,6 +393,7 @@ NovaTemperaturaHTML.addEventListener('change', () => {
 NovaTemperaturaAr.addEventListener('change', () => {
     alterarValorTempAr();
 })
+
 //#endregion
 
 // Inicializa a interface

@@ -3,7 +3,7 @@
    
     background-image: url('/Images/Minecraft-Carregando.jpg'); /* Caminho para a imagem */
     background-size: cover; /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-repeat: repeat-y; /* Impede que a imagem se repita */
     
 }
 

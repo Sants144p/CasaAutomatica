@@ -4,7 +4,7 @@ export class Banheiro extends Comodo{
 
     protected _chuveiro : boolean
 
-    constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento : number, temperatura : number, _chuveiro : boolean) {
+    constructor(nome : string, luzes : boolean, altura : number, largura : number, comprimento : number, _chuveiro : boolean) {
 
         super(nome, luzes, altura, largura, comprimento)
         this._chuveiro = false

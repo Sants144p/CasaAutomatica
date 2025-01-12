@@ -25,6 +25,7 @@ const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as H
 const HoraDiv = document.getElementById('Hora') as HTMLDivElement
 const ValorTemp = document.getElementById('temperatura-range') as HTMLDivElement;
 const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivElement;
+const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -87,7 +88,7 @@ loginButton.addEventListener('click', () => {
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
     new Sala("Sala de Estar", true, 3.5, 12,14, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, 19, false), //2
+    new Banheiro("Banheiro", true, 2.5, 6, 6, false), //2
     new Garagem("Garagem", true, 3.5, 20, 20, false), //3
     new Cozinha("Cozinha", true, 3.5, 12,14, false, false) //4
 ]
@@ -252,6 +253,121 @@ function alterarValorTempAr() {
     atualizarOutput();
 }
 
+function atualizarImagemCamera() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    let imagemPath = "";
+
+    if (comodoAtual instanceof Quarto) {
+        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
+            imagemPath = "1" //Tudo on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
+            imagemPath = "2" //Tudo off
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
+            imagemPath = "3" //só Luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
+            imagemPath = "4" //só v2 on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
+            imagemPath = "5" //só v3 on
+        }
+        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
+            imagemPath = "6" //luz e v2 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
+            imagemPath = "7" //luz e v3 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
+            imagemPath = "8" //Só luz off
+        }
+    }
+
+    if (comodoAtual instanceof Sala) {
+        
+        if (comodoAtual.luzes && comodoAtual.televisao){
+            imagemPath = "1" //Tudo on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.televisao){
+            imagemPath = "2" //Tudo off
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao){
+            imagemPath = "3" //Só luz on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao){
+            imagemPath = "4" //Só luz off
+        }
+    }
+
+    if (comodoAtual instanceof Banheiro) {
+        
+        if (comodoAtual.luzes && comodoAtual.chuveiro){
+            imagemPath = "1" //Tudo on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.chuveiro){
+            imagemPath = "2" //Tudo off
+        }
+        else if (!comodoAtual.luzes && comodoAtual.chuveiro){
+            imagemPath = "3" //Só luz on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.chuveiro){
+            imagemPath = "4" //Só luz off
+        }
+
+    }
+
+    if (comodoAtual instanceof Garagem) {
+        
+        if (comodoAtual.luzes && comodoAtual.portao){
+            imagemPath = "1" //Tudo on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.portao){
+            imagemPath = "2" //Tudo off
+        }
+        else if (!comodoAtual.luzes && comodoAtual.portao){
+            imagemPath = "3" //Só luz on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.portao){
+            imagemPath = "4" //Só luz off
+        }
+
+    }
+
+    if (comodoAtual instanceof Cozinha) {
+        
+        if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira){
+            imagemPath = "1" //Tudo on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
+            imagemPath = "2" //Tudo off
+        }
+        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
+            imagemPath = "3" //só Luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
+            imagemPath = "4" //só v2 on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
+            imagemPath = "5" //só v3 on
+        }
+        else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
+            imagemPath = "6" //luz e v2 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
+            imagemPath = "7" //luz e v3 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
+            imagemPath = "8" //Só luz off
+        }
+
+    }
+
+    // Atualiza a imagem na div
+    imagemDiv.style.backgroundImage = `url(${imagemPath})`;
+    imagemDiv.style.backgroundSize = "cover"; // Ajusta a imagem para cobrir toda a div
+}
+
 //#endregion
 
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -336,7 +452,7 @@ function atualizarOutput() {
     }
 
     const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
-    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${TemperaturaUniversal}°C`; 
+    temperaturaDiv.innerHTML = `<b>Temperatura do Ambiente:</b> ${TemperaturaUniversal}°C`; 
 
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado){
         temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`

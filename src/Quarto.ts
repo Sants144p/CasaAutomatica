@@ -13,7 +13,7 @@ export class Quarto extends Comodo{
 
         this._televisao = false
         this._ArCondicionado = false
-        this._temperaturaArCondicionado = 21
+        this._temperaturaArCondicionado = 23
        
     }
 

@@ -4,7 +4,7 @@ export class Quarto extends Comodo {
         super(nome, luzes, altura, largura, comprimento);
         this._televisao = false;
         this._ArCondicionado = false;
-        this._temperaturaArCondicionado = 21;
+        this._temperaturaArCondicionado = 23;
     }
     get televisao() {
         return this._televisao;

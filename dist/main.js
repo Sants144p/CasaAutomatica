@@ -294,7 +294,7 @@ function atualizarOutput() {
         Ar-Condicionado: ${comodoAtual.ArCondionado ? 'Ligado' : 'Desligado'}`;
     }
     const temperaturaDiv = document.getElementById('temperatura-atual');
-    temperaturaDiv.innerHTML = `<b>Temperatura Atual:</b> ${TemperaturaUniversal}°C`;
+    temperaturaDiv.innerHTML = `<b>Temperatura do Ambiente:</b> ${TemperaturaUniversal}°C`;
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
         temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`;
     }

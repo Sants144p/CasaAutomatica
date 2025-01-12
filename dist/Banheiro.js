@@ -1,6 +1,6 @@
 import { Comodo } from "./Comodos.js";
 export class Banheiro extends Comodo {
-    constructor(nome, luzes, altura, largura, comprimento, temperatura, _chuveiro) {
+    constructor(nome, luzes, altura, largura, comprimento, _chuveiro) {
         super(nome, luzes, altura, largura, comprimento);
         this._chuveiro = false;
     }

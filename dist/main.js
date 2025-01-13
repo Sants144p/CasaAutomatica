@@ -222,101 +222,98 @@ function atualizarImagemCamera() {
     let imagemPath = "";
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
-            imagemPath = "1"; //Tudo on
+            imagemPath = "/Images/Quarto/Quarto (Luz, TV e Ar).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            imagemPath = "2"; //Tudo off
+            imagemPath = "/Images/Quarto/Quarto (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            imagemPath = "3"; //só Luz on
+            imagemPath = "/Images/Quarto/Quarto (Luz).jpg"; //só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            imagemPath = "4"; //só v2 on
+            imagemPath = "/Images/Quarto/Quarto (TV).jpg"; //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
-            imagemPath = "5"; //só v3 on
+            imagemPath = "/Images/Quarto/Quarto (Ar).jpg"; //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            imagemPath = "6"; //luz e v2 on
+            imagemPath = "/Images/Quarto/Quarto (Luz e TV).jpg"; //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
-            imagemPath = "7"; //luz e v3 on
+            imagemPath = "/Images/Quarto/Quarto (Luz e Ar).jpg"; //luz e v3 on
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            imagemPath = "8"; //Só luz off
+        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
+            imagemPath = "/Images/Quarto/Quarto (TV e Ar).jpg"; //Só luz off
         }
     }
     if (comodoAtual instanceof Sala) {
         if (comodoAtual.luzes && comodoAtual.televisao) {
-            imagemPath = "1"; //Tudo on
+            imagemPath = "/Images/Sala/Sala (Luz e TV).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao) {
-            imagemPath = "2"; //Tudo off
-        }
-        else if (!comodoAtual.luzes && comodoAtual.televisao) {
-            imagemPath = "3"; //Só luz on
+            imagemPath = "/Images/Sala/Sala (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao) {
-            imagemPath = "4"; //Só luz off
+            imagemPath = "/Images/Sala/Sala (Luz).jpg"; //Só luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao) {
+            imagemPath = "/Images/Sala/Sala (TV).jpg"; //Só luz off
         }
     }
     if (comodoAtual instanceof Banheiro) {
         if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "1"; //Tudo on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "2"; //Tudo off
-        }
-        else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "3"; //Só luz on
+            imagemPath = "/Images/Banheiro/Banheiro (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "4"; //Só luz off
+            imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg"; //Só luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
+            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).jpg"; //Só luz off
         }
     }
     if (comodoAtual instanceof Garagem) {
         if (comodoAtual.luzes && comodoAtual.portao) {
-            imagemPath = "1"; //Tudo on
+            imagemPath = "/Images/Garagem/Garagem (Luz e Portão).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.portao) {
-            imagemPath = "2"; //Tudo off
-        }
-        else if (!comodoAtual.luzes && comodoAtual.portao) {
-            imagemPath = "3"; //Só luz on
+            imagemPath = "/Images/Garagem/Garagem (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.portao) {
-            imagemPath = "4"; //Só luz off
+            imagemPath = "/Images/Garagem/Garagem (Luz).jpg"; //Só luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.portao) {
+            imagemPath = "/Images/Garagem/Garagem (Portão).jpg"; //Só luz off
         }
     }
     if (comodoAtual instanceof Cozinha) {
         if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "1"; //Tudo on
+            imagemPath = "/Images/Cozinha/Cozinha (Luz, Fogão e Geladeira).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "2"; //Tudo off
+            imagemPath = "/Images/Cozinha/Cozinha (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "3"; //só Luz on
+            imagemPath = "/Images/Cozinha/Cozinha (Luz).jpg"; //só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "4"; //só v2 on
+            imagemPath = "/Images/Cozinha/Cozinha (Fogão).jpg"; //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "5"; //só v3 on
+            imagemPath = "/Images/Cozinha/Cozinha (Geladeira).jpg"; //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "6"; //luz e v2 on
+            imagemPath = "/Images/Cozinha/Cozinha (Luz e Fogão).jpg"; //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "7"; //luz e v3 on
+            imagemPath = "/Images/Cozinha/Cozinha (Luz e Geladeira).jpg"; //luz e v3 on
         }
-        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "8"; //Só luz off
+        else if (!comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
+            imagemPath = "/Images/Cozinha/Cozinha (Fogão e Geladeira).jpg"; //Só luz off
         }
     }
-    // Atualiza a imagem na div
-    imagemDiv.style.backgroundImage = `url(${imagemPath})`;
-    imagemDiv.style.backgroundSize = "cover"; // Ajusta a imagem para cobrir toda a div
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -405,6 +402,7 @@ selectCamera.addEventListener('change', () => {
     const indice = parseInt(selectCamera.value);
     cameraExibeComodo(indice);
     atualizarBotoes();
+    atualizarImagemCamera();
     atualizarOutput();
     alterarTemperatura2();
 });
@@ -412,40 +410,52 @@ selectCamera.addEventListener('change', () => {
 //#region Conectar os botões aos seus eventos
 btnAlternarLuzes.addEventListener('click', () => {
     alterarLuzes();
+    atualizarImagemCamera();
     atualizarOutput();
 });
 btnAlternarFogao.addEventListener('click', () => {
     alterarFogao();
+    atualizarImagemCamera();
 });
 btnAlternarGeladeira.addEventListener('click', () => {
     alterarGeladeira();
+    atualizarImagemCamera();
 });
 btnAlternarPortao.addEventListener('click', () => {
     alterarPortao();
+    atualizarImagemCamera();
 });
 btnAlternarChuveiro.addEventListener('click', () => {
     alterarChuveiro();
+    atualizarImagemCamera();
 });
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();
+    atualizarImagemCamera();
 });
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
     alterarTelevisaoQuarto();
+    atualizarImagemCamera();
 });
 btnAlternarArCondicionado.addEventListener('click', () => {
     alterarArCondicionado();
+    atualizarImagemCamera();
 });
 btnAjustarTempAr.addEventListener('click', () => {
     RegularArCondicionado();
+    atualizarImagemCamera();
 });
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
+    atualizarImagemCamera();
 });
 NovaTemperaturaHTML.addEventListener('change', () => {
     alterarValorTemp();
+    atualizarImagemCamera();
 });
 NovaTemperaturaAr.addEventListener('change', () => {
     alterarValorTempAr();
+    atualizarImagemCamera();
 });
 //#endregion
 // Inicializa a interface

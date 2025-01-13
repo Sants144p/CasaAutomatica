@@ -50,6 +50,7 @@ loginButton.addEventListener('click', () => {
         CasaDiv.style.display = 'block';
         atualizarBotoes();
         atualizarOutput();
+        atualizarImagemCamera();
     }
     else {
         loginError.style.display = 'block';
@@ -262,10 +263,10 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Banheiro) {
         if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).jpg"; //Tudo on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).png"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Nada).jpg"; //Tudo off
+            imagemPath = "/Images/Banheiro/Banheiro (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
             imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg"; //Só luz on
@@ -314,6 +315,8 @@ function atualizarImagemCamera() {
             imagemPath = "/Images/Cozinha/Cozinha (Fogão e Geladeira).jpg"; //Só luz off
         }
     }
+    // Atualiza a imagem na div
+    imagemDiv.src = `${imagemPath}`;
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado

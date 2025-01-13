@@ -25,7 +25,7 @@ const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as H
 const HoraDiv = document.getElementById('Hora') as HTMLDivElement
 const ValorTemp = document.getElementById('temperatura-range') as HTMLDivElement;
 const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivElement;
-const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement
+const imagemDiv = document.getElementById('ImagemCamera') as HTMLImageElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -61,6 +61,7 @@ loginButton.addEventListener('click', () => {
          CasaDiv.style.display = 'block';
          atualizarBotoes();
          atualizarOutput();
+         atualizarImagemCamera()
      
      } else {
          loginError.style.display = 'block';
@@ -282,6 +283,7 @@ function atualizarImagemCamera() {
         else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
             imagemPath = "/Images/Quarto/Quarto (TV e Ar).jpg" //Só luz off
         }
+
     }
 
     if (comodoAtual instanceof Sala) {
@@ -303,16 +305,16 @@ function atualizarImagemCamera() {
     if (comodoAtual instanceof Banheiro) {
         
         if (comodoAtual.luzes && comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).jpg" //Tudo on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).png" //Tudo on V
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro){
             imagemPath = "/Images/Banheiro/Banheiro (Nada).jpg" //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg" //Só luz on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg" //Só luz on V
         }
         else if (!comodoAtual.luzes && comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).jpg" //Só luz off
+            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).png" //Só luz off
         }
 
     }
@@ -362,8 +364,7 @@ function atualizarImagemCamera() {
         }
     }
     // Atualiza a imagem na div
-    imagemDiv.style.backgroundImage = `url(${imagemPath})`;
-    imagemDiv.style.backgroundSize = "cover"; // Ajusta a imagem para cobrir toda a div
+    imagemDiv.src = `${imagemPath}`;
 }
 //#endregion
 

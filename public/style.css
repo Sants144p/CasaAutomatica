@@ -1,8 +1,9 @@
 
 .max-width{
    
-    background-image: url('/Images/Minecraft-Carregando.jpg'); /* Caminho para a imagem */
-    background-size:auto; /* Faz a imagem cobrir toda a área */
+    background-image: url('/Images/Minecraft-Carregando.png'); /* Caminho para a imagem */
+    background-size:cover; /* Faz a imagem cobrir toda a área */
+    background-attachment: fixed;
     background-repeat: repeat-y; /* Impede que a imagem se repita */
     
 }

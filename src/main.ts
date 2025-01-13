@@ -74,12 +74,12 @@ loginButton.addEventListener('click', () => {
     if (InputSenha.type === 'password') {
 
         InputSenha.type = 'text';
-        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/invisible.png";
+        eyeIcon.src = "/Images/Perola_Do_Fim.png";
             
     } else {
         
         InputSenha.type = 'password';
-        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/000000/visible.png";
+        eyeIcon.src = "/Images/Olho_Do_Fim.png";
             
     }
 });

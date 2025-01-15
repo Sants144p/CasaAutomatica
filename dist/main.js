@@ -320,6 +320,35 @@ function atualizarImagemCamera() {
     // Atualiza a imagem na div
     imagemDiv.innerHTML = `<img src="${imagemPath}" width="600" height="400"></img">`;
 }
+//#region Mudar filtro de Calor/frio
+function mudarFiltro() {
+    if (TemperaturaUniversal >= -10 && TemperaturaUniversal <= 24) {
+        //Mantem o tom normal
+        imagemDiv.style.filter = 'none';
+    }
+    else if (TemperaturaUniversal > 24) {
+        //Aplica tom avermelhado proporcional ao valor
+        const intensidade = (TemperaturaUniversal - 24) / 76; //Normaliza de 0 a 1
+        const filtroVermelho = `
+                    brightness(${1}) 
+                    sepia(${intensidade * 0.8}) 
+                    saturate(${1 + intensidade * 0.6}) 
+                    hue-rotate(-15deg)`;
+        imagemDiv.style.filter = filtroVermelho;
+    }
+    else if (TemperaturaUniversal < 10) {
+        //Aplica tom azulado proporcional ao valor
+        const intensidade = (-10 - TemperaturaUniversal) / 90;
+        const filtroAzul = `
+                    brightness(${1}) 
+                    sepia(${intensidade * 0.2}) 
+                    saturate(${1 + intensidade * 0.2}) 
+                    hue-rotate(230deg)`;
+        imagemDiv.style.filter = filtroAzul;
+    }
+}
+setInterval(mudarFiltro, 500);
+//#endregion
 function Energia() {
     const comodoAtual = ListaComodos[cameraIndice];
     let ConsumoTotal = 0; // 

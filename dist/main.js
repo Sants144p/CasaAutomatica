@@ -263,16 +263,16 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Banheiro) {
         if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).png"; //Tudo on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).png"; //Tudo on V
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Nada).png"; //Tudo off
+            imagemPath = "/Images/Banheiro/Banheiro (Nada).jpg"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg"; //Só luz on
+            imagemPath = "/Images/Banheiro/Banheiro (Luz).jpg"; //Só luz on V
         }
         else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).jpg"; //Só luz off
+            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).png"; //Só luz off
         }
     }
     if (comodoAtual instanceof Garagem) {
@@ -316,7 +316,7 @@ function atualizarImagemCamera() {
         }
     }
     // Atualiza a imagem na div
-    imagemDiv.src = `${imagemPath}`;
+    imagemDiv.innerHTML = `<img src="${imagemPath}" width="600" height="400"></img">`;
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado

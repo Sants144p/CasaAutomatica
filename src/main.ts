@@ -25,7 +25,7 @@ const AjustadorDiv = document.getElementById('ajustar-temp-arcondicionado') as H
 const HoraDiv = document.getElementById('Hora') as HTMLDivElement
 const ValorTemp = document.getElementById('temperatura-range') as HTMLDivElement;
 const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivElement;
-const imagemDiv = document.getElementById('ImagemCamera') as HTMLImageElement
+const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -364,7 +364,7 @@ function atualizarImagemCamera() {
         }
     }
     // Atualiza a imagem na div
-    imagemDiv.src = `${imagemPath}`;
+    imagemDiv.innerHTML = `<img src="${imagemPath}" width="600" height="400"></img">`;
 }
 //#endregion
 

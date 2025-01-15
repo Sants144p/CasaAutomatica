@@ -223,7 +223,7 @@ function atualizarImagemCamera() {
     let imagemPath = "";
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
-            imagemPath = "/Images/Quarto/Quarto (Luz, TV e Ar).jpg"; //Tudo on
+            imagemPath = "/Images/Quarto/Quarto (Tudo).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
             imagemPath = "/Images/Quarto/Quarto (Nada).jpg"; //Tudo off
@@ -249,7 +249,7 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Sala) {
         if (comodoAtual.luzes && comodoAtual.televisao) {
-            imagemPath = "/Images/Sala/Sala (Luz e TV).jpg"; //Tudo on
+            imagemPath = "/Images/Sala/Sala (Tudo).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao) {
             imagemPath = "/Images/Sala/Sala (Nada).jpg"; //Tudo off
@@ -263,7 +263,7 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Banheiro) {
         if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Luz e Chuveiro).png"; //Tudo on V
+            imagemPath = "/Images/Banheiro/Banheiro (Tudo).png"; //Tudo on V
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro) {
             imagemPath = "/Images/Banheiro/Banheiro (Nada).jpg"; //Tudo off
@@ -277,7 +277,7 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Garagem) {
         if (comodoAtual.luzes && comodoAtual.portao) {
-            imagemPath = "/Images/Garagem/Garagem (Luz e Portão).jpg"; //Tudo on
+            imagemPath = "/Images/Garagem/Garagem (Tudo).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.portao) {
             imagemPath = "/Images/Garagem/Garagem (Nada).jpg"; //Tudo off
@@ -291,7 +291,7 @@ function atualizarImagemCamera() {
     }
     if (comodoAtual instanceof Cozinha) {
         if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Luz, Fogão e Geladeira).jpg"; //Tudo on
+            imagemPath = "/Images/Cozinha/Cozinha (Tudo).jpg"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
             imagemPath = "/Images/Cozinha/Cozinha (Nada).jpg"; //Tudo off

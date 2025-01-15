@@ -371,35 +371,36 @@ function atualizarImagemCamera() {
 
 function Energia() {
     const comodoAtual = ListaComodos[cameraIndice];
-    let ConsumoTotal = 101; // 
+    let ConsumoTotal = 0; // 
     const ConsumoLuzes = 1
     const ConsumoFogao = 2700;
     const ConsumoGeladeiraAberta = 104;
+    const ConsumoGeladeiraFechada = 101;
     const ConsumoArCondicionado = 101;
     const ConsumoTV = 160;
     const ConsumoChuveiro = 6800;
 
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado  //Tudo on
+            ConsumoTotal = ConsumoLuzes + ConsumoTV + ConsumoArCondicionado  //Tudo on
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoLuzes//só Luz on
+            ConsumoTotal = ConsumoLuzes//só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoTV //só v2 on
+            ConsumoTotal = ConsumoTV //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoArCondicionado //só v3 on
+            ConsumoTotal = ConsumoArCondicionado //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV //luz e v2 on
+            ConsumoTotal = ConsumoLuzes + ConsumoTV //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado //luz e v3 on
+            ConsumoTotal = ConsumoLuzes + ConsumoArCondicionado //luz e v3 on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
-            ConsumoTotal += ConsumoTV + ConsumoArCondicionado //Só luz off
+            ConsumoTotal = ConsumoTV + ConsumoArCondicionado //Só luz off
         }
 
     }
@@ -407,26 +408,26 @@ function Energia() {
     if (comodoAtual instanceof Sala) {
         
         if (comodoAtual.luzes && comodoAtual.televisao){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV //Tudo on
+            ConsumoTotal = ConsumoLuzes + ConsumoTV //Tudo on
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao){
-            ConsumoTotal += ConsumoLuzes //Só luz on
+            ConsumoTotal = ConsumoLuzes //Só luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao){
-            ConsumoTotal += ConsumoTV //Só luz off
+            ConsumoTotal = ConsumoTV //Só luz off
         }
     }
 
     if (comodoAtual instanceof Banheiro) {
         
         if (comodoAtual.luzes && comodoAtual.chuveiro){
-            ConsumoTotal += ConsumoLuzes + ConsumoChuveiro //Tudo on V
+            ConsumoTotal = ConsumoLuzes + ConsumoChuveiro //Tudo on V
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro){
-            ConsumoTotal += ConsumoLuzes //Só luz on V
+            ConsumoTotal = ConsumoLuzes //Só luz on V
         }
         else if (!comodoAtual.luzes && comodoAtual.chuveiro){
-            ConsumoTotal += ConsumoChuveiro //Só luz off
+            ConsumoTotal = ConsumoChuveiro //Só luz off
         }
 
     }
@@ -434,10 +435,10 @@ function Energia() {
     if (comodoAtual instanceof Garagem) {
         
         if (comodoAtual.luzes && comodoAtual.portao){
-            ConsumoTotal += ConsumoLuzes //Tudo on
+            ConsumoTotal = ConsumoLuzes //Tudo on
         }
         else if (comodoAtual.luzes && !comodoAtual.portao){
-            ConsumoTotal += ConsumoLuzes //Só luz on
+            ConsumoTotal = ConsumoLuzes //Só luz on
         }
 
     }
@@ -447,17 +448,20 @@ function Energia() {
         if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira){
             ConsumoTotal = ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraAberta //Tudo on
         }
+        else if(!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
+            ConsumoTotal = ConsumoGeladeiraFechada
+        }
         else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
-            ConsumoTotal += ConsumoLuzes //só Luz on
+            ConsumoTotal = ConsumoLuzes + ConsumoGeladeiraFechada //só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
-            ConsumoTotal += ConsumoFogao //só v2 on
+            ConsumoTotal = ConsumoFogao + ConsumoGeladeiraFechada //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
-            ConsumoTotal += ConsumoGeladeiraAberta //só v3 on
+            ConsumoTotal = ConsumoGeladeiraAberta //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
-            ConsumoTotal += ConsumoLuzes + ConsumoFogao //luz e v2 on
+            ConsumoTotal = ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraFechada //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
             ConsumoTotal = ConsumoLuzes + ConsumoGeladeiraAberta //luz e v3 on

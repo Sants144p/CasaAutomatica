@@ -22,6 +22,7 @@ const HoraDiv = document.getElementById('Hora');
 const ValorTemp = document.getElementById('temperatura-range');
 const ValorTempAr = document.getElementById('temperatura-range-ar');
 const imagemDiv = document.getElementById('ImagemCamera');
+const ConsumoEnergia = document.getElementById('Energia');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -51,6 +52,7 @@ loginButton.addEventListener('click', () => {
         atualizarBotoes();
         atualizarOutput();
         atualizarImagemCamera();
+        Energia();
     }
     else {
         loginError.style.display = 'block';
@@ -318,6 +320,93 @@ function atualizarImagemCamera() {
     // Atualiza a imagem na div
     imagemDiv.innerHTML = `<img src="${imagemPath}" width="600" height="400"></img">`;
 }
+function Energia() {
+    const comodoAtual = ListaComodos[cameraIndice];
+    let ConsumoTotal = 101; // 
+    const ConsumoLuzes = 1;
+    const ConsumoFogao = 2700;
+    const ConsumoGeladeiraAberta = 104;
+    const ConsumoArCondicionado = 101;
+    const ConsumoTV = 160;
+    const ConsumoChuveiro = 6800;
+    if (comodoAtual instanceof Quarto) {
+        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado; //Tudo on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes; //só Luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoTV; //só v2 on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoArCondicionado; //só v3 on
+        }
+        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV; //luz e v2 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado; //luz e v3 on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
+            ConsumoTotal += ConsumoTV + ConsumoArCondicionado; //Só luz off
+        }
+    }
+    if (comodoAtual instanceof Sala) {
+        if (comodoAtual.luzes && comodoAtual.televisao) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV; //Tudo on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.televisao) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.televisao) {
+            ConsumoTotal += ConsumoTV; //Só luz off
+        }
+    }
+    if (comodoAtual instanceof Banheiro) {
+        if (comodoAtual.luzes && comodoAtual.chuveiro) {
+            ConsumoTotal += ConsumoLuzes + ConsumoChuveiro; //Tudo on V
+        }
+        else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on V
+        }
+        else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
+            ConsumoTotal += ConsumoChuveiro; //Só luz off
+        }
+    }
+    if (comodoAtual instanceof Garagem) {
+        if (comodoAtual.luzes && comodoAtual.portao) {
+            ConsumoTotal += ConsumoLuzes; //Tudo on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.portao) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on
+        }
+    }
+    if (comodoAtual instanceof Cozinha) {
+        if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
+            ConsumoTotal = ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraAberta; //Tudo on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
+            ConsumoTotal += ConsumoLuzes; //só Luz on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
+            ConsumoTotal += ConsumoFogao; //só v2 on
+        }
+        else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
+            ConsumoTotal += ConsumoGeladeiraAberta; //só v3 on
+        }
+        else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
+            ConsumoTotal += ConsumoLuzes + ConsumoFogao; //luz e v2 on
+        }
+        else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
+            ConsumoTotal = ConsumoLuzes + ConsumoGeladeiraAberta; //luz e v3 on
+        }
+        else if (!comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
+            ConsumoTotal = ConsumoFogao + ConsumoGeladeiraAberta; //Só luz off
+        }
+    }
+    ConsumoEnergia.innerHTML = `<br>Consumo de Energia do Cômodo: ${ConsumoTotal}W`;
+}
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
 function atualizarBotoes() {
@@ -408,6 +497,7 @@ selectCamera.addEventListener('change', () => {
     atualizarImagemCamera();
     atualizarOutput();
     alterarTemperatura2();
+    Energia();
 });
 //#endregion
 //#region Conectar os botões aos seus eventos
@@ -415,14 +505,17 @@ btnAlternarLuzes.addEventListener('click', () => {
     alterarLuzes();
     atualizarImagemCamera();
     atualizarOutput();
+    Energia();
 });
 btnAlternarFogao.addEventListener('click', () => {
     alterarFogao();
     atualizarImagemCamera();
+    Energia();
 });
 btnAlternarGeladeira.addEventListener('click', () => {
     alterarGeladeira();
     atualizarImagemCamera();
+    Energia();
 });
 btnAlternarPortao.addEventListener('click', () => {
     alterarPortao();
@@ -431,18 +524,22 @@ btnAlternarPortao.addEventListener('click', () => {
 btnAlternarChuveiro.addEventListener('click', () => {
     alterarChuveiro();
     atualizarImagemCamera();
+    Energia();
 });
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();
     atualizarImagemCamera();
+    Energia();
 });
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
     alterarTelevisaoQuarto();
     atualizarImagemCamera();
+    Energia();
 });
 btnAlternarArCondicionado.addEventListener('click', () => {
     alterarArCondicionado();
     atualizarImagemCamera();
+    Energia();
 });
 btnAjustarTempAr.addEventListener('click', () => {
     RegularArCondicionado();

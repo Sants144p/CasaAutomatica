@@ -350,8 +350,12 @@ function mudarFiltro() {
 setInterval(mudarFiltro, 500);
 //#endregion
 function Energia() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    let ConsumoTotal = 0; // 
+    const quarto = ListaComodos[0];
+    const sala = ListaComodos[1];
+    const banheiro = ListaComodos[2];
+    const garagem = ListaComodos[3];
+    const cozinha = ListaComodos[4];
+    let ConsumoTotal = 0;
     const ConsumoLuzes = 1;
     const ConsumoFogao = 2700;
     const ConsumoGeladeiraAberta = 104;
@@ -359,83 +363,83 @@ function Energia() {
     const ConsumoArCondicionado = 101;
     const ConsumoTV = 160;
     const ConsumoChuveiro = 6800;
-    if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoLuzes + ConsumoTV + ConsumoArCondicionado; //Tudo on
+    if (quarto instanceof Quarto) {
+        if (quarto.luzes && quarto.televisao && quarto.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado; //Tudo on
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoLuzes; //só Luz on
+        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes; //só Luz on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoTV; //só v2 on
+        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondionado) {
+            ConsumoTotal += ConsumoTV; //só v2 on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoArCondicionado; //só v3 on
+        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondionado) {
+            ConsumoTotal += ConsumoArCondicionado; //só v3 on
         }
-        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoLuzes + ConsumoTV; //luz e v2 on
+        else if (quarto.luzes && quarto.televisao && !quarto.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV; //luz e v2 on
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoLuzes + ConsumoArCondicionado; //luz e v3 on
+        else if (quarto.luzes && !quarto.televisao && quarto.ArCondionado) {
+            ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado; //luz e v3 on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
-            ConsumoTotal = ConsumoTV + ConsumoArCondicionado; //Só luz off
-        }
-    }
-    if (comodoAtual instanceof Sala) {
-        if (comodoAtual.luzes && comodoAtual.televisao) {
-            ConsumoTotal = ConsumoLuzes + ConsumoTV; //Tudo on
-        }
-        else if (comodoAtual.luzes && !comodoAtual.televisao) {
-            ConsumoTotal = ConsumoLuzes; //Só luz on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.televisao) {
-            ConsumoTotal = ConsumoTV; //Só luz off
+        else if (!quarto.luzes && quarto.televisao && quarto.ArCondionado) {
+            ConsumoTotal += ConsumoTV + ConsumoArCondicionado; //Só luz off
         }
     }
-    if (comodoAtual instanceof Banheiro) {
-        if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            ConsumoTotal = ConsumoLuzes + ConsumoChuveiro; //Tudo on V
+    if (sala instanceof Sala) {
+        if (sala.luzes && sala.televisao) {
+            ConsumoTotal += ConsumoLuzes + ConsumoTV; //Tudo on
         }
-        else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
-            ConsumoTotal = ConsumoLuzes; //Só luz on V
+        else if (sala.luzes && !sala.televisao) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on
         }
-        else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
-            ConsumoTotal = ConsumoChuveiro; //Só luz off
-        }
-    }
-    if (comodoAtual instanceof Garagem) {
-        if (comodoAtual.luzes && comodoAtual.portao) {
-            ConsumoTotal = ConsumoLuzes; //Tudo on
-        }
-        else if (comodoAtual.luzes && !comodoAtual.portao) {
-            ConsumoTotal = ConsumoLuzes; //Só luz on
+        else if (!sala.luzes && sala.televisao) {
+            ConsumoTotal += ConsumoTV; //Só luz off
         }
     }
-    if (comodoAtual instanceof Cozinha) {
-        if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraAberta; //Tudo on
+    if (banheiro instanceof Banheiro) {
+        if (banheiro.luzes && banheiro.chuveiro) {
+            ConsumoTotal += ConsumoLuzes + ConsumoChuveiro; //Tudo on V
         }
-        else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoGeladeiraFechada;
+        else if (banheiro.luzes && !banheiro.chuveiro) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on V
         }
-        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoLuzes + ConsumoGeladeiraFechada; //só Luz on
+        else if (!banheiro.luzes && banheiro.chuveiro) {
+            ConsumoTotal += ConsumoChuveiro; //Só luz off
         }
-        else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoFogao + ConsumoGeladeiraFechada; //só v2 on
+    }
+    if (garagem instanceof Garagem) {
+        if (garagem.luzes && garagem.portao) {
+            ConsumoTotal += ConsumoLuzes; //Tudo on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoGeladeiraAberta; //só v3 on
+        else if (garagem.luzes && !garagem.portao) {
+            ConsumoTotal += ConsumoLuzes; //Só luz on
         }
-        else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraFechada; //luz e v2 on
+    }
+    if (cozinha instanceof Cozinha) {
+        if (cozinha.luzes && cozinha.fogão && cozinha.geladeira) {
+            ConsumoTotal += ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraAberta; //Tudo on
         }
-        else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoLuzes + ConsumoGeladeiraAberta; //luz e v3 on
+        else if (!cozinha.luzes && !cozinha.fogão && !cozinha.geladeira) {
+            ConsumoTotal += ConsumoGeladeiraFechada;
         }
-        else if (!comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            ConsumoTotal = ConsumoFogao + ConsumoGeladeiraAberta; //Só luz off
+        else if (cozinha.luzes && !cozinha.fogão && !cozinha.geladeira) {
+            ConsumoTotal += ConsumoLuzes + ConsumoGeladeiraFechada; //só Luz on
+        }
+        else if (!cozinha.luzes && cozinha.fogão && !cozinha.geladeira) {
+            ConsumoTotal += ConsumoFogao + ConsumoGeladeiraFechada; //só v2 on
+        }
+        else if (!cozinha.luzes && !cozinha.fogão && cozinha.geladeira) {
+            ConsumoTotal += ConsumoGeladeiraAberta; //só v3 on
+        }
+        else if (cozinha.luzes && cozinha.fogão && !cozinha.geladeira) {
+            ConsumoTotal += ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraFechada; //luz e v2 on
+        }
+        else if (cozinha.luzes && !cozinha.fogão && cozinha.geladeira) {
+            ConsumoTotal += ConsumoLuzes + ConsumoGeladeiraAberta; //luz e v3 on
+        }
+        else if (!cozinha.luzes && cozinha.fogão && cozinha.geladeira) {
+            ConsumoTotal += ConsumoFogao + ConsumoGeladeiraAberta; //Só luz off
         }
     }
     ConsumoEnergia.innerHTML = `<br>Consumo de Energia do Cômodo: ${ConsumoTotal}W`;

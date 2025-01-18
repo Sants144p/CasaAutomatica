@@ -23,6 +23,7 @@ const ValorTemp = document.getElementById('temperatura-range');
 const ValorTempAr = document.getElementById('temperatura-range-ar');
 const imagemDiv = document.getElementById('ImagemCamera');
 const ConsumoEnergia = document.getElementById('Energia');
+const FiltroCor = document.getElementById('Filtro');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -322,30 +323,30 @@ function atualizarImagemCamera() {
 }
 //#region Mudar filtro de Calor/frio
 function mudarFiltro() {
-    if (TemperaturaUniversal >= -10 && TemperaturaUniversal <= 24) {
+    let opacidade;
+    if (TemperaturaUniversal >= -15 && TemperaturaUniversal <= 24) {
         //Mantem o tom normal
-        imagemDiv.style.filter = 'none';
+        opacidade = 0;
+        FiltroCor.style.filter = 'none';
     }
-    else if (TemperaturaUniversal > 24) {
-        //Aplica tom avermelhado proporcional ao valor
-        const intensidade = (TemperaturaUniversal - 24) / 76; //Normaliza de 0 a 1
-        const filtroVermelho = `
-                    brightness(${1}) 
-                    sepia(${intensidade * 0.8}) 
-                    saturate(${1 + intensidade * 0.6}) 
-                    hue-rotate(-15deg)`;
-        imagemDiv.style.filter = filtroVermelho;
+    else {
+        // Fora do intervalo neutro, calcula a opacidade com base na distância
+        const distancia = TemperaturaUniversal < -15
+            ? Math.abs(TemperaturaUniversal - (-15))
+            : Math.abs(TemperaturaUniversal - 24);
+        // Normaliza a distância para um intervalo de transparência (mínimo 0.3)
+        const maxDistancia = 100; // -100 ou 100
+        const transparencia = Math.min((distancia / maxDistancia), 1);
+        if (TemperaturaUniversal > 24) {
+            FiltroCor.src = "/Images/TelaCalor.jpg";
+            opacidade = 0.35 - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
+        }
+        else if (TemperaturaUniversal < -15) {
+            FiltroCor.src = "/Images/TelaFrio.jpg";
+            opacidade = 0.5 - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
+        }
     }
-    else if (TemperaturaUniversal < 10) {
-        //Aplica tom azulado proporcional ao valor
-        const intensidade = (-10 - TemperaturaUniversal) / 90;
-        const filtroAzul = `
-                    brightness(${1}) 
-                    sepia(${intensidade * 0.2}) 
-                    saturate(${1 + intensidade * 0.2}) 
-                    hue-rotate(230deg)`;
-        imagemDiv.style.filter = filtroAzul;
-    }
+    FiltroCor.style.opacity = String(opacidade);
 }
 setInterval(mudarFiltro, 500);
 //#endregion

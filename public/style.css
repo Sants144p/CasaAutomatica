@@ -105,3 +105,17 @@
     transition: filter 0.5s ease;
     
 }
+
+#Filtro {
+
+    width: 650px;
+    height: 500px;
+    position: absolute; /* A imagem será posicionada em relação ao container */
+    top: 0;
+    padding-top: 100px;
+    right: 0;
+    padding-right: 50px;
+    transition: filter 0.5s ease;
+    z-index: 1000;
+
+}

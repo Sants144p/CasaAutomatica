@@ -84,7 +84,7 @@
 
 #Hora {
     position: fixed; /* Fixa a div na posição, mesmo ao rolar a página */
-    top: 10px; /* Distância do topo */
+    top: 20px; /* Distância do topo */
     right: 10px; /* Distância do lado direito */
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
     color: white; /* Texto branco para contraste */
@@ -94,14 +94,26 @@
     z-index: 1000; /* Garante que a div fique acima de outros elementos */
 }
 
+#temperatura-atual {
+
+    position: fixed; /* Fixa a div na posição, mesmo ao rolar a página */
+    top: 20px; /* Distância do topo */
+    right: 130px; /* Distância do lado direito */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    color: white; /* Texto branco para contraste */
+    padding: 5px 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 24px; /* Tamanho do texto */
+    z-index: 1000; /* Garante que a div fique acima de outros elementos */
+
+}
+
 #ImagemCamera {
     width: 650px;
     height: 450px;
-    position: absolute; /* A imagem será posicionada em relação ao container */
-    top: 0;
-    padding-top: 100px;
-    right: 0;
-    padding-right: 150px;
+    position: flex; /* A imagem será posicionada em relação ao container */
+    justify-content: center;
+    align-items: center;
     transition: filter 0.5s ease;
     
 }

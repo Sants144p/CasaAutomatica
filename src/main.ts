@@ -602,7 +602,7 @@ function atualizarOutput() {
         
     }
     const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
-    temperaturaDiv.innerHTML = `<b>Temperatura do Ambiente:</b> ${TemperaturaUniversal}°C`; 
+    temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`; 
 
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado){
         temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`

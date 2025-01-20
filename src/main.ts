@@ -29,6 +29,7 @@ const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement;
 const ConsumoEnergia = document.getElementById('Energia') as HTMLDivElement;
 const Display_temp = document.getElementById('display-temp') as HTMLDivElement;
 const FiltroCor = document.getElementById('Filtro') as HTMLImageElement;
+const Cubao = document.getElementById('Cubao') as HTMLDivElement
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -537,6 +538,7 @@ function Energia() {
 
 function DORMIR() {
     CasaDiv.style.display = 'none'
+    Cubao.style.display = 'block'
 }
 //#endregion
 

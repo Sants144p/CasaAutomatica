@@ -25,6 +25,7 @@ const imagemDiv = document.getElementById('ImagemCamera');
 const ConsumoEnergia = document.getElementById('Energia');
 const Display_temp = document.getElementById('display-temp');
 const FiltroCor = document.getElementById('Filtro');
+const Cubao = document.getElementById('Cubao');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
 const MostrarSenha = document.getElementById('mostrar-senha');
@@ -461,6 +462,7 @@ function Energia() {
 }
 function DORMIR() {
     CasaDiv.style.display = 'none';
+    Cubao.style.display = 'block';
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado

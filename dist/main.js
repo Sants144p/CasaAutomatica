@@ -23,6 +23,7 @@ const ValorTemp = document.getElementById('temperatura-range');
 const ValorTempAr = document.getElementById('temperatura-range-ar');
 const imagemDiv = document.getElementById('ImagemCamera');
 const ConsumoEnergia = document.getElementById('Energia');
+const Display_ar = document.getElementById('display-ar');
 const FiltroCor = document.getElementById('Filtro');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
@@ -196,6 +197,12 @@ function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         comodoAtual.alterarArCondicionado();
+        if (comodoAtual.ArCondionado == true) {
+            Display_ar.style.display = 'none';
+        }
+        else {
+            Display_ar.style.display = 'block';
+        }
         atualizarBotoes();
         atualizarOutput();
     }

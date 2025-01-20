@@ -326,7 +326,7 @@ function atualizarImagemCamera() {
         }
     }
     // Atualiza a imagem na div
-    imagemDiv.innerHTML = `<img src="${imagemPath}" width="600" height="400"></img">`;
+    imagemDiv.innerHTML = `<img src="${imagemPath}" width="950" height="550"></img">`;
 }
 //#region Mudar filtro de Calor/frio
 function mudarFiltro() {

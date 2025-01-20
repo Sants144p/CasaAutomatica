@@ -612,7 +612,7 @@ function atualizarOutput() {
     temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`; 
 
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado){
-        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`
+        temperaturaDiv.innerHTML = `${comodoAtual.temperaturaArCondicionado}°C`
     }
 }
 

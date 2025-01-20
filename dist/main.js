@@ -532,7 +532,7 @@ function atualizarOutput() {
     const temperaturaDiv = document.getElementById('temperatura-atual');
     temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`;
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
-        temperaturaDiv.innerHTML += `<br><b>Temperatura do Ar-Condicionado:</b> ${comodoAtual.temperaturaArCondicionado}°C`;
+        temperaturaDiv.innerHTML = `<b>${comodoAtual.temperaturaArCondicionado}°C</b>`;
     }
 }
 selectCamera.addEventListener('change', () => {

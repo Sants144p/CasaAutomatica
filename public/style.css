@@ -98,7 +98,7 @@
 
     position: fixed; /* Fixa a div na posição, mesmo ao rolar a página */
     top: 20px; /* Distância do topo */
-    right: 130px; /* Distância do lado direito */
+    right: 210px; /* Distância do lado direito */
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
     color: white; /* Texto branco para contraste */
     padding: 5px 10px; /* Espaçamento interno */
@@ -112,7 +112,7 @@
 
     position: fixed; /* Fixa a div na posição, mesmo ao rolar a página */
     top: 20px; /* Distância do topo */
-    right: 210px; /* Distância do lado direito */
+    right: 130px; /* Distância do lado direito */
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
     color: white; /* Texto branco para contraste */
     padding: 5px 10px; /* Espaçamento interno */
@@ -127,7 +127,7 @@
     position: absolute; /* A imagem será posicionada em relação ao container */
     top: 100px;
     right: 0;
-    padding-right: 50px;
+    padding-right: 30px;
     transition: filter 0.5s ease;
 }
 

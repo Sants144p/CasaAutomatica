@@ -443,7 +443,7 @@ function Energia() {
             ConsumoTotal += ConsumoFogao + ConsumoGeladeiraAberta; //Só luz off
         }
     }
-    ConsumoEnergia.innerHTML = `<br>Consumo de Energia do Cômodo: ${ConsumoTotal}W`;
+    ConsumoEnergia.innerHTML = `${ConsumoTotal}W`;
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado

@@ -4,7 +4,7 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 // Dados de login
-const validUser = "Vinicius";
+const validUser = "Viniccius";
 const validPassword = "davizao13";
 //Temperatura
 let TemperaturaAncora = 21;

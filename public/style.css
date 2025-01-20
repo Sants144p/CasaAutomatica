@@ -132,12 +132,12 @@
 }
 
 #Filtro {
-    width: 1000px;
+    width: 980px;
     height: 550px;
     position: absolute; /* A imagem será posicionada em relação ao container */
     top: 100px;
     right: 0;
-    padding-right: 50px;
+    padding-right: 30px;
     transition: filter 0.5s ease;
     z-index: 1000;
 

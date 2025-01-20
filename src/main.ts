@@ -27,7 +27,7 @@ const ValorTemp = document.getElementById('temperatura-range') as HTMLDivElement
 const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivElement;
 const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement;
 const ConsumoEnergia = document.getElementById('Energia') as HTMLDivElement;
-const Display_ar = document.getElementById('display-ar') as HTMLDivElement;
+const Display_temp = document.getElementById('display-temp') as HTMLDivElement;
 const FiltroCor = document.getElementById('Filtro') as HTMLImageElement;
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
@@ -126,11 +126,11 @@ function alterarTemperatura() {
 
     const comodoAtual = ListaComodos[cameraIndice];
 
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
         atualizarOutput()
-    }else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false){
+    }else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false){
         const NovaTemperatura : number = Number(NovaTemperaturaHTML.value)
         TemperaturaAncora = NovaTemperatura
         TemperaturaUniversal = TemperaturaAncora
@@ -147,7 +147,7 @@ function alterarTemperatura2(){
 
     const comodoAtual = ListaComodos[cameraIndice];
 
-    if (comodoAtual instanceof Quarto  && comodoAtual.ArCondionado){
+    if (comodoAtual instanceof Quarto  && comodoAtual.ArCondicionado){
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
         atualizarOutput()
@@ -161,12 +161,12 @@ function alterarTemperatura3(){
 
     const comodoAtual = ListaComodos[cameraIndice];
 
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
         atualizarOutput()
     }
-    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false){
+    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false){
         TemperaturaUniversal = TemperaturaAncora
         atualizarOutput()
     }
@@ -229,11 +229,11 @@ function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         comodoAtual.alterarArCondicionado();
-        if (comodoAtual.ArCondionado == true) {
-            Display_ar.style.display = 'none';
+        if (comodoAtual.ArCondicionado == true) {
+            Display_temp.style.display = 'none';
         }
         else {
-            Display_ar.style.display = 'block';
+            Display_temp.style.display = 'block';
         }
         atualizarBotoes();
         atualizarOutput();
@@ -269,28 +269,28 @@ function atualizarImagemCamera() {
     let imagemPath = "";
 
     if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
+        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Tudo).png" //Tudo on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Nada).png" //Tudo off
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado){
+        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Luz).png" //só Luz on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
+        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (TV).png" //só v2 on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Ar).png" //só v3 on
         }
-        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado){
+        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Luz e TV).png" //luz e v2 on
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado){
+        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (Luz e Ar).png" //luz e v3 on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado){
+        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado){
             imagemPath = "/Images/Quarto/Quarto (TV e Ar).png" //Só luz off
         }
 
@@ -436,25 +436,25 @@ function Energia() {
     const ConsumoChuveiro = 6800;
 
     if (quarto instanceof Quarto) {
-        if (quarto.luzes && quarto.televisao && quarto.ArCondionado){
+        if (quarto.luzes && quarto.televisao && quarto.ArCondicionado){
             ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado  //Tudo on
         }
-        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondionado){
+        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondicionado){
             ConsumoTotal += ConsumoLuzes//só Luz on
         }
-        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondionado){
+        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondicionado){
             ConsumoTotal += ConsumoTV //só v2 on
         }
-        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondionado){
+        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondicionado){
             ConsumoTotal += ConsumoArCondicionado //só v3 on
         }
-        else if (quarto.luzes && quarto.televisao && !quarto.ArCondionado){
+        else if (quarto.luzes && quarto.televisao && !quarto.ArCondicionado){
             ConsumoTotal += ConsumoLuzes + ConsumoTV //luz e v2 on
         }
-        else if (quarto.luzes && !quarto.televisao && quarto.ArCondionado){
+        else if (quarto.luzes && !quarto.televisao && quarto.ArCondicionado){
             ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado //luz e v3 on
         }
-        else if (!quarto.luzes && quarto.televisao && quarto.ArCondionado){
+        else if (!quarto.luzes && quarto.televisao && quarto.ArCondicionado){
             ConsumoTotal += ConsumoTV + ConsumoArCondicionado //Só luz off
         }
     }
@@ -553,11 +553,31 @@ function atualizarBotoes() {
 
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.ArCondionado == true){
+        if (comodoAtual.ArCondicionado == true){
             AjustadorDiv.style.display = 'block'
         }else{
             AjustadorDiv.style.display = 'none'
         }
+    }
+    if (comodoAtual instanceof Quarto) {
+        if (comodoAtual.ArCondicionado == true) {
+            Display_temp.style.display = 'none';
+        }
+        else {
+            Display_temp.style.display = 'block';
+        }
+    }
+    if (comodoAtual instanceof Sala) {
+        Display_temp.style.display = 'block'
+    }
+    if (comodoAtual instanceof Garagem) {
+        Display_temp.style.display = 'block'
+    }
+    if (comodoAtual instanceof Cozinha) {
+        Display_temp.style.display = 'block'
+    }
+    if (comodoAtual instanceof Banheiro) {
+        Display_temp.style.display = 'block'
     }
 }
 //#endregion
@@ -605,13 +625,13 @@ function atualizarOutput() {
     } else if (comodoAtual instanceof Quarto) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
-        Ar-Condicionado: ${comodoAtual.ArCondionado ? 'Ligado' : 'Desligado'}`
+        Ar-Condicionado: ${comodoAtual.ArCondicionado ? 'Ligado' : 'Desligado'}`
         
     }
     const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
     temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`; 
 
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado){
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado){
         temperaturaDiv.innerHTML = `${comodoAtual.temperaturaArCondicionado}°C`
     }
 }

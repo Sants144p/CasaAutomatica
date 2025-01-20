@@ -23,7 +23,7 @@ const ValorTemp = document.getElementById('temperatura-range');
 const ValorTempAr = document.getElementById('temperatura-range-ar');
 const imagemDiv = document.getElementById('ImagemCamera');
 const ConsumoEnergia = document.getElementById('Energia');
-const Display_ar = document.getElementById('display-ar');
+const Display_temp = document.getElementById('display-temp');
 const FiltroCor = document.getElementById('Filtro');
 const InputUsuario = document.getElementById('usuario');
 const InputSenha = document.getElementById('password');
@@ -103,12 +103,12 @@ function alterarLuzes() {
 function alterarTemperatura() {
     var _a;
     const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = (_a = comodoAtual.temperaturaArCondicionado) !== null && _a !== void 0 ? _a : 21;
         TemperaturaUniversal = tempAr;
         atualizarOutput();
     }
-    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false) {
+    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false) {
         const NovaTemperatura = Number(NovaTemperaturaHTML.value);
         TemperaturaAncora = NovaTemperatura;
         TemperaturaUniversal = TemperaturaAncora;
@@ -124,7 +124,7 @@ function alterarTemperatura() {
 function alterarTemperatura2() {
     var _a;
     const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = (_a = comodoAtual.temperaturaArCondicionado) !== null && _a !== void 0 ? _a : 21;
         TemperaturaUniversal = tempAr;
         atualizarOutput();
@@ -137,12 +137,12 @@ function alterarTemperatura2() {
 function alterarTemperatura3() {
     var _a;
     const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = (_a = comodoAtual.temperaturaArCondicionado) !== null && _a !== void 0 ? _a : 21;
         TemperaturaUniversal = tempAr;
         atualizarOutput();
     }
-    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado == false) {
+    else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false) {
         TemperaturaUniversal = TemperaturaAncora;
         atualizarOutput();
     }
@@ -197,11 +197,11 @@ function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         comodoAtual.alterarArCondicionado();
-        if (comodoAtual.ArCondionado == true) {
-            Display_ar.style.display = 'none';
+        if (comodoAtual.ArCondicionado == true) {
+            Display_temp.style.display = 'none';
         }
         else {
-            Display_ar.style.display = 'block';
+            Display_temp.style.display = 'block';
         }
         atualizarBotoes();
         atualizarOutput();
@@ -232,28 +232,28 @@ function atualizarImagemCamera() {
     const comodoAtual = ListaComodos[cameraIndice];
     let imagemPath = "";
     if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
+        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Tudo).png"; //Tudo on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Nada).png"; //Tudo off
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondionado) {
+        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Luz).png"; //só Luz on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
+        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (TV).png"; //só v2 on
         }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
+        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Ar).png"; //só v3 on
         }
-        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondionado) {
+        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Luz e TV).png"; //luz e v2 on
         }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondionado) {
+        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (Luz e Ar).png"; //luz e v3 on
         }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondionado) {
+        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado) {
             imagemPath = "/Images/Quarto/Quarto (TV e Ar).png"; //Só luz off
         }
     }
@@ -372,25 +372,25 @@ function Energia() {
     const ConsumoTV = 160;
     const ConsumoChuveiro = 6800;
     if (quarto instanceof Quarto) {
-        if (quarto.luzes && quarto.televisao && quarto.ArCondionado) {
+        if (quarto.luzes && quarto.televisao && quarto.ArCondicionado) {
             ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado; //Tudo on
         }
-        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondionado) {
+        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondicionado) {
             ConsumoTotal += ConsumoLuzes; //só Luz on
         }
-        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondionado) {
+        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondicionado) {
             ConsumoTotal += ConsumoTV; //só v2 on
         }
-        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondionado) {
+        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondicionado) {
             ConsumoTotal += ConsumoArCondicionado; //só v3 on
         }
-        else if (quarto.luzes && quarto.televisao && !quarto.ArCondionado) {
+        else if (quarto.luzes && quarto.televisao && !quarto.ArCondicionado) {
             ConsumoTotal += ConsumoLuzes + ConsumoTV; //luz e v2 on
         }
-        else if (quarto.luzes && !quarto.televisao && quarto.ArCondionado) {
+        else if (quarto.luzes && !quarto.televisao && quarto.ArCondicionado) {
             ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado; //luz e v3 on
         }
-        else if (!quarto.luzes && quarto.televisao && quarto.ArCondionado) {
+        else if (!quarto.luzes && quarto.televisao && quarto.ArCondicionado) {
             ConsumoTotal += ConsumoTV + ConsumoArCondicionado; //Só luz off
         }
     }
@@ -480,12 +480,32 @@ function atualizarBotoes() {
     }
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.ArCondionado == true) {
+        if (comodoAtual.ArCondicionado == true) {
             AjustadorDiv.style.display = 'block';
         }
         else {
             AjustadorDiv.style.display = 'none';
         }
+    }
+    if (comodoAtual instanceof Quarto) {
+        if (comodoAtual.ArCondicionado == true) {
+            Display_temp.style.display = 'none';
+        }
+        else {
+            Display_temp.style.display = 'block';
+        }
+    }
+    if (comodoAtual instanceof Sala) {
+        Display_temp.style.display = 'block';
+    }
+    if (comodoAtual instanceof Garagem) {
+        Display_temp.style.display = 'block';
+    }
+    if (comodoAtual instanceof Cozinha) {
+        Display_temp.style.display = 'block';
+    }
+    if (comodoAtual instanceof Banheiro) {
+        Display_temp.style.display = 'block';
     }
 }
 //#endregion
@@ -527,12 +547,12 @@ function atualizarOutput() {
     else if (comodoAtual instanceof Quarto) {
         output.innerHTML = `${status} <br>
         Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
-        Ar-Condicionado: ${comodoAtual.ArCondionado ? 'Ligado' : 'Desligado'}`;
+        Ar-Condicionado: ${comodoAtual.ArCondicionado ? 'Ligado' : 'Desligado'}`;
     }
     const temperaturaDiv = document.getElementById('temperatura-atual');
     temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`;
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondionado) {
-        temperaturaDiv.innerHTML = `<b>${comodoAtual.temperaturaArCondicionado}°C</b>`;
+    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
+        temperaturaDiv.innerHTML = `${comodoAtual.temperaturaArCondicionado}°C`;
     }
 }
 selectCamera.addEventListener('change', () => {

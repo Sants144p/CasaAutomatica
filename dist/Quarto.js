@@ -13,7 +13,7 @@ export class Quarto extends Comodo {
         this._televisao = !this._televisao;
         console.log(`Quarto: Televisão está agora ${this._televisao ? "Ligada" : "Desligada"}`);
     }
-    get ArCondionado() {
+    get ArCondicionado() {
         return this._ArCondicionado;
     }
     alterarArCondicionado() {
@@ -24,7 +24,7 @@ export class Quarto extends Comodo {
         return this._temperaturaArCondicionado;
     }
     ajustarTemperaturadoAr(temp) {
-        if (this.ArCondionado) {
+        if (this.ArCondicionado) {
             this._temperaturaArCondicionado = temp;
         }
         else {

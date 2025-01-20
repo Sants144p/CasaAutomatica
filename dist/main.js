@@ -4,8 +4,8 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 // Dados de login
-const validUser = "user";
-const validPassword = "1";
+const validUser = "Vinicius";
+const validPassword = "davizao13";
 //Temperatura
 let TemperaturaAncora = 21;
 let TemperaturaUniversal = TemperaturaAncora;
@@ -328,7 +328,7 @@ function atualizarImagemCamera() {
         }
     }
     // Atualiza a imagem na div
-    imagemDiv.innerHTML = `<img src="${imagemPath}" width="950" height="550"></img">`;
+    imagemDiv.innerHTML = `<img src="${imagemPath}" width="1400" height="800"></img">`;
 }
 //#region Mudar filtro de Calor/frio
 function mudarFiltro() {

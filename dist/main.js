@@ -38,6 +38,7 @@ const btnAlternarPortao = document.getElementById('alternar-portao');
 const btnAlternarTelevisao = document.getElementById('alternar-televisao');
 const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto');
 const btnAlternarChuveiro = document.getElementById('alternar-chuveiro');
+const btnDormir = document.getElementById('dormir');
 const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto');
 const btnAjustarTempAr = document.getElementById('ajustar-temp');
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
@@ -451,6 +452,15 @@ function Energia() {
         }
     }
     ConsumoEnergia.innerHTML = `${ConsumoTotal}W`;
+    if (ConsumoTotal == 101) {
+        btnDormir.style.display = 'block';
+    }
+    else {
+        btnDormir.style.display = 'none';
+    }
+}
+function DORMIR() {
+    CasaDiv.style.display = 'none';
 }
 //#endregion
 //#region Função para exibir e ocultar botões dependendo do cômodo selecionado
@@ -613,6 +623,9 @@ btnAjustarTempAr.addEventListener('click', () => {
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
     atualizarImagemCamera();
+});
+btnDormir.addEventListener('click', () => {
+    DORMIR();
 });
 NovaTemperaturaHTML.addEventListener('change', () => {
     alterarValorTemp();

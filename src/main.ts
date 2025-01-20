@@ -44,6 +44,7 @@ const btnAlternarPortao = document.getElementById('alternar-portao')! as HTMLBut
 const btnAlternarTelevisao = document.getElementById('alternar-televisao')! as HTMLButtonElement;
 const btnAlternarTelevisaoQuarto = document.getElementById('alternar-televisao-quarto')! as HTMLButtonElement;
 const btnAlternarChuveiro = document.getElementById('alternar-chuveiro') as HTMLButtonElement;
+const btnDormir = document.getElementById('dormir') as HTMLButtonElement;
 
 const btnAlternarArCondicionado = document.getElementById('alternar-ar-quarto')! as HTMLButtonElement;
 const btnAjustarTempAr = document.getElementById('ajustar-temp')! as HTMLButtonElement;
@@ -525,6 +526,17 @@ function Energia() {
         }
     }
     ConsumoEnergia.innerHTML = `${ConsumoTotal}W`
+
+    if (ConsumoTotal == 101) {
+        btnDormir.style.display = 'block'
+    }
+    else {
+        btnDormir.style.display = 'none'
+    }
+}
+
+function DORMIR() {
+    CasaDiv.style.display = 'none'
 }
 //#endregion
 
@@ -698,6 +710,9 @@ btnAjustarTempAr.addEventListener('click', () => {
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
     atualizarImagemCamera();
+})
+btnDormir.addEventListener('click', () => {
+    DORMIR();
 })
 NovaTemperaturaHTML.addEventListener('change', () => {
     alterarValorTemp();

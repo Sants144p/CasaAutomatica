@@ -5,16 +5,24 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
-// Dados de login
-const validUser = "Viniccius";
-const validPassword = "davizao13";
+
+// Variável para rastrear a posição atual da câmera
+let cameraIndice = 0;
+console.log("Índice: " + cameraIndice);
 
 //Temperatura
 let TemperaturaAncora : number = 21
 let TemperaturaUniversal : number = TemperaturaAncora
 
+const ListaComodos : Comodo[] = [
+    new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
+    new Sala("Sala de Estar", true, 3.5, 12,14, false), //1
+    new Banheiro("Banheiro", true, 2.5, 6, 6, false), //2
+    new Garagem("Garagem", true, 3.5, 20, 20, false), //3
+    new Cozinha("Cozinha", true, 3.5, 12,14, false, false) //4
+];
+
 //#region Elementos
-const loginDiv = document.getElementById('login')! as HTMLDivElement;
 const CasaDiv = document.getElementById('Casa-Automatica')! as HTMLDivElement;
 const CozinhaDiv = document.getElementById('controle-cozinha') as HTMLDivElement;
 const QuartoDiv = document.getElementById('controle-quarto') as HTMLDivElement;
@@ -30,13 +38,6 @@ const ConsumoEnergia = document.getElementById('Energia') as HTMLDivElement;
 const Display_temp = document.getElementById('display-temp') as HTMLDivElement;
 const FiltroCor = document.getElementById('Filtro') as HTMLImageElement;
 const Cubao = document.getElementById('Cubao') as HTMLDivElement
-
-const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
-const InputSenha = document.getElementById('password') as HTMLInputElement;
-const MostrarSenha = document.getElementById('mostrar-senha')! as HTMLButtonElement;
-const eyeIcon = document.getElementById('eye-icon')! as HTMLImageElement;
-const loginButton = document.getElementById('login-botão')! as HTMLButtonElement;
-const loginError = document.getElementById('login-error') as HTMLDivElement;
 
 const btnAlternarLuzes = document.getElementById('alternar-luzes')! as HTMLButtonElement;
 const btnAlternarFogao = document.getElementById('alternar-fogao')! as HTMLButtonElement;
@@ -55,53 +56,15 @@ const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTML
 const NovaTemperaturaAr = document.getElementById('temp-ar')! as HTMLInputElement;
 
 //#endregion
+atualizarBotoes();
+console.log("atualizarBotoes() OK");
+atualizarOutput();
+console.log("atualizarOutput() OK");
+atualizarImagemCamera();
+console.log("atualizarImagemCamera() OK");
+Energia();
+console.log("Energia() OK");
 
-//#region código do Login
-loginButton.addEventListener('click', () => {
-     const usuario = InputUsuario.value;
-     const senha = InputSenha.value;
-
-     if (usuario === validUser && senha === validPassword) {
-         loginDiv.style.display = 'none';
-         CasaDiv.style.display = 'block';
-         atualizarBotoes();
-         atualizarOutput();
-         atualizarImagemCamera();
-         Energia();
-     
-     } else {
-         loginError.style.display = 'block';
-     }
- });
-
- //#endregion
-
-//#region Mostrar/ocultar senha com botão de "olhinho"
-    MostrarSenha.addEventListener('click', () => {
-    if (InputSenha.type === 'password') {
-
-        InputSenha.type = 'text';
-        eyeIcon.src = "/Images/Perola_Do_Fim.png";
-            
-    } else {
-        
-        InputSenha.type = 'password';
-        eyeIcon.src = "/Images/Olho_Do_Fim.png";
-            
-    }
-});
-//#endregion
-
-const ListaComodos : Comodo[] = [
-    new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
-    new Sala("Sala de Estar", true, 3.5, 12,14, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, false), //2
-    new Garagem("Garagem", true, 3.5, 20, 20, false), //3
-    new Cozinha("Cozinha", true, 3.5, 12,14, false, false) //4
-]
-
-// Variável para rastrear a posição atual da câmera
-let cameraIndice = 0;
 
 function cameraExibeComodo(indice: number): void {
     if (indice >= 0 && indice < ListaComodos.length) {
@@ -176,23 +139,21 @@ function alterarTemperatura3(){
 }
 
 function alterarFogao() {
-    if (cameraIndice === 4) {  // Cômodo Cozinha
-        const comodoAtual = ListaComodos[cameraIndice];
-        if (comodoAtual instanceof Cozinha) {
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Cozinha) {
             comodoAtual.alterarFogao();
             atualizarOutput();
-        }
     }
+
 }
 
 function alterarGeladeira() {
-    if (cameraIndice === 4) {  // Cômodo Cozinha
-        const comodoAtual = ListaComodos[cameraIndice];
-            if (comodoAtual instanceof Cozinha) {
-                comodoAtual.alterarGeladeira();
-                atualizarOutput();
-        }
+    const comodoAtual = ListaComodos[cameraIndice];
+        if (comodoAtual instanceof Cozinha) {
+            comodoAtual.alterarGeladeira();
+            atualizarOutput();
     }
+
 }
 
 function alterarPortao() {
@@ -552,20 +513,23 @@ function atualizarBotoes() {
     QuartoDiv.style.display = 'none';
     AjustadorDiv.style.display = 'none';
 
+    
+    const comodoAtual = ListaComodos[cameraIndice];
+    console.log(comodoAtual.nome);
+
     // Mostrar botões conforme o cômodo atual
-    if (cameraIndice === 4) { // Cozinha
+    if (comodoAtual instanceof Cozinha) { // Cozinha
         CozinhaDiv.style.display = 'block';
-    } else if (cameraIndice === 3) { // Garagem
+    } else if (comodoAtual instanceof Garagem) { // Garagem
         GaragemDiv.style.display = 'block';
-    } else if (cameraIndice === 2) { // Banheiro
+    } else if (comodoAtual instanceof Banheiro) { // Banheiro
         BanheiroDiv.style.display = 'block'
-    } else if (cameraIndice === 1) { // Sala
+    } else if (comodoAtual instanceof Sala) { // Sala
         SalaDiv.style.display = 'block';
-    } else if (cameraIndice === 0) { // Quarto
+    } else if (comodoAtual instanceof Quarto) { // Quarto
         QuartoDiv.style.display = 'block';
     }
 
-    const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.ArCondicionado == true){
             AjustadorDiv.style.display = 'block'
@@ -726,8 +690,5 @@ NovaTemperaturaAr.addEventListener('change', () => {
 })
 
 //#endregion
-
-// Inicializa a interface
-atualizarOutput();
 
 

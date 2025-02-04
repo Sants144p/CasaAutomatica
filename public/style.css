@@ -1,11 +1,10 @@
+.Casarão{
 
-.max-width{
-   
     background-image: url('/Images/Minecraft-Carregando.png'); /* Caminho para a imagem */
     background-size:cover; /* Faz a imagem cobrir toda a área */
     background-attachment: fixed;
     background-repeat: repeat-y; /* Impede que a imagem se repita */
-    
+
 }
 
 #output {
@@ -48,7 +47,7 @@
 
 #Casa-Automatica{
 
-    display: none;
+    display: block;
     padding-left: 20px;
     margin-top: 10px;
 }

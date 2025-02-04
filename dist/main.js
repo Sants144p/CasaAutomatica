@@ -3,14 +3,20 @@ import { Garagem } from "./Garagem.js";
 import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
-// Dados de login
-const validUser = "Viniccius";
-const validPassword = "davizao13";
+// Variável para rastrear a posição atual da câmera
+let cameraIndice = 0;
+console.log("Índice: " + cameraIndice);
 //Temperatura
 let TemperaturaAncora = 21;
 let TemperaturaUniversal = TemperaturaAncora;
+const ListaComodos = [
+    new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
+    new Sala("Sala de Estar", true, 3.5, 12, 14, false), //1
+    new Banheiro("Banheiro", true, 2.5, 6, 6, false), //2
+    new Garagem("Garagem", true, 3.5, 20, 20, false), //3
+    new Cozinha("Cozinha", true, 3.5, 12, 14, false, false) //4
+];
 //#region Elementos
-const loginDiv = document.getElementById('login');
 const CasaDiv = document.getElementById('Casa-Automatica');
 const CozinhaDiv = document.getElementById('controle-cozinha');
 const QuartoDiv = document.getElementById('controle-quarto');
@@ -26,12 +32,6 @@ const ConsumoEnergia = document.getElementById('Energia');
 const Display_temp = document.getElementById('display-temp');
 const FiltroCor = document.getElementById('Filtro');
 const Cubao = document.getElementById('Cubao');
-const InputUsuario = document.getElementById('usuario');
-const InputSenha = document.getElementById('password');
-const MostrarSenha = document.getElementById('mostrar-senha');
-const eyeIcon = document.getElementById('eye-icon');
-const loginButton = document.getElementById('login-botão');
-const loginError = document.getElementById('login-error');
 const btnAlternarLuzes = document.getElementById('alternar-luzes');
 const btnAlternarFogao = document.getElementById('alternar-fogao');
 const btnAlternarGeladeira = document.getElementById('alternar-geladeira');
@@ -46,44 +46,14 @@ const btnAlterarTemperatura = document.getElementById('alterar-temperatura');
 const NovaTemperaturaHTML = document.getElementById('nova-temperatura');
 const NovaTemperaturaAr = document.getElementById('temp-ar');
 //#endregion
-//#region código do Login
-loginButton.addEventListener('click', () => {
-    const usuario = InputUsuario.value;
-    const senha = InputSenha.value;
-    if (usuario === validUser && senha === validPassword) {
-        loginDiv.style.display = 'none';
-        CasaDiv.style.display = 'block';
-        atualizarBotoes();
-        atualizarOutput();
-        atualizarImagemCamera();
-        Energia();
-    }
-    else {
-        loginError.style.display = 'block';
-    }
-});
-//#endregion
-//#region Mostrar/ocultar senha com botão de "olhinho"
-MostrarSenha.addEventListener('click', () => {
-    if (InputSenha.type === 'password') {
-        InputSenha.type = 'text';
-        eyeIcon.src = "/Images/Perola_Do_Fim.png";
-    }
-    else {
-        InputSenha.type = 'password';
-        eyeIcon.src = "/Images/Olho_Do_Fim.png";
-    }
-});
-//#endregion
-const ListaComodos = [
-    new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
-    new Sala("Sala de Estar", true, 3.5, 12, 14, false), //1
-    new Banheiro("Banheiro", true, 2.5, 6, 6, false), //2
-    new Garagem("Garagem", true, 3.5, 20, 20, false), //3
-    new Cozinha("Cozinha", true, 3.5, 12, 14, false, false) //4
-];
-// Variável para rastrear a posição atual da câmera
-let cameraIndice = 0;
+atualizarBotoes();
+console.log("atualizarBotoes() OK");
+atualizarOutput();
+console.log("atualizarOutput() OK");
+atualizarImagemCamera();
+console.log("atualizarImagemCamera() OK");
+Energia();
+console.log("Energia() OK");
 function cameraExibeComodo(indice) {
     if (indice >= 0 && indice < ListaComodos.length) {
         cameraIndice = indice;
@@ -150,21 +120,17 @@ function alterarTemperatura3() {
     }
 }
 function alterarFogao() {
-    if (cameraIndice === 4) { // Cômodo Cozinha
-        const comodoAtual = ListaComodos[cameraIndice];
-        if (comodoAtual instanceof Cozinha) {
-            comodoAtual.alterarFogao();
-            atualizarOutput();
-        }
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Cozinha) {
+        comodoAtual.alterarFogao();
+        atualizarOutput();
     }
 }
 function alterarGeladeira() {
-    if (cameraIndice === 4) { // Cômodo Cozinha
-        const comodoAtual = ListaComodos[cameraIndice];
-        if (comodoAtual instanceof Cozinha) {
-            comodoAtual.alterarGeladeira();
-            atualizarOutput();
-        }
+    const comodoAtual = ListaComodos[cameraIndice];
+    if (comodoAtual instanceof Cozinha) {
+        comodoAtual.alterarGeladeira();
+        atualizarOutput();
     }
 }
 function alterarPortao() {
@@ -474,23 +440,24 @@ function atualizarBotoes() {
     SalaDiv.style.display = 'none';
     QuartoDiv.style.display = 'none';
     AjustadorDiv.style.display = 'none';
+    const comodoAtual = ListaComodos[cameraIndice];
+    console.log(comodoAtual.nome);
     // Mostrar botões conforme o cômodo atual
-    if (cameraIndice === 4) { // Cozinha
+    if (comodoAtual instanceof Cozinha) { // Cozinha
         CozinhaDiv.style.display = 'block';
     }
-    else if (cameraIndice === 3) { // Garagem
+    else if (comodoAtual instanceof Garagem) { // Garagem
         GaragemDiv.style.display = 'block';
     }
-    else if (cameraIndice === 2) { // Banheiro
+    else if (comodoAtual instanceof Banheiro) { // Banheiro
         BanheiroDiv.style.display = 'block';
     }
-    else if (cameraIndice === 1) { // Sala
+    else if (comodoAtual instanceof Sala) { // Sala
         SalaDiv.style.display = 'block';
     }
-    else if (cameraIndice === 0) { // Quarto
+    else if (comodoAtual instanceof Quarto) { // Quarto
         QuartoDiv.style.display = 'block';
     }
-    const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.ArCondicionado == true) {
             AjustadorDiv.style.display = 'block';
@@ -638,5 +605,3 @@ NovaTemperaturaAr.addEventListener('change', () => {
     atualizarImagemCamera();
 });
 //#endregion
-// Inicializa a interface
-atualizarOutput();

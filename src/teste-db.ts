@@ -9,3 +9,4 @@ export async function testConnection() {
     console.error('❌ Erro ao conectar ao banco:', error);
   }
 }
+testConnection()

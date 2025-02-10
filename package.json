@@ -30,6 +30,7 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/method-override": "^3.0.0",
     "@types/node": "^22.13.1",

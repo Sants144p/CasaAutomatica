@@ -9,7 +9,7 @@ import router from "./Routes/principal.js"; // ES Modules exige a extensão do a
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Corrigir __dirname para ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -23,21 +23,8 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
 // Arquivos estáticos (CSS, JS, imagens, etc.)
-app.use(express.static(path.join(__dirname, "../public")));
-
-// Configurar o Handlebars como template engine com helper para comparação (ifCond)
-app.engine(
-  "handlebars",
-  engine({
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "views/layouts"),
-    helpers: {
-      ifCond: (v1: any, v2: any, options: any) => (v1 === v2 ? options.fn(this) : options.inverse(this)),
-    },
-  })
-);
-app.set("view engine", "handlebars");
-app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.join(__dirname, "")))
 
 // Usar as rotas definidas
 app.use("/", router);

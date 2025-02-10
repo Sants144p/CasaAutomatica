@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="/frontend/style.css">
+    <link rel="stylesheet" type="text/css" href="/frontend/MinecraftCSS/dist/minecraft-css-framework-v-1.0.0.css">
+
+</head>
+<body class="Casarão">
+        <div id="titulo-cadastro"><h1>Cadastre-se</h1></div>
+        <div id="cadastro">
+          <label for="username">Usuário:</label>
+          <input type="text" id="usuario" class="form-input">
+          <br><br>    
+          <div class="mostrador-senha">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" class="form-input">
+            <button class="botao-olho" id="mostrar-senha">
+                <img src="/frontend/Images/Olho_Do_Fim.png" alt="Mostrar senha" id="eye-icon">
+            </button>
+          </div>
+          <br>
+          <button id="cadastro-botão" class="button button-primary">Cadastrar</button>
+          <p id="cadastro-error" style="color: red; display: none;">Usuário ou senha inválidos!</p>
+
+          <script type="module" src="/dist/Login.js"></script>
+          <script src="https://unpkg.com/minecraft-framework-css@1.1.9/css/assets/script.js"></script>
+    
+        </div>
+    
+</body>
+</html>

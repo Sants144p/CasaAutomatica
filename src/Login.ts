@@ -8,6 +8,7 @@ const MostrarSenha = document.getElementById('mostrar-senha')! as HTMLButtonElem
 const eyeIcon = document.getElementById('eye-icon')! as HTMLImageElement;
 const loginButton = document.getElementById('login-botão')! as HTMLButtonElement;
 const loginError = document.getElementById('login-error') as HTMLDivElement;
+const IrCadastro = document.getElementById('pagina-cadastro')! as HTMLButtonElement;
 
 //#region código do Login
 loginButton.addEventListener('click', () => {
@@ -20,6 +21,13 @@ loginButton.addEventListener('click', () => {
         loginError.style.display = 'block';
     }
 });
+
+//Ir para página de cadastro
+IrCadastro.addEventListener('click', () => {
+
+    window.location.href = '/frontend/cadastro.html'
+})
+
 
 //#endregion
 

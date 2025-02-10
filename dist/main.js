@@ -201,96 +201,96 @@ function atualizarImagemCamera() {
     let imagemPath = "";
     if (comodoAtual instanceof Quarto) {
         if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Tudo).png"; //Tudo on
+            imagemPath = "/frontend/Images/Quarto/Quarto (Tudo).png"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Nada).png"; //Tudo off
+            imagemPath = "/frontend/Images/Quarto/Quarto (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Luz).png"; //só Luz on
+            imagemPath = "/frontend/Images/Quarto/Quarto (Luz).png"; //só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (TV).png"; //só v2 on
+            imagemPath = "/frontend/Images/Quarto/Quarto (TV).png"; //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Ar).png"; //só v3 on
+            imagemPath = "/frontend/Images/Quarto/Quarto (Ar).png"; //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Luz e TV).png"; //luz e v2 on
+            imagemPath = "/frontend/Images/Quarto/Quarto (Luz e TV).png"; //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (Luz e Ar).png"; //luz e v3 on
+            imagemPath = "/frontend/Images/Quarto/Quarto (Luz e Ar).png"; //luz e v3 on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado) {
-            imagemPath = "/Images/Quarto/Quarto (TV e Ar).png"; //Só luz off
+            imagemPath = "/frontend/Images/Quarto/Quarto (TV e Ar).png"; //Só luz off
         }
     }
     if (comodoAtual instanceof Sala) {
         if (comodoAtual.luzes && comodoAtual.televisao) {
-            imagemPath = "/Images/Sala/Sala (Tudo).png"; //Tudo on
+            imagemPath = "/frontend/Images/Sala/Sala (Tudo).png"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.televisao) {
-            imagemPath = "/Images/Sala/Sala (Nada).png"; //Tudo off
+            imagemPath = "/frontend/Images/Sala/Sala (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.televisao) {
-            imagemPath = "/Images/Sala/Sala (Luz).png"; //Só luz on
+            imagemPath = "/frontend/Images/Sala/Sala (Luz).png"; //Só luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.televisao) {
-            imagemPath = "/Images/Sala/Sala (TV).png"; //Só luz off
+            imagemPath = "/frontend/Images/Sala/Sala (TV).png"; //Só luz off
         }
     }
     if (comodoAtual instanceof Banheiro) {
         if (comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Tudo).png"; //Tudo on V
+            imagemPath = "/frontend/Images/Banheiro/Banheiro (Tudo).png"; //Tudo on V
         }
         else if (!comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Nada).png"; //Tudo off
+            imagemPath = "/frontend/Images/Banheiro/Banheiro (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Luz).png"; //Só luz on V
+            imagemPath = "/frontend/Images/Banheiro/Banheiro (Luz).png"; //Só luz on V
         }
         else if (!comodoAtual.luzes && comodoAtual.chuveiro) {
-            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).png"; //Só luz off
+            imagemPath = "/frontend/Images/Banheiro/Banheiro (Chuveiro).png"; //Só luz off
         }
     }
     if (comodoAtual instanceof Garagem) {
         if (comodoAtual.luzes && comodoAtual.portao) {
-            imagemPath = "/Images/Garagem/Garagem (Tudo).png"; //Tudo on
+            imagemPath = "/frontend/Images/Garagem/Garagem (Tudo).png"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.portao) {
-            imagemPath = "/Images/Garagem/Garagem (Nada).png"; //Tudo off
+            imagemPath = "/frontend/Images/Garagem/Garagem (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.portao) {
-            imagemPath = "/Images/Garagem/Garagem (Luz).png"; //Só luz on
+            imagemPath = "/frontend/Images/Garagem/Garagem (Luz).png"; //Só luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.portao) {
-            imagemPath = "/Images/Garagem/Garagem (Portão).png"; //Só luz off
+            imagemPath = "/frontend/Images/Garagem/Garagem (Portão).png"; //Só luz off
         }
     }
     if (comodoAtual instanceof Cozinha) {
         if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Tudo).png"; //Tudo on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Tudo).png"; //Tudo on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Nada).png"; //Tudo off
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Nada).png"; //Tudo off
         }
         else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Luz).png"; //só Luz on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Luz).png"; //só Luz on
         }
         else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Fogão).png"; //só v2 on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Fogão).png"; //só v2 on
         }
         else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Geladeira).png"; //só v3 on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Geladeira).png"; //só v3 on
         }
         else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Luz e Fogão).png"; //luz e v2 on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Luz e Fogão).png"; //luz e v2 on
         }
         else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Luz e Geladeira).png"; //luz e v3 on
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Luz e Geladeira).png"; //luz e v3 on
         }
         else if (!comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira) {
-            imagemPath = "/Images/Cozinha/Cozinha (Fogão e Geladeira).png"; //Só luz off
+            imagemPath = "/frontend/Images/Cozinha/Cozinha (Fogão e Geladeira).png"; //Só luz off
         }
     }
     // Atualiza a imagem na div
@@ -313,11 +313,11 @@ function mudarFiltro() {
         const maxDistancia = 100; // -100 ou 100
         const transparencia = Math.min((distancia / maxDistancia), 1);
         if (TemperaturaUniversal > 24) {
-            FiltroCor.src = "/Images/TelaCalor.jpg";
+            FiltroCor.src = "/frontend/Images/TelaCalor.jpg";
             opacidade = 0.35 - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
         }
         else if (TemperaturaUniversal < -15) {
-            FiltroCor.src = "/Images/TelaFrio.jpg";
+            FiltroCor.src = "/frontend/Images/TelaFrio.jpg";
             opacidade = 0.5 - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
         }
     }

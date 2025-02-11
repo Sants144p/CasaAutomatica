@@ -25,7 +25,7 @@ loginButton.addEventListener('click', () => {
 //Ir para página de cadastro
 IrCadastro.addEventListener('click', () => {
 
-    window.location.href = '/frontend/cadastro.html'
+    window.location.href = 'cadastro.html'
 })
 
 
@@ -36,12 +36,12 @@ IrCadastro.addEventListener('click', () => {
    if (InputSenha.type === 'password') {
 
        InputSenha.type = 'text';
-       eyeIcon.src = "/frontend/Images/Perola_Do_Fim.png";
+       eyeIcon.src = "Images/Perola_Do_Fim.png";
            
    } else {
        
        InputSenha.type = 'password';
-       eyeIcon.src = "/frontend/Images/Olho_Do_Fim.png";
+       eyeIcon.src = "Images/Olho_Do_Fim.png";
            
    }
 });

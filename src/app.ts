@@ -6,7 +6,7 @@ import methodOverride from "method-override";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import router from "./Routes/principal.js"; // ES Modules exige a extensão do arquivo
-
+import { Request, Response } from "express";
 dotenv.config();
 const app = express();
 const PORT = 3000;
@@ -26,6 +26,9 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "../frontend")));
 app.use(express.static(path.join(__dirname, "")))
 
+app.get("/", (req: Request, res: Response) => {
+  return res.sendFile(path.join(__dirname, '../frontend/login.html'));
+});
 // Usar as rotas definidas
 app.use("/", router);
 

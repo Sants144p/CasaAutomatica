@@ -5,6 +5,8 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
+//import { cameraExibeComodo } from "./Funcoes.js";
+
 
 // Variável para rastrear a posição atual da câmera
 let cameraIndice = 0;
@@ -65,8 +67,8 @@ console.log("atualizarImagemCamera() OK");
 Energia();
 console.log("Energia() OK");
 
-
-function cameraExibeComodo(indice: number): void {
+function cameraExibeComodo(indice : number) {
+    cameraIndice = indice
     if (indice >= 0 && indice < ListaComodos.length) {
         cameraIndice = indice;
         console.log(ListaComodos[cameraIndice].nome);

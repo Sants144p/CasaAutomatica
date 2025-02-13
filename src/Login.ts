@@ -16,7 +16,7 @@ loginButton.addEventListener('click', () => {
     const senha = InputSenha.value;
 
     if (usuario === validUser && senha === validPassword) {
-        window.location.href = 'index.html'
+        window.location.href = 'main.html'
     } else {
         loginError.style.display = 'block';
     }

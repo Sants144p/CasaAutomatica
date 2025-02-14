@@ -1,3 +1,5 @@
+import { createUsuario } from "./Control/UsuarioControl";
+
 const eyeIcon2 = document.getElementById('eye-icon')! as HTMLImageElement;
 const InputSenha2 = document.getElementById('password') as HTMLInputElement;
 const IrLogin = document.getElementById('pagina-login')! as HTMLButtonElement
@@ -24,3 +26,5 @@ MostrarSenha2.addEventListener('click', () => {
     }
  });
  //#endregion
+
+ 

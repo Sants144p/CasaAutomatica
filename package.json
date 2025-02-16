@@ -1,0 +1,44 @@
+{
+  "name": "casaautomatica",
+  "type": "module",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "scripts": {
+    "start": "node ./dist/app.js"
+  },
+  "packages": {
+    "": {
+      "name": "casaautomatica",
+      "version": "1.0.0",
+      "license": "MIT",
+      "dependencies": {
+        "minecraft-framework-css": "^2.0.0"
+      }
+    },
+    "node_modules/minecraft-framework-css": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/minecraft-framework-css/-/minecraft-framework-css-2.0.0.tgz",
+      "integrity": "sha512-tKV98zfEHg6GB9drm6jbyFtcLH1d+jJ1yyBoybdxOL0Yc/04GlOtml7GU5nV5tBGBq5zgIE5irsh8aR483v/uw==",
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "license": "ISC"
+    }
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "minecraft-framework-css": "^2.0.0",
+    "mysql2": "^3.12.0",
+    "path": "^0.12.7",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/method-override": "^3.0.0",
+    "@types/node": "^22.13.1",
+    "body-parser": "^1.20.3",
+    "express-handlebars": "^8.0.1",
+    "method-override": "^3.0.0"
+  }
+}

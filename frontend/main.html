@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Automática do Viniccius 13</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="/MinecraftCSS/dist/minecraft-css-framework-v-1.0.0.css">
+</head>
+<body class="Casarão">
+    <div id="Casa-Automatica">
+    <h1>Casa Automatica do Viniccius 13</h1>
+
+    <label for="camera-select">Escolha o cômodo:</label>
+    <br>
+    <select id="camera-select">
+        <option value="0">Quarto</option>
+        <option value="1">Sala</option>
+        <option value="2">Banheiro</option>
+        <option value="3">Garagem</option>
+        <option value="4">Cozinha</option>
+    </select>
+    <br><br>  
+    <button id="alternar-luzes" class="button button-tertiary">Alternar Luzes</button>
+
+    <div id="controle-cozinha" style="display: none;">
+      <button id="alternar-fogao" class="button button-tertiary">Alternar Fogão</button>
+      <button id="alternar-geladeira" class="button button-tertiary">Alternar Geladeira</button>
+    </div>
+
+    <div id="controle-quarto" style="display: none;">
+      <button id="alternar-televisao-quarto" class="button button-tertiary">Alternar Televisão</button>
+      <button id="alternar-ar-quarto" class="button button-tertiary">Alternar Ar-Condicionado</button> 
+
+      <div id="ajustar-temp-arcondicionado">
+        <label for="temp-ar">Temperatura do Ar:</label>
+        <input type="range" id="temp-ar" min="16" max="30">
+        <div id="temperatura-range-ar">23°</div>
+        <button id="ajustar-temp" class="button button-tertiary">Ajustar a Temperatura do Ar-Condicionado</button>
+
+      </div>
+    </div>
+  
+    <div id="controle-garagem" style="display: none;">
+      <button id="alternar-portao" class="button button-tertiary">Alternar Portão</button>
+    </div>
+    
+    <div id="controle-banheiro" style="display: none;">
+      <button id="alternar-chuveiro" class="button button-tertiary">Alternar Chuveiro</button>
+    </div>
+
+    <div id="controle-sala" style="display: none;">
+      <button id="alternar-televisao" class="button button-tertiary">Alternar Televisão</button>
+    </div>
+
+    <div id="display-temp" style="display: block;">
+    <label for="nova-temperatura"> <b>Nova Temperatura:</b></label>
+    <input type="range" id="nova-temperatura" placeholder="Digite a nova temperatura" min="-100" max="100">
+    <div id="temperatura-range">0°</div>
+    <button id="alterar-temperatura" class="button button-tertiary">Alterar Temperatura</button>
+    </div>
+    <div id="output">Câmera não posicionada.</div>
+    
+  <div id="Energia"></div>
+  <div id="temperatura-atual"><b>Temperatura do Ambiente: </b></div>
+  
+  <button id="dormir" class="button button-tertiary" style="display: none">DORMIR</button>
+
+  <div id="ImagemCamera"></div>
+  <img id="Filtro" src="">
+  <div id="Hora"></div>
+  </div class="max-width"></div>
+
+  <div class="scene" id="Cubao" style ="display: none;">
+    <div class="cube">
+      <div class="cube__face cube__face--left"></div>
+      <div class="cube__face cube__face--right"></div>
+      <div class="cube__face cube__face--top"></div>
+      <div class="cube__face cube__face--bottom"></div>
+      <div class="cube__face cube__face--front"></div>
+      <div class="cube__face cube__face--back"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+  <script src="https://unpkg.com/minecraft-framework-css@1.1.9/css/assets/script.js"></script>
+</body>
+</html>

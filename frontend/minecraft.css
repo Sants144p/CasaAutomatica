@@ -1,0 +1,85 @@
+  input[type=text] {
+    padding: 2px;
+    border: 2px solid;
+    background-color: #616161;
+    color: #fff;
+    outline: 2px solid black;
+    border-image: url(./assets/text-input.png) 1;
+  }
+  
+  input[type=text]::placeholder {
+    color: #c4c4c4;
+  }
+  
+  input[type=text]:hover {
+    outline: 2px solid white;
+  }
+  
+  input[type=text]:focus {
+    outline: 2px solid white;
+  }
+  
+  .input-text-lg {
+    padding: 2px;
+    border: 2px solid;
+    background-color: #616161;
+    color: #fff;
+    height: 40px;
+    outline: 2px solid black;
+    border-image: url(./assets/text-input.png) 1;
+  }
+  
+  .input-text-lg::placeholder {
+    color: #c4c4c4;
+  }
+  
+  .input-text-lg:hover {
+    outline: 2px solid white;
+  }
+  
+  .input-text-lg:focus {
+    outline: 2px solid white;
+  }
+  
+  .is {
+    margin-right: 10px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  input.new[type=checkbox], 
+  input[type=checkbox] {
+    width: 60px;
+    height: 32px;
+    background-image: url(./assets/toggle_off.png);
+  }
+  
+  input.new[type=checkbox]:checked, 
+  input[type=checkbox]:checked {
+    background-image: url(./assets/toggle_on.png);
+  }
+  
+  select {
+    height: 55px;
+    text-align: left;
+    display: block;
+    padding: 5px;
+    outline: 2px solid rgb(0, 0, 0);
+    border: 2px solid;
+    background-color: #c6c6c6;
+    border-image: url("./assets/button_normal.png") 1;
+  }
+  
+  select:hover {
+    outline: 2px solid rgb(255, 255, 255);
+    color: #fff;
+    background-color: #43a01c;
+    border-image: url("./assets/button_pressed.png") 1;
+  }
+  
+  select option:hover {
+    background-color: #616161;
+    color: #fff;
+  }

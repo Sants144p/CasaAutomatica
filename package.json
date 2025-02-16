@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "minecraft-framework-css": "^2.0.0",
     "mysql2": "^3.12.0",

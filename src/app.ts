@@ -10,6 +10,10 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
+app.set("view engine", "ejs"); // Define o EJS como motor de visualização
+app.set("views", path.join(process.cwd(), "../views")); // Pasta onde estão os arquivos .ejs
+
+
 // Corrigir __dirname para ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

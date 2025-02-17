@@ -1,6 +1,6 @@
+const db = `/usuarios`
+
 // Dados de login
-const validUser = "Viniccius";
-const validPassword = "davizao13";
 
 const InputUsuario = document.getElementById('usuario') as HTMLInputElement;
 const InputSenha = document.getElementById('password') as HTMLInputElement;
@@ -10,17 +10,32 @@ const loginButton = document.getElementById('login-botão')! as HTMLButtonElemen
 const loginError = document.getElementById('login-error') as HTMLDivElement;
 const IrCadastro = document.getElementById('pagina-cadastro')! as HTMLButtonElement;
 
+
+
+
 //#region código do Login
 loginButton.addEventListener('click', () => {
-    const usuario = InputUsuario.value;
-    const senha = InputSenha.value;
+    fetch(db)
+    .then(response => response.json())
+    .then(registro => mostrar_usuario(registro))
 
-    if (usuario === validUser && senha === validPassword) {
-        window.location.href = 'main.html'
-    } else {
-        loginError.style.display = 'block';
-    }
-});
+    function mostrar_usuario(registro: { id: number; nome: string; senha: string }[]) {
+        let logou: boolean = false;
+        for (let user of registro) {
+          if (InputUsuario.value === user.nome && InputSenha.value === user.senha) {
+            logou = true;
+            break;
+            } 
+        }
+        if (logou) {
+            window.location.href = 'main.html'
+            
+        } else {
+            loginError.style.display = 'block';
+        }
+         
+      
+}})
 
 //Ir para página de cadastro
 IrCadastro.addEventListener('click', () => {

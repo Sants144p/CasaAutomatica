@@ -5,7 +5,7 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
-//import { cameraExibeComodo } from "./Funcoes.js";
+import { cameraExibeComodo, atualizarBotoes, atualizarImagemCamera, atualizarOutput, Energia } from "./Funcoes.js";
 
 
 // Variável para rastrear a posição atual da câmera
@@ -58,24 +58,14 @@ const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTML
 const NovaTemperaturaAr = document.getElementById('temp-ar')! as HTMLInputElement;
 
 //#endregion
-atualizarBotoes();
+atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
 console.log("atualizarBotoes() OK");
-atualizarOutput();
+atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
 console.log("atualizarOutput() OK");
-atualizarImagemCamera();
+atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 console.log("atualizarImagemCamera() OK");
-Energia();
+Energia(ListaComodos, ConsumoEnergia, btnDormir);
 console.log("Energia() OK");
-
-function cameraExibeComodo(indice : number) {
-    cameraIndice = indice
-    if (indice >= 0 && indice < ListaComodos.length) {
-        cameraIndice = indice;
-        console.log(ListaComodos[cameraIndice].nome);
-    } else {
-        console.log("Índice inválido! Por favor, escolha um número válido na lista.");
-    }
-}
 
 //#region Funções para alterar as booleanas
 
@@ -96,17 +86,17 @@ function alterarTemperatura() {
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false){
         const NovaTemperatura : number = Number(NovaTemperaturaHTML.value)
         TemperaturaAncora = NovaTemperatura
         TemperaturaUniversal = TemperaturaAncora
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else{
         const NovaTemperatura : number = Number(NovaTemperaturaHTML.value)
         TemperaturaAncora = NovaTemperatura
         TemperaturaUniversal = TemperaturaAncora
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }
 }
 
@@ -117,10 +107,10 @@ function alterarTemperatura2(){
     if (comodoAtual instanceof Quarto  && comodoAtual.ArCondicionado){
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else{
         TemperaturaUniversal = TemperaturaAncora
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }
 }
 
@@ -131,11 +121,11 @@ function alterarTemperatura3(){
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
         let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
         TemperaturaUniversal = tempAr
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }
     else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false){
         TemperaturaUniversal = TemperaturaAncora
-        atualizarOutput()
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }
 
 }
@@ -144,7 +134,7 @@ function alterarFogao() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Cozinha) {
             comodoAtual.alterarFogao();
-            atualizarOutput();
+            atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 
 }
@@ -153,7 +143,7 @@ function alterarGeladeira() {
     const comodoAtual = ListaComodos[cameraIndice];
         if (comodoAtual instanceof Cozinha) {
             comodoAtual.alterarGeladeira();
-            atualizarOutput();
+            atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 
 }
@@ -162,7 +152,7 @@ function alterarPortao() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Garagem) {
         comodoAtual.alterarPortao();
-        atualizarOutput();
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 }
 
@@ -170,7 +160,7 @@ function alterarTelevisao() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Sala) {
         comodoAtual.alterarTV();
-        atualizarOutput();
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 }
 
@@ -178,7 +168,7 @@ function alterarTelevisaoQuarto() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
         comodoAtual.alterarTV();
-        atualizarOutput();
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 }
 
@@ -186,7 +176,7 @@ function alterarChuveiro() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Banheiro) {
         comodoAtual.alterarChuveiro();
-        atualizarOutput();
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
 }
 
@@ -200,8 +190,8 @@ function alterarArCondicionado() {
         else {
             Display_temp.style.display = 'block';
         }
-        atualizarBotoes();
-        atualizarOutput();
+        atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
     alterarTemperatura3()
 }
@@ -213,133 +203,20 @@ function RegularArCondicionado() {
         const temp = parseInt(tempHTML.value)
         
         comodoAtual.ajustarTemperaturadoAr(temp);
-        atualizarOutput();
+        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     }
     alterarTemperatura()
 }
 function alterarValorTemp() {
     const temp = parseInt(NovaTemperaturaHTML.value)
     ValorTemp.innerHTML = `${temp}°`
-    atualizarOutput();
+    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
 }
 
 function alterarValorTempAr() {
     const temp = parseInt(NovaTemperaturaAr.value)
     ValorTempAr.innerHTML = `${temp}`
-    atualizarOutput();
-}
-
-function atualizarImagemCamera() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    let imagemPath = "";
-
-    if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Tudo).png" //Tudo on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Nada).png" //Tudo off
-        }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && !comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Luz).png" //só Luz on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (TV).png" //só v2 on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Ar).png" //só v3 on
-        }
-        else if (comodoAtual.luzes && comodoAtual.televisao && !comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Luz e TV).png" //luz e v2 on
-        }
-        else if (comodoAtual.luzes && !comodoAtual.televisao && comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (Luz e Ar).png" //luz e v3 on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.televisao && comodoAtual.ArCondicionado){
-            imagemPath = "/Images/Quarto/Quarto (TV e Ar).png" //Só luz off
-        }
-
-    }
-
-    if (comodoAtual instanceof Sala) {
-        
-        if (comodoAtual.luzes && comodoAtual.televisao){
-            imagemPath = "/Images/Sala/Sala (Tudo).png" //Tudo on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.televisao){
-            imagemPath = "/Images/Sala/Sala (Nada).png" //Tudo off
-        }
-        else if (comodoAtual.luzes && !comodoAtual.televisao){
-            imagemPath = "/Images/Sala/Sala (Luz).png" //Só luz on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.televisao){
-            imagemPath = "/Images/Sala/Sala (TV).png" //Só luz off
-        }
-    }
-
-    if (comodoAtual instanceof Banheiro) {
-        
-        if (comodoAtual.luzes && comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Tudo).png" //Tudo on V
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Nada).png" //Tudo off
-        }
-        else if (comodoAtual.luzes && !comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Luz).png" //Só luz on V
-        }
-        else if (!comodoAtual.luzes && comodoAtual.chuveiro){
-            imagemPath = "/Images/Banheiro/Banheiro (Chuveiro).png" //Só luz off
-        }
-
-    }
-
-    if (comodoAtual instanceof Garagem) {
-        
-        if (comodoAtual.luzes && comodoAtual.portao){
-            imagemPath = "/Images/Garagem/Garagem (Tudo).png" //Tudo on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.portao){
-            imagemPath = "/Images/Garagem/Garagem (Nada).png" //Tudo off
-        }
-        else if (comodoAtual.luzes && !comodoAtual.portao){
-            imagemPath = "/Images/Garagem/Garagem (Luz).png" //Só luz on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.portao){
-            imagemPath = "/Images/Garagem/Garagem (Portão).png" //Só luz off
-        }
-
-    }
-
-    if (comodoAtual instanceof Cozinha) {
-        
-        if (comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Tudo).png" //Tudo on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Nada).png" //Tudo off
-        }
-        else if (comodoAtual.luzes && !comodoAtual.fogão && !comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Luz).png" //só Luz on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Fogão).png" //só v2 on
-        }
-        else if (!comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Geladeira).png" //só v3 on
-        }
-        else if (comodoAtual.luzes && comodoAtual.fogão && !comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Luz e Fogão).png" //luz e v2 on
-        }
-        else if (comodoAtual.luzes && !comodoAtual.fogão && comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Luz e Geladeira).png" //luz e v3 on
-        }
-        else if (!comodoAtual.luzes && comodoAtual.fogão && comodoAtual.geladeira){
-            imagemPath = "/Images/Cozinha/Cozinha (Fogão e Geladeira).png" //Só luz off
-        }
-    }
-    // Atualiza a imagem na div
-    imagemDiv.innerHTML = `<img src="${imagemPath}" width="1400" height="800"></img">`;
+    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
 }
 
 //#region Mudar filtro de Calor/frio
@@ -381,184 +258,9 @@ function mudarFiltro(){
 
 setInterval(mudarFiltro, 500)
 
-
-
-//#endregion
-
-function Energia() {
-    const quarto = ListaComodos[0];
-    const sala = ListaComodos[1];
-    const banheiro = ListaComodos[2];
-    const garagem = ListaComodos[3];
-    const cozinha = ListaComodos[4];
-    let ConsumoTotal = 0;
-    const ConsumoLuzes = 1;
-    const ConsumoFogao = 2700;
-    const ConsumoGeladeiraAberta = 104;
-    const ConsumoGeladeiraFechada = 101;
-    const ConsumoArCondicionado = 101;
-    const ConsumoTV = 160;
-    const ConsumoChuveiro = 6800;
-
-    if (quarto instanceof Quarto) {
-        if (quarto.luzes && quarto.televisao && quarto.ArCondicionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV + ConsumoArCondicionado  //Tudo on
-        }
-        else if (quarto.luzes && !quarto.televisao && !quarto.ArCondicionado){
-            ConsumoTotal += ConsumoLuzes//só Luz on
-        }
-        else if (!quarto.luzes && quarto.televisao && !quarto.ArCondicionado){
-            ConsumoTotal += ConsumoTV //só v2 on
-        }
-        else if (!quarto.luzes && !quarto.televisao && quarto.ArCondicionado){
-            ConsumoTotal += ConsumoArCondicionado //só v3 on
-        }
-        else if (quarto.luzes && quarto.televisao && !quarto.ArCondicionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV //luz e v2 on
-        }
-        else if (quarto.luzes && !quarto.televisao && quarto.ArCondicionado){
-            ConsumoTotal += ConsumoLuzes + ConsumoArCondicionado //luz e v3 on
-        }
-        else if (!quarto.luzes && quarto.televisao && quarto.ArCondicionado){
-            ConsumoTotal += ConsumoTV + ConsumoArCondicionado //Só luz off
-        }
-    }
-
-    if (sala instanceof Sala) {
-        
-        if (sala.luzes && sala.televisao){
-            ConsumoTotal += ConsumoLuzes + ConsumoTV //Tudo on
-        }
-        else if (sala.luzes && !sala.televisao){
-            ConsumoTotal += ConsumoLuzes //Só luz on
-        }
-        else if (!sala.luzes && sala.televisao){
-            ConsumoTotal += ConsumoTV //Só luz off
-        }
-    }
-
-    if (banheiro instanceof Banheiro) {
-        
-        if (banheiro.luzes && banheiro.chuveiro){
-            ConsumoTotal += ConsumoLuzes + ConsumoChuveiro //Tudo on V
-        }
-        else if (banheiro.luzes && !banheiro.chuveiro){
-            ConsumoTotal += ConsumoLuzes //Só luz on V
-        }
-        else if (!banheiro.luzes && banheiro.chuveiro){
-            ConsumoTotal += ConsumoChuveiro //Só luz off
-        }
-
-    }
-
-    if (garagem instanceof Garagem) {
-        
-        if (garagem.luzes && garagem.portao){
-            ConsumoTotal += ConsumoLuzes //Tudo on
-        }
-        else if (garagem.luzes && !garagem.portao){
-            ConsumoTotal += ConsumoLuzes //Só luz on
-        }
-
-    }
-
-    if (cozinha instanceof Cozinha) {
-        
-        if (cozinha.luzes && cozinha.fogão && cozinha.geladeira){
-            ConsumoTotal += ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraAberta //Tudo on
-        }
-        else if(!cozinha.luzes && !cozinha.fogão && !cozinha.geladeira) {
-            ConsumoTotal += ConsumoGeladeiraFechada
-        }
-        else if (cozinha.luzes && !cozinha.fogão && !cozinha.geladeira){
-            ConsumoTotal += ConsumoLuzes + ConsumoGeladeiraFechada //só Luz on
-        }
-        else if (!cozinha.luzes && cozinha.fogão && !cozinha.geladeira){
-            ConsumoTotal += ConsumoFogao + ConsumoGeladeiraFechada //só v2 on
-        }
-        else if (!cozinha.luzes && !cozinha.fogão && cozinha.geladeira){
-            ConsumoTotal += ConsumoGeladeiraAberta //só v3 on
-        }
-        else if (cozinha.luzes && cozinha.fogão && !cozinha.geladeira){
-            ConsumoTotal += ConsumoLuzes + ConsumoFogao + ConsumoGeladeiraFechada //luz e v2 on
-        }
-        else if (cozinha.luzes && !cozinha.fogão && cozinha.geladeira){
-            ConsumoTotal += ConsumoLuzes + ConsumoGeladeiraAberta //luz e v3 on
-        }
-        else if (!cozinha.luzes && cozinha.fogão && cozinha.geladeira){
-            ConsumoTotal += ConsumoFogao + ConsumoGeladeiraAberta //Só luz off
-        }
-    }
-    ConsumoEnergia.innerHTML = `${ConsumoTotal}W`
-
-    if (ConsumoTotal == 101) {
-        btnDormir.style.display = 'block'
-    }
-    else {
-        btnDormir.style.display = 'none'
-    }
-}
-
 function DORMIR() {
     CasaDiv.style.display = 'none'
     Cubao.style.display = 'block'
-}
-//#endregion
-
-//#region Função para exibir e ocultar botões dependendo do cômodo selecionado
-function atualizarBotoes() {
-    // Ocultar todos os botões
-    CozinhaDiv.style.display = 'none';
-    GaragemDiv.style.display = 'none';
-    BanheiroDiv.style.display = 'none';
-    SalaDiv.style.display = 'none';
-    QuartoDiv.style.display = 'none';
-    AjustadorDiv.style.display = 'none';
-
-    
-    const comodoAtual = ListaComodos[cameraIndice];
-    console.log(comodoAtual.nome);
-
-    // Mostrar botões conforme o cômodo atual
-    if (comodoAtual instanceof Cozinha) { // Cozinha
-        CozinhaDiv.style.display = 'block';
-    } else if (comodoAtual instanceof Garagem) { // Garagem
-        GaragemDiv.style.display = 'block';
-    } else if (comodoAtual instanceof Banheiro) { // Banheiro
-        BanheiroDiv.style.display = 'block'
-    } else if (comodoAtual instanceof Sala) { // Sala
-        SalaDiv.style.display = 'block';
-    } else if (comodoAtual instanceof Quarto) { // Quarto
-        QuartoDiv.style.display = 'block';
-    }
-
-    if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.ArCondicionado == true){
-            AjustadorDiv.style.display = 'block'
-        }else{
-            AjustadorDiv.style.display = 'none'
-        }
-    }
-    if (comodoAtual instanceof Quarto) {
-        if (comodoAtual.ArCondicionado == true) {
-            Display_temp.style.display = 'none';
-        }
-        else {
-            Display_temp.style.display = 'block';
-        }
-    }
-    if (comodoAtual instanceof Sala) {
-        Display_temp.style.display = 'block'
-    }
-    if (comodoAtual instanceof Garagem) {
-        Display_temp.style.display = 'block'
-    }
-    if (comodoAtual instanceof Cozinha) {
-        Display_temp.style.display = 'block'
-    }
-    if (comodoAtual instanceof Banheiro) {
-        Display_temp.style.display = 'block'
-    }
 }
 //#endregion
 
@@ -582,48 +284,14 @@ atualizarHora()
 
 const selectCamera = document.getElementById('camera-select')! as HTMLSelectElement;
 
-
-function atualizarOutput() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    let status = `${comodoAtual.nome}: Luzes estão ${comodoAtual.luzes ? 'ligadas' : 'desligadas'}.`;
-    const output = document.getElementById('output')! as HTMLDivElement;
-
-    // Adicionar status das novas variáveis (garantir que acessamos corretamente os atributos específicos)
-    if (comodoAtual instanceof Cozinha) {
-        output.innerHTML = `${status} <br>
-        Fogão: ${comodoAtual.fogão ? 'Ligado' : 'Desligado'}.<br>
-        Geladeira: ${comodoAtual.geladeira ? 'Ligada' : 'Desligada'}.`
-    } else if (comodoAtual instanceof Garagem) {
-        output.innerHTML = `${status} <br> 
-        Portão: ${comodoAtual.portao ? 'Aberto' : 'Fechado'}.`;
-    } else if (comodoAtual instanceof Banheiro) {
-        output.innerHTML = `${status} <br>
-        Chuveiro: ${comodoAtual.chuveiro ? 'Ligado' : 'Desligado'}.`;
-    } else if (comodoAtual instanceof Sala) {
-        output.innerHTML = `${status} <br>
-        Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.`;
-    } else if (comodoAtual instanceof Quarto) {
-        output.innerHTML = `${status} <br>
-        Televisão: ${comodoAtual.televisao ? 'Ligada' : 'Desligada'}.<br>
-        Ar-Condicionado: ${comodoAtual.ArCondicionado ? 'Ligado' : 'Desligado'}`
-        
-    }
-    const temperaturaDiv = document.getElementById('temperatura-atual') as HTMLDivElement;
-    temperaturaDiv.innerHTML = `${TemperaturaUniversal}°C`; 
-
-    if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado){
-        temperaturaDiv.innerHTML = `${comodoAtual.temperaturaArCondicionado}°C`
-    }
-}
-
 selectCamera.addEventListener('change', () => {
-    const indice = parseInt(selectCamera.value);
-    cameraExibeComodo(indice);
-    atualizarBotoes();
-    atualizarImagemCamera();
-    atualizarOutput();
+    let indice: number = parseInt(selectCamera.value);
+    cameraExibeComodo(indice, ListaComodos, cameraIndice);
+    atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     alterarTemperatura2();
-    Energia();
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 
 });
 
@@ -633,62 +301,62 @@ selectCamera.addEventListener('change', () => {
 
 btnAlternarLuzes.addEventListener('click', () => {
     alterarLuzes();
-    atualizarImagemCamera();
-    atualizarOutput();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarFogao.addEventListener('click', () => {
     alterarFogao();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarGeladeira.addEventListener('click', () => {
     alterarGeladeira();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarPortao.addEventListener('click', () => {
     alterarPortao();
-    atualizarImagemCamera();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 });
 btnAlternarChuveiro.addEventListener('click', () => {
     alterarChuveiro();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 })
 btnAlternarTelevisao.addEventListener('click', () => {
     alterarTelevisao();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
     alterarTelevisaoQuarto();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarArCondicionado.addEventListener('click', () => {
     alterarArCondicionado();
-    atualizarImagemCamera();
-    Energia();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
+    Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAjustarTempAr.addEventListener('click', () => {
     RegularArCondicionado();
-    atualizarImagemCamera();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 btnAlterarTemperatura.addEventListener('click', () => {
     alterarTemperatura();
-    atualizarImagemCamera();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 btnDormir.addEventListener('click', () => {
     DORMIR();
 })
 NovaTemperaturaHTML.addEventListener('change', () => {
     alterarValorTemp();
-    atualizarImagemCamera();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 NovaTemperaturaAr.addEventListener('change', () => {
     alterarValorTempAr();
-    atualizarImagemCamera();
+    atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 
 //#endregion

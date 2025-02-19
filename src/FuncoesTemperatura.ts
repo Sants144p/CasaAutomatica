@@ -5,7 +5,6 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 import { atualizarOutput, atualizarBotoes } from "./FuncoesVisuais.js";
-
 export function alterarTemperatura(cameraIndice : number, ListaComodos : Comodo[], TemperaturaAncora : number,
     TemperaturaUniversal : number, NovaTemperaturaHTML : HTMLInputElement
 ) {
@@ -13,12 +12,15 @@ export function alterarTemperatura(cameraIndice : number, ListaComodos : Comodo[
     const comodoAtual = ListaComodos[cameraIndice];
 
     if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado) {
-        let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
+        let tempAr = comodoAtual.temperaturaArCondicionado ?? TemperaturaUniversal
         TemperaturaUniversal = tempAr
+        localStorage.setItem('TemperaturaUniversal', `${tempAr}`)
         atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else if (comodoAtual instanceof Quarto && comodoAtual.ArCondicionado == false){
         const NovaTemperatura : number = Number(NovaTemperaturaHTML.value)
         TemperaturaAncora = NovaTemperatura
+        localStorage.setItem('TemperaturaAncora', `${NovaTemperatura}`)
+        localStorage.setItem('TemperaturaUniversal', `${TemperaturaAncora}`)
         TemperaturaUniversal = TemperaturaAncora
         atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else{
@@ -35,7 +37,7 @@ export function alterarTemperatura2(cameraIndice : number, ListaComodos : Comodo
     const comodoAtual = ListaComodos[cameraIndice];
 
     if (comodoAtual instanceof Quarto  && comodoAtual.ArCondicionado){
-        let tempAr = comodoAtual.temperaturaArCondicionado ?? 21
+        let tempAr = comodoAtual.temperaturaArCondicionado ?? TemperaturaUniversal
         TemperaturaUniversal = tempAr
         atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal)
     }else{
@@ -96,6 +98,7 @@ export function alterarValorTemp(cameraIndice : number, ListaComodos : Comodo[],
 ) {
     const temp = parseInt(NovaTemperaturaHTML.value)
     ValorTemp.innerHTML = `${temp}°`
+    console.log('quebrei o sistema porra')
     atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
 }
 

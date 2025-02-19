@@ -14,8 +14,13 @@ let cameraIndice = 0;
 console.log("Índice: " + cameraIndice);
 
 //Temperatura
-let TemperaturaAncora : number = 21
-let TemperaturaUniversal : number = TemperaturaAncora
+localStorage.setItem("TemperaturaAncora", "40");
+localStorage.setItem('TemperaturaUniversal', "40");
+let tempStringAncora: string = localStorage.getItem("TemperaturaAncora") ?? "21"
+let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+
+export let _TemperaturaAncora : number = parseInt(tempStringAncora) 
+export let _TemperaturaUniversal : number = parseInt(tempStringUniversal)
 
 const ListaComodos : Comodo[] = [
     new Quarto("Quarto", true, 2.5, 6, 8, false, false), //0
@@ -62,7 +67,7 @@ const NovaTemperaturaAr = document.getElementById('temp-ar')! as HTMLInputElemen
 //#region Inicialização
 atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
 console.log("atualizarBotoes() OK");
-atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
+atualizarOutput(ListaComodos, cameraIndice, _TemperaturaUniversal);
 console.log("atualizarOutput() OK");
 atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 console.log("atualizarImagemCamera() OK");
@@ -71,7 +76,7 @@ console.log("Energia() OK");
 //#endregion
 
 //#region Mudar filtro de Calor/frio
-setInterval( () => mudarFiltro(TemperaturaUniversal, FiltroCor), 500);
+setInterval( () => mudarFiltro(_TemperaturaUniversal, FiltroCor), 500);
 //#endregion
 
 //#region Horário Atualizado
@@ -88,8 +93,9 @@ selectCamera.addEventListener('change', () => {
     cameraIndice = cameraExibeComodo(indice, ListaComodos, cameraIndice);
     atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
-    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    alterarTemperatura2(cameraIndice, ListaComodos, TemperaturaAncora, TemperaturaUniversal);
+    atualizarOutput(ListaComodos, cameraIndice, _TemperaturaUniversal);
+    let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+    alterarTemperatura2(cameraIndice, ListaComodos, _TemperaturaAncora, parseInt(tempStringUniversal));
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 
 });
@@ -100,61 +106,66 @@ selectCamera.addEventListener('change', () => {
 btnAlternarLuzes.addEventListener('click', () => {
     alterarLuzes(cameraIndice, ListaComodos);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
-    atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
+    atualizarOutput(ListaComodos, cameraIndice, _TemperaturaUniversal);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarFogao.addEventListener('click', () => {
-    alterarFogao(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarFogao(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarGeladeira.addEventListener('click', () => {
-    alterarGeladeira(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarGeladeira(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarPortao.addEventListener('click', () => {
-    alterarPortao(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarPortao(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 });
 btnAlternarChuveiro.addEventListener('click', () => {
-    alterarChuveiro(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarChuveiro(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 })
 btnAlternarTelevisao.addEventListener('click', () => {
-    alterarTelevisao(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarTelevisao(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
-    alterarTelevisaoQuarto(cameraIndice, ListaComodos, TemperaturaUniversal);
+    alterarTelevisaoQuarto(cameraIndice, ListaComodos, _TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarArCondicionado.addEventListener('click', () => {
-    alterarArCondicionado(cameraIndice, ListaComodos, TemperaturaAncora, TemperaturaUniversal, Display_temp, 
+    let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+    alterarArCondicionado(cameraIndice, ListaComodos, _TemperaturaAncora, parseInt(tempStringUniversal), Display_temp, 
         CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv);
+    
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAjustarTempAr.addEventListener('click', () => {
-    RegularArCondicionado(cameraIndice, ListaComodos, TemperaturaAncora, TemperaturaUniversal, NovaTemperaturaHTML);
+    RegularArCondicionado(cameraIndice, ListaComodos, _TemperaturaAncora, parseInt(tempStringUniversal), NovaTemperaturaHTML);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 btnAlterarTemperatura.addEventListener('click', () => {
-    alterarTemperatura(cameraIndice, ListaComodos, TemperaturaAncora, TemperaturaUniversal, NovaTemperaturaHTML);
+    let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+    alterarTemperatura(cameraIndice, ListaComodos, _TemperaturaAncora, parseInt(tempStringUniversal), NovaTemperaturaHTML);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 btnDormir.addEventListener('click', () => {
     DORMIR();
 })
 NovaTemperaturaHTML.addEventListener('change', () => {
-    alterarValorTemp(cameraIndice, ListaComodos, TemperaturaUniversal, NovaTemperaturaHTML, ValorTemp);
+    let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+    alterarValorTemp(cameraIndice, ListaComodos, parseInt(tempStringUniversal), NovaTemperaturaHTML, ValorTemp);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 NovaTemperaturaAr.addEventListener('change', () => {
-    alterarValorTempAr(cameraIndice, ListaComodos, TemperaturaUniversal, NovaTemperaturaHTML, ValorTempAr);
+    let tempStringUniversal: string = localStorage.getItem("TemperaturaUniversal") ?? "21"
+    alterarValorTempAr(cameraIndice, ListaComodos, parseInt(tempStringUniversal), NovaTemperaturaAr, ValorTempAr);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 

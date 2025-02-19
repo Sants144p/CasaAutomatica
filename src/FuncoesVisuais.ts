@@ -5,6 +5,8 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
+//import { _TemperaturaUniversal, _TemperaturaAncora } from "./main.js";
+
 
 export function cameraExibeComodo(indice: number, ListaComodos : Comodo[], cameraIndice : number) { 
     if (indice >= 0 && indice < ListaComodos.length){
@@ -380,4 +382,5 @@ export function atualizarHora(HoraDiv : HTMLDivElement){
 
     HoraDiv.textContent = `${horas}:${minutos}:${segundos}`
     console.log("Hora Funcionando")
+    //console.log(`Valor da Temperatura Universal: ${_TemperaturaUniversal}`)
 }

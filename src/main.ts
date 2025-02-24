@@ -286,7 +286,7 @@ const selectCamera = document.getElementById('camera-select')! as HTMLSelectElem
 
 selectCamera.addEventListener('change', () => {
     let indice: number = parseInt(selectCamera.value);
-    cameraExibeComodo(indice, ListaComodos, cameraIndice);
+    cameraIndice = cameraExibeComodo(indice, ListaComodos, cameraIndice);
     atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);

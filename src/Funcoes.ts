@@ -7,8 +7,9 @@ import { Sala } from "./Sala.js";
 
 
 export function cameraExibeComodo(indice: number, ListaComodos : Comodo[], cameraIndice : number) {
-    cameraIndice = indice
+    
     if (indice >= 0 && indice < ListaComodos.length) {
+        cameraIndice = indice
         console.log(ListaComodos[cameraIndice].nome);
         console.log(cameraIndice)
         return cameraIndice;

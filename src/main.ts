@@ -5,7 +5,8 @@ import { Cozinha } from "./Cozinha.js";
 import { Quarto } from "./Quarto.js";
 import { Sala } from "./Sala.js";
 
-import { cameraExibeComodo, atualizarBotoes, atualizarImagemCamera, atualizarOutput, Energia } from "./Funcoes.js";
+import { cameraExibeComodo, atualizarBotoes, atualizarImagemCamera, atualizarOutput, Energia, atualizarHora, mudarFiltro, DORMIR} from "./FuncoesVisuais.js";
+import { alterarLuzes, alterarFogao, alterarGeladeira, alterarChuveiro, alterarPortao, alterarTelevisao, alterarTelevisaoQuarto} from "./FuncoesBooleanas.js";
 
 
 // Variável para rastrear a posição atual da câmera
@@ -38,7 +39,6 @@ const ValorTempAr = document.getElementById('temperatura-range-ar') as HTMLDivEl
 const imagemDiv = document.getElementById('ImagemCamera') as HTMLDivElement;
 const ConsumoEnergia = document.getElementById('Energia') as HTMLDivElement;
 const Display_temp = document.getElementById('display-temp') as HTMLDivElement;
-const FiltroCor = document.getElementById('Filtro') as HTMLImageElement;
 const Cubao = document.getElementById('Cubao') as HTMLDivElement
 
 const btnAlternarLuzes = document.getElementById('alternar-luzes')! as HTMLButtonElement;
@@ -56,8 +56,8 @@ const btnAjustarTempAr = document.getElementById('ajustar-temp')! as HTMLButtonE
 const btnAlterarTemperatura = document.getElementById('alterar-temperatura')! as HTMLButtonElement;
 const NovaTemperaturaHTML = document.getElementById('nova-temperatura')! as HTMLInputElement;
 const NovaTemperaturaAr = document.getElementById('temp-ar')! as HTMLInputElement;
-
 //#endregion
+
 atualizarBotoes(CozinhaDiv, GaragemDiv, BanheiroDiv, SalaDiv, QuartoDiv, AjustadorDiv, ListaComodos, cameraIndice, Display_temp);
 console.log("atualizarBotoes() OK");
 atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
@@ -67,18 +67,7 @@ console.log("atualizarImagemCamera() OK");
 Energia(ListaComodos, ConsumoEnergia, btnDormir);
 console.log("Energia() OK");
 
-//#region Funções para alterar as booleanas
-
-function alterarLuzes() : void{
-
-    if (cameraIndice >= 0 && cameraIndice < ListaComodos.length) {
-        ListaComodos[cameraIndice].Trocarluzes();
-    } else {
-        console.log("A câmera não está posicionada em um cômodo válido.");
-    }
-
-}
-
+//#region Temperatura
 function alterarTemperatura() {
 
     const comodoAtual = ListaComodos[cameraIndice];
@@ -130,56 +119,6 @@ function alterarTemperatura3(){
 
 }
 
-function alterarFogao() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Cozinha) {
-            comodoAtual.alterarFogao();
-            atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-
-}
-
-function alterarGeladeira() {
-    const comodoAtual = ListaComodos[cameraIndice];
-        if (comodoAtual instanceof Cozinha) {
-            comodoAtual.alterarGeladeira();
-            atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-
-}
-
-function alterarPortao() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Garagem) {
-        comodoAtual.alterarPortao();
-        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-}
-
-function alterarTelevisao() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Sala) {
-        comodoAtual.alterarTV();
-        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-}
-
-function alterarTelevisaoQuarto() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Quarto) {
-        comodoAtual.alterarTV();
-        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-}
-
-function alterarChuveiro() {
-    const comodoAtual = ListaComodos[cameraIndice];
-    if (comodoAtual instanceof Banheiro) {
-        comodoAtual.alterarChuveiro();
-        atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
-    }
-}
-
 function alterarArCondicionado() {
     const comodoAtual = ListaComodos[cameraIndice];
     if (comodoAtual instanceof Quarto) {
@@ -218,70 +157,19 @@ function alterarValorTempAr() {
     ValorTempAr.innerHTML = `${temp}`
     atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
 }
+//#endregion
 
 //#region Mudar filtro de Calor/frio
-
-function mudarFiltro(){
-
-    let opacidade
-
-    if (TemperaturaUniversal >= -15 && TemperaturaUniversal <= 24){
-        //Mantem o tom normal
-        opacidade = 0
-        FiltroCor.style.filter = 'none'
-
-    }else{
-
-        // Fora do intervalo neutro, calcula a opacidade com base na distância
-        const distancia = TemperaturaUniversal < -15
-            ? Math.abs(TemperaturaUniversal - (-15)) 
-            : Math.abs(TemperaturaUniversal - 24);
-
-        // Normaliza a distância para um intervalo de transparência (mínimo 0.3)
-        const maxDistancia = 100; // -100 ou 100
-        const transparencia = Math.min((distancia / maxDistancia), 1);
-        
-
-        if (TemperaturaUniversal > 24){
-            FiltroCor.src = "/Images/TelaCalor.jpg"
-            opacidade = 0.35  - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
-                        
-        }else if (TemperaturaUniversal < -15){
-            FiltroCor.src = "/Images/TelaFrio.jpg"
-            opacidade = 0.5  - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
-        }
-    
-
-    }
-    FiltroCor.style.opacity = String(opacidade)
-}
-
+setInterval( () => mudarFiltro(TemperaturaUniversal), 500);
 setInterval(mudarFiltro, 500)
-
-function DORMIR() {
-    CasaDiv.style.display = 'none'
-    Cubao.style.display = 'block'
-}
 //#endregion
 
 //#region Horário Atualizado
-function atualizarHora(){
-    const Agora = new Date()
-
-    const horas = ('0' + Agora.getHours()).slice(-2);
-    const minutos = ('0' + Agora.getMinutes()).slice(-2);
-    const segundos = ('0' + Agora.getSeconds()).slice(-2);
-
-    HoraDiv.textContent = `${horas}:${minutos}:${segundos}`
-}
-
-setInterval(atualizarHora, 1000)
-
-atualizarHora()
+setInterval( () => atualizarHora(HoraDiv), 1000);
+atualizarHora(HoraDiv)
 //#endregion
 
 //#region Cameras
-
 const selectCamera = document.getElementById('camera-select')! as HTMLSelectElement;
 
 selectCamera.addEventListener('change', () => {
@@ -294,43 +182,41 @@ selectCamera.addEventListener('change', () => {
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 
 });
-
 //#endregion
 
 //#region Conectar os botões aos seus eventos
-
 btnAlternarLuzes.addEventListener('click', () => {
-    alterarLuzes();
+    alterarLuzes(cameraIndice, ListaComodos);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     atualizarOutput(ListaComodos, cameraIndice, TemperaturaUniversal);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarFogao.addEventListener('click', () => {
-    alterarFogao();
+    alterarFogao(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarGeladeira.addEventListener('click', () => {
-    alterarGeladeira();
+    alterarGeladeira(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarPortao.addEventListener('click', () => {
-    alterarPortao();
+    alterarPortao(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 });
 btnAlternarChuveiro.addEventListener('click', () => {
-    alterarChuveiro();
+    alterarChuveiro(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 })
 btnAlternarTelevisao.addEventListener('click', () => {
-    alterarTelevisao();
+    alterarTelevisao(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
 btnAlternarTelevisaoQuarto.addEventListener('click', () => {
-    alterarTelevisaoQuarto();
+    alterarTelevisaoQuarto(cameraIndice, ListaComodos, TemperaturaUniversal);
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
     Energia(ListaComodos, ConsumoEnergia, btnDormir);
 });
@@ -348,7 +234,7 @@ btnAlterarTemperatura.addEventListener('click', () => {
     atualizarImagemCamera(ListaComodos, cameraIndice, imagemDiv);
 })
 btnDormir.addEventListener('click', () => {
-    DORMIR();
+    DORMIR(CasaDiv, Cubao);
 })
 NovaTemperaturaHTML.addEventListener('change', () => {
     alterarValorTemp();

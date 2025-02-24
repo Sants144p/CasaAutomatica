@@ -335,3 +335,56 @@ export function Energia(ListaComodos : Comodo[], ConsumoEnergia : HTMLDivElement
         btnDormir.style.display = 'none'
     }
 }
+
+export function atualizarHora(HoraDiv : HTMLDivElement){
+    const Agora = new Date()
+
+    const horas = ('0' + Agora.getHours()).slice(-2);
+    const minutos = ('0' + Agora.getMinutes()).slice(-2);
+    const segundos = ('0' + Agora.getSeconds()).slice(-2);
+
+    HoraDiv.textContent = `${horas}:${minutos}:${segundos}`
+    console.log("Hora Funcionando")
+    //console.log(`Valor da Temperatura Universal: ${_TemperaturaUniversal}`)
+}
+
+export function mudarFiltro(TemperaturaUniversal : number){
+
+    let opacidade
+    const FiltroCor = document.getElementById('Filtro') as HTMLImageElement;
+
+    if (TemperaturaUniversal >= -15 && TemperaturaUniversal <= 24){
+        //Mantem o tom normal
+        opacidade = 0
+        FiltroCor.style.filter = 'none'
+
+    }else{
+
+        // Fora do intervalo neutro, calcula a opacidade com base na distância
+        const distancia = TemperaturaUniversal < -15
+            ? Math.abs(TemperaturaUniversal - (-15)) 
+            : Math.abs(TemperaturaUniversal - 24);
+
+        // Normaliza a distância para um intervalo de transparência (mínimo 0.3)
+        const maxDistancia = 100; // -100 ou 100
+        const transparencia = Math.min((distancia / maxDistancia), 1);
+        
+
+        if (TemperaturaUniversal > 24){
+            FiltroCor.src = "/Images/TelaCalor.jpg"
+            opacidade = 0.35  - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
+                        
+        }else if (TemperaturaUniversal < -15){
+            FiltroCor.src = "/Images/TelaFrio.jpg"
+            opacidade = 0.5  - (0.7 * (1 - transparencia)); // Garante opacidade mínima de 0.3
+        }
+    
+
+    }
+    FiltroCor.style.opacity = String(opacidade)
+}
+
+export function DORMIR(CasaDiv : HTMLDivElement, Cubao : HTMLDivElement) {
+    CasaDiv.style.display = 'none'
+    Cubao.style.display = 'block'
+}

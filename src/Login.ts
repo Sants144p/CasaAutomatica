@@ -20,6 +20,7 @@ loginButton.addEventListener('click', () => {
     .then(registro => mostrar_usuario(registro))
 
     function mostrar_usuario(registro: { id: number; nome: string; senha: string }[]) {
+        try {
         let logou: boolean = false;
         for (let user of registro) {
           if (InputUsuario.value === user.nome && InputSenha.value === user.senha) {
@@ -33,7 +34,15 @@ loginButton.addEventListener('click', () => {
         } else {
             loginError.style.display = 'block';
         }
-         
+    } catch(error : unknown) {
+        if(error instanceof Error) {
+            console.log(`Erro: ${error.message}`);
+        } else {
+            console.log("Ocorreu um erro desconhecido")
+        }
+    } finally {
+        console.log("Tentativa de login finalizada")
+    }
       
 }})
 

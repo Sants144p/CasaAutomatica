@@ -57,6 +57,7 @@ MostrarSenha2.addEventListener('click', () => {
   
           alert("Usuário cadastrado com sucesso!");
           form.reset(); // Limpa o formulário após o cadastro
+          
         } catch (error) {
           console.error("Erro:", error);
           alert("Erro ao cadastrar usuário!");

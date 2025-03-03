@@ -5,6 +5,7 @@
   "lockfileVersion": 3,
   "requires": true,
   "scripts": {
+    "test": "jest",
     "start": "node ./dist/app.js"
   },
   "packages": {

@@ -1,29 +1,41 @@
-import { getUsuarioById, getAllUsuarios } from "../src/Model/usuarioModel";
 
-jest.mock("../src/Model/usuarioModel", () => ({
-  getUsuarioById: jest.fn(),
-  getAllUsuarios: jest.fn()
+import pool from '../src/database';
+import { getAllUsuarios } from '../src/Model/usuarioModel'; // Ajuste o caminho conforme necessário
+
+// Mock do pool.execute
+jest.mock('../src/database', () => ({
+  execute: jest.fn(),
 }));
 
-describe("Testes do usuarioModel", () => {
-  
-  test("Deve retornar um usuário pelo ID", async () => {
-    (getUsuarioById as jest.Mock).mockResolvedValue({ id: 1, nome: "leitoa" });
+describe('getAllUsuarios', () => {
+  it('deve retornar uma lista de usuários', async () => {
+    // Mock dos dados que seriam retornados pelo banco de dados
+    const mockUsuarios = [
+      { id: 1, nome: 'Usuário 1', senha: 'senha1' },
+      { id: 2, nome: 'Usuário 2', senha: 'senha2' },
+    ];
 
-    const usuario = await getUsuarioById(1);
-    expect(usuario).toEqual({ id: 1, nome: "leitoa" });
-  });
+    // Configura o mock para retornar os dados simulados
+    (pool.execute as jest.Mock).mockResolvedValueOnce([mockUsuarios]);
 
-  test("Deve retornar todos os usuários do banco", async () => {
-    const usuariosMock = [
-      { id: 1, nome: "leitoa" },
-      { id: 2, nome: "robertinho" },
-      { id: 3, nome: "leozinho" }];
-
-    (getAllUsuarios as jest.Mock).mockResolvedValue(usuariosMock);
-
+    // Chama a função que queremos testar
     const usuarios = await getAllUsuarios();
-    expect(usuarios).toEqual(usuariosMock);
+
+    // Verifica se o resultado é o esperado
+    expect(usuarios).toEqual(mockUsuarios);
+
+    // Verifica se o pool.execute foi chamado corretamente
+    expect(pool.execute).toHaveBeenCalledWith('SELECT * FROM usuarios');
   });
-  
+
+  it('deve lançar um erro se a consulta falhar', async () => {
+    // Configura o mock para lançar um erro
+    (pool.execute as jest.Mock).mockRejectedValueOnce(new Error('Erro ao buscar usuários'));
+
+    // Verifica se a função lança o erro esperado
+    await expect(getAllUsuarios()).rejects.toThrow('Erro ao buscar usuários');
+
+    // Verifica se o pool.execute foi chamado corretamente
+    expect(pool.execute).toHaveBeenCalledWith('SELECT * FROM usuarios');
+  });
 });

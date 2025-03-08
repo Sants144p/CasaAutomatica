@@ -1,6 +1,6 @@
 
 import pool from '../src/database';
-import { getAllUsuarios, getUsuarioById } from '../src/Model/usuarioModel'; // Ajuste o caminho conforme necessário
+import { getAllUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario } from '../src/Model/usuarioModel'; // Ajuste o caminho conforme necessário
 
 // Mock do pool.execute
 jest.mock('../src/database', () => ({
@@ -39,7 +39,6 @@ describe('getAllUsuarios', () => {
     expect(pool.execute).toHaveBeenCalledWith('SELECT * FROM usuarios');
   });
 
-
 });
 
 describe('getUsuarioById', () => {
@@ -67,3 +66,76 @@ describe('getUsuarioById', () => {
   });
 
 })
+
+describe('createUsuario', () => {
+  it('deve criar um novo usuário', async () => {
+    const mockUsuario = { id: 1, nome: 'leitoa', senha: 'shark' };
+    (pool.execute as jest.Mock).mockResolvedValueOnce([{ insertId: 1 }]);
+
+    const id = await createUsuario(mockUsuario);
+
+    expect(id).toBe(1);
+    expect(pool.execute).toHaveBeenCalledWith(
+      'INSERT INTO usuarios (nome, senha) VALUES (?, ?)',
+      ['leitoa', 'shark']
+    );
+  });
+
+  it('deve lançar um erro se a criação falhar', async () => {
+    const mockUsuario = { nome: 'leitoa', senha: 'shark' };
+    (pool.execute as jest.Mock).mockRejectedValueOnce(new Error('Erro ao criar usuário'));
+
+    await expect(createUsuario(mockUsuario)).rejects.toThrow('Erro ao criar usuário');
+
+    expect(pool.execute).toHaveBeenCalledWith(
+      'INSERT INTO usuarios (nome, senha) VALUES (?, ?)',
+      ['leitoa', 'shark']
+    );
+  });
+});
+
+describe('updateUsuario', () => {
+  it('deve atualizar um usuário', async () => {
+    const mockUsuario = { id: 1, nome: 'leitoa', senha: 'shark' };
+    (pool.execute as jest.Mock).mockResolvedValueOnce([{ affectedRows: 1 }]);
+
+    const result = await updateUsuario(mockUsuario);
+
+    expect(result).toBe(true);
+    expect(pool.execute).toHaveBeenCalledWith(
+      'UPDATE usuarios SET nome = ?, senha = ? WHERE id = ?',
+      ['leitoa', 'shark', 1]
+    );
+  });
+
+  it('deve lançar um erro se a atualização falhar', async () => {
+    const mockUsuario = { id: 1, nome: 'leitoa', senha: 'shark' };
+    (pool.execute as jest.Mock).mockRejectedValueOnce(new Error('Erro ao atualizar usuário'));
+
+    await expect(updateUsuario(mockUsuario)).rejects.toThrow('Erro ao atualizar usuário');
+
+    expect(pool.execute).toHaveBeenCalledWith(
+      'UPDATE usuarios SET nome = ?, senha = ? WHERE id = ?',
+      ['leitoa', 'shark', 1]
+    );
+  });
+});
+
+describe('deleteUsuario', () => {
+  it('deve deletar um usuário', async () => {
+    (pool.execute as jest.Mock).mockResolvedValueOnce([{ affectedRows: 1 }]);
+
+    const result = await deleteUsuario(1);
+
+    expect(result).toBe(true);
+    expect(pool.execute).toHaveBeenCalledWith('DELETE FROM usuarios WHERE id = ?', [1]);
+  });
+
+  it('deve lançar um erro se a deleção falhar', async () => {
+    (pool.execute as jest.Mock).mockRejectedValueOnce(new Error('Erro ao deletar usuário'));
+
+    await expect(deleteUsuario(1)).rejects.toThrow('Erro ao deletar usuário');
+
+    expect(pool.execute).toHaveBeenCalledWith('DELETE FROM usuarios WHERE id = ?', [1]);
+  });
+});
